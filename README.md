@@ -1,0 +1,7 @@
+- init done
+- parsing : read file fonctionne mais check_config n'a pas bonnes données (lines vides)
+- parsing a finir
+- stocker données de map
+- init window
+- faire raycasting
+- gérer touches
