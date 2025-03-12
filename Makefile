@@ -6,7 +6,7 @@
 #    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/11 15:08:46 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/03/12 11:51:46 by ema_blnch        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ SRC_FILES =	error.c \
 			main.c \
 			validate_file.c \
 			check_file_config.c \
+			check_map.c \
+			check_map_closed.c \
+			check_file_utils.c \
 			utils.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

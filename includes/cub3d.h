@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/11 16:10:21 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 11:47:37 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define B		    "\033[34m"
 
 
-int     main(int argc, char **argv);
+// int     main(int argc, char **argv);
 
 // Init
 t_game	*init_data(void);
@@ -44,6 +44,11 @@ void	validate_file(char *filename, t_game *data);
 char	**read_all_lines(char *filename, t_game *data);
 void	check_filename(t_game *data, char *filename);
 void	check_file_config(t_game *data, char **lines);
+void	check_map(t_game *data, char **lines);
+void	check_map_is_closed(char **lines, int start, t_game *data);
+void	check_duplicate(int *flag, t_game *data, char *id);
+void	check_color_format(char *line, t_game *data, char id);
+void	check_texture_path(char *line, t_game *data, char *id);
 
 // Window
 // void	init_window(t_game *game);
