@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/11 14:52:59 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 17:16:16 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,17 @@ typedef struct s_ray {
     int         side;
 }               t_ray;
 
+typedef struct s_hud {
+	void	*gun_img;
+	int		gun_w;
+	int		gun_h;
+}	        t_hud;
+
 typedef struct s_game {
     t_mlx       mlx;
     t_config    config;
     t_ray       ray;
+    t_hud       hud;
     double      pos_x;
     double      pos_y;
     double      dir_x;

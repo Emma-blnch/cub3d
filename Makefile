@@ -6,7 +6,7 @@
 #    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/12 12:35:32 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/03/12 16:33:11 by ema_blnch        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRC_FILES =	error.c \
 			parse_textures.c \
 			parse_color.c \
 			map_utils.c \
+			init_window.c \
+			minimap.c \
 			utils.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

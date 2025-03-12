@@ -1,4 +1,3 @@
 - init done
-- init window
 - faire raycasting
 - gérer touches

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:38:45 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 17:44:29 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "struct.h"
+# include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include "../libft/printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
@@ -26,6 +27,7 @@
 
 # define MAX_LINES 1024
 # define ESC_KEY 65307
+# define TILE_SIZE 10
 
 # define RESET		"\033[0m"
 # define R		    "\033[31m"
@@ -37,7 +39,7 @@
 // int     main(int argc, char **argv);
 
 // Init
-t_game	*init_data(void);
+t_game	*init_data(int argc, char **argv);
 
 // Check file
 void	validate_file(char *filename, t_game *data);
@@ -58,8 +60,12 @@ void	parse_colors(t_game *data, char **lines);
 void	store_player_position(t_game *data);
 
 // Window
-// void	init_window(t_game *game);
-// int     close_window(t_matrix *data);
+void	init_window(t_game *game);
+void	draw_floor_and_ceiling(t_game *game);
+
+// Mini-map
+int     render(t_game *game);
+void	draw_minimap(t_game *game);
 
 // Utils
 int     count_lines(char **lines);
