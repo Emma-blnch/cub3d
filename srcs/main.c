@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:53:25 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 12:17:15 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			main(int argc, char **argv)
         error_exit(data, "Usage: ./cub3d <map.cub>");
     data = init_data();
     validate_file(argv[1], data);
-    store_data(data);
     // init_window(data);
     // game_loop();
     free_resources(data);

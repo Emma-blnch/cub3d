@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:47:37 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 12:38:45 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ void	check_map_is_closed(char **lines, int start, t_game *data);
 void	check_duplicate(int *flag, t_game *data, char *id);
 void	check_color_format(char *line, t_game *data, char id);
 void	check_texture_path(char *line, t_game *data, char *id);
+int     find_map_start_index(char **lines);
+
+// Store data
+void    store_data(t_game *data, char **lines);
+void	parse_textures(t_game *data, char **lines);
+void	parse_colors(t_game *data, char **lines);
+void	store_player_position(t_game *data);
 
 // Window
 // void	init_window(t_game *game);
@@ -59,6 +66,8 @@ int     count_lines(char **lines);
 int     ft_strcmp(char *s1, char *s2);
 void	free_split(char **split);
 int     ft_str_is_whitespace(char *str);
+int     is_valid_map_line(char *line);
+int     has_wall_start(char *line);
 
 // Error and free
 void	error_exit(t_game *data, char *message);

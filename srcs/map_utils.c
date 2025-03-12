@@ -1,63 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 13:56:18 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:35:10 by ema_blnch        ###   ########.fr       */
+/*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
+/*   Updated: 2025/03/12 12:35:05 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	count_lines(char **lines)
-{
-	int	i;
-
-	i = 0;
-	while (lines[i])
-		i++;
-	return (i);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-void	free_split(char **split)
+int	is_valid_map_line(char *line)
 {
 	int	i;
 	
 	i = 0;
-	if (!split)
-		return ;
-	while (split[i])
+	while (line[i])
 	{
-		free(split[i]);
+		if (line[i] != ' ' && line[i] != '\n')
+			return (1);
 		i++;
 	}
-	free(split);
+	return (0); // ligne vide
 }
 
-int	ft_str_is_whitespace(char *str)
+int	has_wall_start(char *line)
 {
-	int	i = 0;
-
-	if (!str)
-		return (1);
-	while (str[i])
+	int	i;
+	
+	i = 0;
+	while (line[i])
 	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+		if (line[i] == '1' || line[i] == '0')
+			return (1);
+		if (line[i] != ' ')
 			return (0);
 		i++;
 	}
-	return (1);
+	return (0);
 }

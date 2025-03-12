@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:36:11 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:52:37 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 12:17:24 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	validate_file(char *filename, t_game *data)
 		error_exit(data, "Error: File too short");
 	check_file_config(data, lines);
 	check_map(data, lines);
+	store_data(data, lines);
 	free_lines(lines);
 }

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:52:49 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/12 12:33:39 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ static void	check_map_characters(char **lines, int start, t_game *data)
 		error_exit(data, "Error: Map must contain exactly one player");
 }
 
-static int	find_map_start_index(char **lines)
+int	find_map_start_index(char **lines)
 {
 	int	i;
 
 	i = 0;
 	while (lines[i])
 	{
-		if (!ft_str_is_whitespace(lines[i])
-			&& ft_strchr("01", lines[i][0]))
+		if (is_valid_map_line(lines[i]) && has_wall_start(lines[i]))
 			return (i);
 		i++;
 	}
