@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 17:55:51 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/14 12:05:16 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,37 @@ void	draw_floor_and_ceiling(t_game *game)
 	}
 }
 
+void	draw_menu(t_game *game)
+{
+	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
+		game->hud.menu_bg, 0, 0);
+	int x = game->win_width / 2 - 50;
+	int y = game->win_height / 2 - 20;
+
+	mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
+		(game->menu_selection == 0) ? 0xFF0000 : 0xFFFFFF, "> Play");
+	mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
+		(game->menu_selection == 1) ? 0xFF0000 : 0xFFFFFF, "> Exit");
+}
+
 int	render(t_game *game)
 {
     if (!game || !game->mlx.win_ptr || !game->hud.gun_img)
 		return (ft_printf("Missing render info!\n"), 1);
-    draw_floor_and_ceiling(game);
-	draw_minimap(game);
-    mlx_put_image_to_window(game->mlx.mlx_ptr,
-		game->mlx.win_ptr, game->mlx.img, 0, 0);
-    int x = (game->win_width - game->hud.gun_w) / 2;
-	int y = game->win_height - game->hud.gun_h;
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-		game->hud.gun_img, x, y);
+	if (game->menu_active)
+		draw_menu(game);
+	else
+	{
+		draw_floor_and_ceiling(game);
+		draw_minimap(game);
+		mlx_put_image_to_window(game->mlx.mlx_ptr,
+			game->mlx.win_ptr, game->mlx.img, 0, 0);
+		int x = (game->win_width - game->hud.gun_w) / 2;
+		int y = game->win_height - game->hud.gun_h;
+		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
+			game->hud.gun_img, x, y);
+	}
     return 0;
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 17:45:53 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/14 12:05:36 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,34 @@ static int	close_window(t_game *data)
 	return (0);
 }
 
-static int	handle_keypress(int keycode, t_game *data)
+// static int	handle_keypress(int keycode, t_game *data)
+// {
+// 	if (keycode == 53)
+// 		error_exit(data, NULL);
+// 	return (0);
+// }
+
+static int	handle_keypress(int key, t_game *game)
 {
-	if (keycode == 53)
-		error_exit(data, NULL);
+	if (game->menu_active)
+	{
+		if (key == XK_Up || key == XK_w)
+			game->menu_selection = (game->menu_selection + 1) % 2;
+		else if (key == XK_Down || key == XK_s)
+			game->menu_selection = (game->menu_selection + 1) % 2;
+		else if (key == XK_E)
+		{
+			if (game->menu_selection == 0)
+				game->menu_active = 0; // lancer le jeu
+			else
+				error_exit(game, NULL); // quitter
+		}
+	}
+	else
+	{
+		if (key == XK_Escape)
+			error_exit(game, NULL);
+	}
 	return (0);
 }
 
@@ -31,6 +55,10 @@ void	load_hud(t_game *game)
 		"./textures/hud/weapon.xpm", &game->hud.gun_w, &game->hud.gun_h);
 	if (!game->hud.gun_img)
 		error_exit(game, "Error: Failed to load gun sprite");
+	game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+		"./textures/menu.xpm", &game->hud.menu_bg_w, &game->hud.menu_bg_h);
+	if (!game->hud.menu_bg)
+		error_exit(game, "Error: Failed to load menu background");	
 }
 
 void	init_window(t_game *game)

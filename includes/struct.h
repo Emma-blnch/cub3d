@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 17:16:16 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/14 12:00:35 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,15 @@ typedef struct s_ray {
 }               t_ray;
 
 typedef struct s_hud {
-	void	*gun_img;
-	int		gun_w;
-	int		gun_h;
+	void	    *gun_img;
+	int		    gun_w;
+	int		    gun_h;
+    void	    *menu_bg;
+    int		    menu_bg_w;
+    int		    menu_bg_h;
+    void	    *font_img;
+    int		    font_img_w;
+    int		    font_img_h;
 }	        t_hud;
 
 typedef struct s_game {
@@ -71,6 +77,8 @@ typedef struct s_game {
     double      plane_y;
     int         win_width;
     int         win_height;
+    int         menu_active; // 1 si on est dans le menu, 0 si on est en jeu
+	int         menu_selection; // 0 = Play, 1 = Exit
 }               t_game;
 
 typedef struct s_check {
