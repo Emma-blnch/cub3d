@@ -1,3 +1,5 @@
-- init done
+- init + parsing done
 - faire raycasting
 - gérer touches
+- finaliser hud
+- faire bonus
