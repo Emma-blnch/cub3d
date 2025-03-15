@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/14 12:05:36 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:48:41 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	close_window(t_game *data)
 
 static int	handle_keypress(int key, t_game *game)
 {
+	// printf("%d\n", key);
+	// (void)game;
 	if (game->menu_active)
 	{
 		if (key == XK_Up || key == XK_w)
@@ -40,6 +42,8 @@ static int	handle_keypress(int key, t_game *game)
 			else
 				error_exit(game, NULL); // quitter
 		}
+		else if (key == XK_Escape)
+			error_exit(game, NULL);
 	}
 	else
 	{
@@ -58,7 +62,11 @@ void	load_hud(t_game *game)
 	game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 		"./textures/menu.xpm", &game->hud.menu_bg_w, &game->hud.menu_bg_h);
 	if (!game->hud.menu_bg)
-		error_exit(game, "Error: Failed to load menu background");	
+		error_exit(game, "Error: Failed to load menu background");
+	game->hud.wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+		"./textures/grey-stone-wall.xpm", &game->hud.wall_w, &game->hud.wall_h);
+	if (!game->hud.wall)
+		error_exit(game, "Error: Failed to load wall sprite");
 }
 
 void	init_window(t_game *game)

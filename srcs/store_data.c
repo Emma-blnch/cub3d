@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:41:50 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/15 11:08:32 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ void	store_player_position(t_game *data)
 		y++;
 	}
 	error_exit(data, "Error: No player position found");
-}
-
-void	print_map(char **map)
-{
-	int	i = 0;
-
-	printf("[DEBUG] Map content:\n");
-	while (map[i])
-	{
-		printf("Line %d: %s", i, map[i]); // les lignes contiennent déjà '\n'
-		i++;
-	}
 }
 
 void	store_map(t_game *data, char **lines)
@@ -89,3 +77,15 @@ void    store_data(t_game *data, char **lines)
     store_map(data, lines);
     store_player_position(data);
 }
+
+// void	print_map(char **map)
+// {
+// 	int	i = 0;
+
+// 	printf("[DEBUG] Map content:\n");
+// 	while (map[i])
+// 	{
+// 		printf("Line %d: %s", i, map[i]);
+// 		i++;
+// 	}
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/14 12:00:35 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/03/15 10:49:54 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ typedef struct s_hud {
     void	    *menu_bg;
     int		    menu_bg_w;
     int		    menu_bg_h;
-    void	    *font_img;
-    int		    font_img_w;
-    int		    font_img_h;
+    void	    *wall;
+    int		    wall_w;
+    int		    wall_h;
 }	        t_hud;
 
 typedef struct s_game {

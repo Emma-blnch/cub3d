@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/14 12:04:54 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:07:19 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,21 @@
 # define B		    "\033[34m"
 
 // TOUCHES LINUX
-# define XK_Up 65362
-# define XK_w 119
-# define XK_Down 65364
-# define XK_s 115
-# define XK_Escape 65307
-# define XK_Return 65293
-# define XK_E 101
+// # define XK_Up 65362
+// # define XK_w 119
+// # define XK_Down 65364
+// # define XK_s 115
+// # define XK_Escape 65307
+// # define XK_Return 65293
+// # define XK_E 101
+
+// TOUCHES MACOS
+# define XK_Up 126
+# define XK_w 6
+# define XK_Down 125
+# define XK_s 1
+# define XK_Escape 53
+# define XK_E 14
 
 // int     main(int argc, char **argv);
 
