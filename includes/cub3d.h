@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/15 11:07:19 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/21 14:22:09 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	free_split(char **split);
 int     ft_str_is_whitespace(char *str);
 int     is_valid_map_line(char *line);
 int     has_wall_start(char *line);
+void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 
 // Error and free
 void	error_exit(t_game *data, char *message);

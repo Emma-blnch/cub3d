@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:12:35 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:37:13 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/21 09:49:33 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	parse_single_color(char *line, t_game *data, char type)
 		data->config.ceiling_color = encode_rgb(r, g, b);
 	else
 		error_exit(data, "Error: Unknown color type");
-
 	free_split(split);
 }
 

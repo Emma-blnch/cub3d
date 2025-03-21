@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/15 11:07:12 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/21 19:02:37 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	get_tile_size(t_game *game)
 	return (tile);
 }
 
-static void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
+void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
@@ -102,16 +102,28 @@ void	draw_floor_and_ceiling(t_game *game)
 
 void	draw_menu(t_game *game)
 {
+	int	x;
+	int	y;
+
 	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 		game->hud.menu_bg, 0, 0);
-	int x = game->win_width / 2 - 50;
-	int y = game->win_height / 2 - 20;
-
-	mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
-		(game->menu_selection == 0) ? 0xFF0000 : 0xFFFFFF, "> Play");
-	mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
-		(game->menu_selection == 1) ? 0xFF0000 : 0xFFFFFF, "> Exit");
+	x = game->win_width / 2 - 50;
+	y = game->win_height / 2 - 20;
+	if (game->menu_selection == 1)
+	{
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
+			0xFF0000, "> Exit");
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
+			0xFFFFFF, "> Play");
+	}
+	else if (game->menu_selection == 0)
+	{
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
+			0xFFFFFF, "> Exit");
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
+			0xFF0000, "> Play");
+	}
 }
 
 int	render(t_game *game)
