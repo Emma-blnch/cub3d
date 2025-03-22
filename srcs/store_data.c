@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 16:17:32 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:55:11 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void	store_player_position(t_game *data)
 		{
 			if (ft_strchr("NSEW", map[y][x]))
 			{
-				if (data->config.player_dir)
+				if (data->player.dir)
 					error_exit(data, "Error: Multiple player positions found");
 				data->player.x = x;
 				data->player.y = y;
-				data->config.player_dir = map[y][x];
-				return ;
+				data->player.dir = map[y][x];
+				map[y][x] = '0'; // Remplacer le caractère du joueur par '0'
+				return;
 			}
 			x++;
 		}

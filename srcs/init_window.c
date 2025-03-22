@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 16:18:42 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:59:23 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static int	handle_keypress(int key, t_game *game)
 	}
 	else
 	{
-		if (key == XK_Up)
-			game->player.y -= 30;
-		else if (key == XK_Down)
-			game->player.y += 30;
-		if (key == XK_Right)
-			game->player.x -= 30;
-		else if (key == XK_Left)
-			game->player.x += 30;
+		if (key == XK_Up && game->player.y > 0 && game->config.map[game->player.y - 1][game->player.x] != '1')
+			game->player.y -= 1;
+		else if (key == XK_Down && game->config.map[game->player.y + 1] && game->config.map[game->player.y + 1][game->player.x] != '1')
+			game->player.y += 1;
+		else if (key == XK_Right && game->player.x > 0 && game->config.map[game->player.y][game->player.x - 1] != '1')
+			game->player.x -= 1;
+		else if (key == XK_Left && game->config.map[game->player.y][game->player.x + 1] && game->config.map[game->player.y][game->player.x + 1] != '1')
+			game->player.x += 1;
 		else if (key == XK_Escape)
 			error_exit(game, NULL);
 	}
