@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 16:18:02 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:23:59 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	draw_background(t_game *game)
+{
+	int	x;
+	int y;
+
+	y = 0;
+	while (y < game->win_height)
+	{
+		x = 0;
+		while (x < game->win_width)
+		{
+			put_pixel_to_img(&game->mlx, x, y, 0x0080FF);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	draw_menu(t_game *game)
 {
 	int	x;
@@ -91,10 +109,10 @@ void	draw_player_minimap(t_game *game, int *tile_size)
 	player_x_mini = game->player.x / *tile_size;
 	player_y_mini = game->player.y / *tile_size;
 	dy = 0;
-	while (dy < *tile_size)
+	while (dy < *tile_size / 2)
  	{
 		dx = 0;
-		while(dx < *tile_size)
+		while(dx < *tile_size / 2)
 		{
 			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0xFF0000);
 			dx++;
@@ -120,7 +138,7 @@ void	draw_minimap(t_game *game)
                 color = 0x555555; // mur gris
 			else if (c == '0')
                 color = 0xFFFFFF; // sol blanc
-			else if (x == game->player.x && y == game->player.y)
+			else if (x == game->player.x && y == game->player.y) // pe reprendre strchr pour séparer fonction 
 				color = 0x00FF00; // vert pour le joueur
             if (color != -1)
             {
@@ -138,24 +156,6 @@ void	draw_minimap(t_game *game)
 	draw_player_minimap(game, &tile);
 }
 
-void	draw_background(t_game *game)
-{
-	int	x;
-	int y;
-
-	y = 0;
-	while (y < game->win_height)
-	{
-		x = 0;
-		while (x < game->win_width)
-		{
-			put_pixel_to_img(&game->mlx, x, y, 0x0080FF);
-			x++;
-		}
-		y++;
-	}
-}
-
 // ici c'est un carré
 void	draw_player(t_game *game)
 {
@@ -168,7 +168,6 @@ void	draw_player(t_game *game)
 	while (dy <= player_icon_size)
 	{
 		dx = -player_icon_size;
-
 		while (dx <= player_icon_size)
 		{
 			put_pixel_to_img(&game->mlx, game->player.x + dx, game->player.y + dy, 0xFF0000);
