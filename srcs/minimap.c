@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 17:00:05 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 17:02:46 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ static int	get_tile_size(t_game *game)
 		nb_rows++;
 	}
 	width_tile = (int)(game->win_width * 0.2 / max_cols);
-	// mise à l'échelle pour obtenir 20% de la carte,
-	// sur cette nouvelle carte miniaturisée, on divise par le
-	// nombre de lignes/colonnes de la carte initiale (sa "hauteur"/sa "largeur")
-	// afin d'obtenir la taille d'une ligne/colonne dans la carte mini
-	// qui correspond donc à la hauteur/largeur d'une tile
 	height_tile = (int)(game->win_height * 0.2 / nb_rows);
 	if (height_tile < width_tile) //les deux doivent être égales, pourquoi pas if (height != widht) ? 
 		width_tile = height_tile;
@@ -46,8 +41,6 @@ static int	get_tile_size(t_game *game)
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
-	// mlx->line_length  : nombre d'octets pour stocker une ligne de pixels 
-	// mlx->bpp / 8 : nombre d'octets pour stocker un pixel en largeur. On multiplie par x pour avancer de x * bpp/8 pixels
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -109,7 +102,6 @@ void	draw_player_minimap(t_game *game, int *tile_size)
 	player_x_mini = game->player.x * (*tile_size);
 	player_y_mini = game->player.y * (*tile_size);
 	
-	// Dessiner un carré rouge pour représenter le joueur
 	dy = 0;
 	while (dy < *tile_size / 2)
 	{
