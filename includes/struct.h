@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/21 14:15:41 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/22 16:16:56 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,18 @@ typedef struct s_hud {
     int		    wall_h;
 }	        t_hud;
 
+typedef struct s_player {
+    int         x;
+    int         y;
+    char        dir;
+}               t_player;
+
 typedef struct s_game {
     t_mlx       mlx;
     t_config    config;
     t_ray       ray;
     t_hud       hud;
+    t_player    player; // Nouvelle structure pour le joueur
     double      pos_x;
     double      pos_y;
     double      dir_x;

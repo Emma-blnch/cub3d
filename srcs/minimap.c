@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 15:25:43 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 16:18:02 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	draw_player_minimap(t_game *game, int *tile_size)
 	int	dx;
 	int	dy;
 
-	player_x_mini = game->config.player_x / *tile_size;
-	player_y_mini = game->config.player_y / *tile_size;
+	player_x_mini = game->player.x / *tile_size;
+	player_y_mini = game->player.y / *tile_size;
 	dy = 0;
 	while (dy < *tile_size)
  	{
@@ -120,17 +120,17 @@ void	draw_minimap(t_game *game)
                 color = 0x555555; // mur gris
 			else if (c == '0')
                 color = 0xFFFFFF; // sol blanc
-			else if (ft_strchr("NSEW", c))
+			else if (x == game->player.x && y == game->player.y)
 				color = 0x00FF00; // vert pour le joueur
-                if (color != -1)
+            if (color != -1)
+            {
+                for (int dy = 0; dy < tile; dy++)
                 {
-                    for (int dy = 0; dy < tile; dy++)
-                    {
-						// remplit chaque tuiles
-                        for (int dx = 0; dx < tile; dx++)
-                            put_pixel_to_img(&game->mlx, x * tile + dx, y * tile + dy, color);
-                    }
+					// remplit chaque tuiles
+                    for (int dx = 0; dx < tile; dx++)
+                        put_pixel_to_img(&game->mlx, x * tile + dx, y * tile + dy, color);
                 }
+            }
 			x++;
 		}
 		y++;
@@ -171,7 +171,7 @@ void	draw_player(t_game *game)
 
 		while (dx <= player_icon_size)
 		{
-			put_pixel_to_img(&game->mlx, game->config.player_x + dx, game->config.player_y + dy, 0xFF0000);
+			put_pixel_to_img(&game->mlx, game->player.x + dx, game->player.y + dy, 0xFF0000);
 			dx++;
 		}
 		dy++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/15 11:08:32 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/22 16:17:32 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	store_player_position(t_game *data)
 			{
 				if (data->config.player_dir)
 					error_exit(data, "Error: Multiple player positions found");
-				data->config.player_x = x;
-				data->config.player_y = y;
+				data->player.x = x;
+				data->player.y = y;
 				data->config.player_dir = map[y][x];
 				return ;
 			}
@@ -77,15 +77,3 @@ void    store_data(t_game *data, char **lines)
     store_map(data, lines);
     store_player_position(data);
 }
-
-// void	print_map(char **map)
-// {
-// 	int	i = 0;
-
-// 	printf("[DEBUG] Map content:\n");
-// 	while (map[i])
-// 	{
-// 		printf("Line %d: %s", i, map[i]);
-// 		i++;
-// 	}
-// }
