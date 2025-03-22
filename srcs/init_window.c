@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/15 10:48:41 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/22 13:07:11 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static int	close_window(t_game *data)
 
 static int	handle_keypress(int key, t_game *game)
 {
-	// printf("%d\n", key);
-	// (void)game;
 	if (game->menu_active)
 	{
 		if (key == XK_Up || key == XK_w)
@@ -45,11 +43,16 @@ static int	handle_keypress(int key, t_game *game)
 		else if (key == XK_Escape)
 			error_exit(game, NULL);
 	}
-	else
-	{
-		if (key == XK_Escape)
-			error_exit(game, NULL);
-	}
+	if (key == XK_Up)
+		game->config.player_y -= 30;
+	else if (key == XK_Down)
+		game->config.player_y += 30;
+	if (key == XK_Right)
+		game->config.player_x -= 30;
+	else if (key == XK_Left)
+		game->config.player_x += 30;
+	else if (key == XK_Escape)
+		error_exit(game, NULL);
 	return (0);
 }
 

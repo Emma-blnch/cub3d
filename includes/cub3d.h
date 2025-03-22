@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/21 14:22:09 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/22 13:06:57 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@
 # define XK_s 1
 # define XK_Escape 53
 # define XK_E 14
+
+#define XK_Left                          124  /* Move left, left arrow */
+#define XK_Right                         123  /* Move right, right arrow */
 
 // int     main(int argc, char **argv);
 
