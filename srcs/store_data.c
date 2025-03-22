@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 16:55:11 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 17:03:39 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	store_player_position(t_game *data)
 				data->player.x = x;
 				data->player.y = y;
 				data->player.dir = map[y][x];
-				map[y][x] = '0'; // Remplacer le caractère du joueur par '0'
+				map[y][x] = '0';
 				return;
 			}
 			x++;
