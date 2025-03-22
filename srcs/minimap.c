@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/21 19:02:37 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/22 15:25:43 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_tile_size(t_game *game)
 {
 	int	max_cols;
 	int	nb_rows;
-	int	tile;
+	int	width_tile;
     int len;
     int height_tile;
 
@@ -29,21 +29,78 @@ static int	get_tile_size(t_game *game)
 			max_cols = len;
 		nb_rows++;
 	}
-	tile = (int)(game->win_width * 0.2 / max_cols);
+	width_tile = (int)(game->win_width * 0.2 / max_cols);
+	// mise à l'échelle pour obtenir 20% de la carte,
+	// sur cette nouvelle carte miniaturisée, on divise par le
+	// nombre de lignes/colonnes de la carte initiale (sa "hauteur"/sa "largeur")
+	// afin d'obtenir la taille d'une ligne/colonne dans la carte mini
+	// qui correspond donc à la hauteur/largeur d'une tile
 	height_tile = (int)(game->win_height * 0.2 / nb_rows);
-	if (height_tile < tile)
-		tile = height_tile;
-	if (tile < 1)
-		tile = 1;
-	return (tile);
+	if (height_tile < width_tile) //les deux doivent être égales, pourquoi pas if (height != widht) ? 
+		width_tile = height_tile;
+	if (width_tile < 1)
+		width_tile = 1; // au moins un pixel 
+	return (width_tile);
 }
 
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
-
+	// mlx->line_length  : nombre d'octets pour stocker une ligne de pixels 
+	// mlx->bpp / 8 : nombre d'octets pour stocker un pixel en largeur. On multiplie par x pour avancer de x * bpp/8 pixels
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	draw_menu(t_game *game)
+{
+	int	x;
+	int	y;
+
+	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
+		game->hud.menu_bg, 0, 0);
+
+	// adapter mise à l'échelle 
+	x = game->win_width / 2 - 50;
+	y = game->win_height / 2 - 20;
+	
+	if (game->menu_selection == 1)
+	{
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
+			0xFF0000, "> Exit");
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
+			0xFFFFFF, "> Play");
+	}
+	else
+	{
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
+			0xFFFFFF, "> Exit");
+		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
+			0xFF0000, "> Play");
+	}
+}
+
+void	draw_player_minimap(t_game *game, int *tile_size)
+{
+	int player_x_mini;
+	int player_y_mini;
+	int	dx;
+	int	dy;
+
+	player_x_mini = game->config.player_x / *tile_size;
+	player_y_mini = game->config.player_y / *tile_size;
+	dy = 0;
+	while (dy < *tile_size)
+ 	{
+		dx = 0;
+		while(dx < *tile_size)
+		{
+			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0xFF0000);
+			dx++;
+		}
+		dy++;
+	}
 }
 
 void	draw_minimap(t_game *game)
@@ -69,6 +126,7 @@ void	draw_minimap(t_game *game)
                 {
                     for (int dy = 0; dy < tile; dy++)
                     {
+						// remplit chaque tuiles
                         for (int dx = 0; dx < tile; dx++)
                             put_pixel_to_img(&game->mlx, x * tile + dx, y * tile + dy, color);
                     }
@@ -77,9 +135,10 @@ void	draw_minimap(t_game *game)
 		}
 		y++;
 	}
+	draw_player_minimap(game, &tile);
 }
 
-void	draw_floor_and_ceiling(t_game *game)
+void	draw_background(t_game *game)
 {
 	int	x;
 	int y;
@@ -90,40 +149,33 @@ void	draw_floor_and_ceiling(t_game *game)
 		x = 0;
 		while (x < game->win_width)
 		{
-			if (y < game->win_height / 2)
-				put_pixel_to_img(&game->mlx, x, y, game->config.ceiling_color);
-			else
-				put_pixel_to_img(&game->mlx, x, y, game->config.floor_color);
+			put_pixel_to_img(&game->mlx, x, y, 0x0080FF);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_menu(t_game *game)
+// ici c'est un carré
+void	draw_player(t_game *game)
 {
-	int	x;
-	int	y;
+	int	player_icon_size;
+	int	dx;
+	int	dy;
 
-	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-		game->hud.menu_bg, 0, 0);
-	x = game->win_width / 2 - 50;
-	y = game->win_height / 2 - 20;
-	if (game->menu_selection == 1)
+	player_icon_size = game->win_width * 0.02;
+	dy = -player_icon_size;
+	while (dy <= player_icon_size)
 	{
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
-			0xFF0000, "> Exit");
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
-			0xFFFFFF, "> Play");
-	}
-	else if (game->menu_selection == 0)
-	{
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40, 
-			0xFFFFFF, "> Exit");
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y, 
-			0xFF0000, "> Play");
-	}
+		dx = -player_icon_size;
+
+		while (dx <= player_icon_size)
+		{
+			put_pixel_to_img(&game->mlx, game->config.player_x + dx, game->config.player_y + dy, 0xFF0000);
+			dx++;
+		}
+		dy++;
+	}	
 }
 
 int	render(t_game *game)
@@ -134,15 +186,11 @@ int	render(t_game *game)
 		draw_menu(game);
 	else
 	{
-		draw_floor_and_ceiling(game);
+		draw_background(game);
 		draw_minimap(game);
+		draw_player(game);
 		mlx_put_image_to_window(game->mlx.mlx_ptr,
 			game->mlx.win_ptr, game->mlx.img, 0, 0);
-		int x = (game->win_width - game->hud.gun_w) / 2;
-		int y = game->win_height - game->hud.gun_h;
-		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-			game->hud.gun_img, x, y);
 	}
     return 0;
 }
-

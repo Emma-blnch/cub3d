@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 13:07:11 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/22 14:43:38 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,19 @@ static int	handle_keypress(int key, t_game *game)
 		else if (key == XK_Escape)
 			error_exit(game, NULL);
 	}
-	if (key == XK_Up)
-		game->config.player_y -= 30;
-	else if (key == XK_Down)
-		game->config.player_y += 30;
-	if (key == XK_Right)
-		game->config.player_x -= 30;
-	else if (key == XK_Left)
-		game->config.player_x += 30;
-	else if (key == XK_Escape)
-		error_exit(game, NULL);
+	else
+	{
+		if (key == XK_Up)
+			game->config.player_y -= 30;
+		else if (key == XK_Down)
+			game->config.player_y += 30;
+		if (key == XK_Right)
+			game->config.player_x -= 30;
+		else if (key == XK_Left)
+			game->config.player_x += 30;
+		else if (key == XK_Escape)
+			error_exit(game, NULL);
+	}
 	return (0);
 }
 
