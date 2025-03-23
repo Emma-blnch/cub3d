@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 17:02:46 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:16:18 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_menu(t_game *game)
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 		game->hud.menu_bg, 0, 0);
 
-	// adapter mise à l'échelle 
+	// à faire : adapter mise  à l'échelle
 	x = game->win_width / 2 - 50;
 	y = game->win_height / 2 - 20;
 	
@@ -99,14 +99,14 @@ void	draw_player_minimap(t_game *game, int *tile_size)
 	int	dx;
 	int	dy;
 
-	player_x_mini = game->player.x * (*tile_size);
-	player_y_mini = game->player.y * (*tile_size);
+	player_x_mini = (int)(game->player.pos_x * (*tile_size));
+	player_y_mini = (int)(game->player.pos_y * (*tile_size));
 	
 	dy = 0;
-	while (dy < *tile_size / 2)
+	while (dy < *tile_size / 3)
 	{
 		dx = 0;
-		while(dx < *tile_size / 2)
+		while(dx < *tile_size / 3)
 		{
 			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0xFF0000);
 			dx++;
@@ -154,12 +154,12 @@ void	draw_player(t_game *game)
 	int	player_icon_size;
 	int	dx;
 	int	dy;
-    int player_screen_x;
-    int player_screen_y;
+    float scaled_x;
+    float scaled_y;
     
-    player_screen_x = game->player.x * (game->win_width / ft_strlen(game->config.map[0]));
-    player_screen_y = game->player.y * (game->win_height / count_lines((char **)game->config.map));
-    
+//  position en float(précis) dans map   *  tile_width en gros 
+	scaled_x = game->player.pos_x * (game->win_width / ft_strlen(game->config.map[0]));
+    scaled_y = game->player.pos_y * (game->win_height / count_lines(game->config.map));
 	player_icon_size = game->win_width * 0.02;
 	dy = -player_icon_size;
 	while (dy <= player_icon_size)
@@ -167,11 +167,12 @@ void	draw_player(t_game *game)
 		dx = -player_icon_size;
 		while (dx <= player_icon_size)
 		{
-			put_pixel_to_img(&game->mlx, player_screen_x + dx, player_screen_y + dy, 0xFF0000);
+			put_pixel_to_img(&game->mlx, scaled_x + dx, scaled_y + dy, 0xFF0000);
 			dx++;
 		}
 		dy++;
-	}	
+	}
+	
 }
 
 int	render(t_game *game)
