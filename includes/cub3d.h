@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 17:33:52 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:48:14 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@
 # define XK_s 1
 # define XK_Escape 53
 # define XK_E 14
+# define XK_a 0   /* Touche 'a' sous MacOS */
+# define XK_d 2   /* Touche 'd' sous MacOS */
 
 #define XK_Left                          124  /* Move left, left arrow */
 #define XK_Right                         123  /* Move right, right arrow */
+
+#define PI 3.14159265359
 
 // int     main(int argc, char **argv);
 
@@ -104,5 +108,8 @@ void	error_exit(t_game *data, char *message);
 void    free_map(char **map);
 void    free_resources(t_game *data);
 void	free_lines(char **lines);
+
+
+void    init_player(t_player *player);
 
 #endif

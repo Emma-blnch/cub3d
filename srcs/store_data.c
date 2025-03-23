@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 22:46:15 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:34:52 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	store_player_position(t_game *data)
 				data->player.pos_x = (float)x + 0.5f; //centre sur la position
 				data->player.pos_y = (float)y + 0.5f;
 				data->player.dir = map[y][x];
+				data->player.angle = PI / 2;
 				map[y][x] = '0';
 				return;
 			}

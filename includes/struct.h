@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 22:48:12 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:28:37 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ typedef struct s_player {
     float       pos_x; // position float sur la carte (pour les déplacements)
     float       pos_y;
     char        dir;
+    
+    float   angle;
+    bool    key_up;
+    bool    key_down;
+    bool    key_left;
+    bool    key_rigth;
+
+    bool    left_rotate;
+    bool    right_rotate;
 }               t_player;
 
 typedef struct s_game {
