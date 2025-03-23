@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:56:18 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:35:10 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/24 00:38:18 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ int	ft_str_is_whitespace(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dst;
+	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
+	*(unsigned int *)dst = color;
 }

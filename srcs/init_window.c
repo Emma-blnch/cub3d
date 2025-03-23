@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 23:36:20 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:51:49 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ static int	handle_keypress(int key, t_game *game)
 	}
 	else
 		handle_movements(key, game);
-		// printf("Position: x=%.2f, y=%.2f (case %d,%d)\n", 
-		// 	game->player.pos_x, game->player.pos_y, game->player.x, game->player.y);
 	return (0);
 }
 
