@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 17:30:32 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/23 22:48:12 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ typedef struct s_hud {
 }	        t_hud;
 
 typedef struct s_player {
-    int         x;
+    int         x; // position int sur la carte
     int         y;
+    float       pos_x; // position float sur la carte (pour les déplacements)
+    float       pos_y;
     char        dir;
 }               t_player;
 

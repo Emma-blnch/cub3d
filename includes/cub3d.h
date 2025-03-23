@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 17:23:15 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/23 17:33:52 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_filename(t_game *data, char *filename);
 void	check_file_config(t_game *data, char **lines);
 void	check_map(t_game *data, char **lines);
 void	check_map_is_closed(char **lines, int start, t_game *data);
-void	check_duplicate(int *flag, t_game *data, char *id);
+void	check_duplicate(bool *flag, t_game *data, char *id);
 void	check_color_format(char *line, t_game *data, char id);
 void	check_texture_path(char *line, t_game *data, char *id);
 int     find_map_start_index(char **lines);
