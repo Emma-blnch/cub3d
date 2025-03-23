@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 23:19:44 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/23 23:36:20 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ static int	close_window(t_game *data)
 
 static	void	handle_movements(int key, t_game *game)
 {
-	float	shift; // de combien de pixels on se déplace
-	int		new_y;
+	float	shift; // de combien de pixels on se déplace, ici utile pour se déplacer dans un pixel
+	int		new_y; // avec ça on peut se déplacer de player.y à "player.y,999" par ex, ce qui était pas possible avant
+	// car un mur à 1 pixel de notre position nous bloquait. 
 	int		new_x;
 
 	shift = 0.2f;
 	if (key == XK_Up || key == XK_w)
 	{
-		game->player.pos_y += shift,
+		game->player.pos_y -= shift,
 		new_y = (int)game->player.pos_y;
 		if (new_y != game->player.y) // si ça change les coordonnées entières, donc si on a changé de tile
 		{
@@ -35,21 +36,59 @@ static	void	handle_movements(int key, t_game *game)
 			if (new_y >= 0 && game->config.map[new_y][game->player.x] != '1')
 				game->player.y = new_y;
 			else
-				game->player.pos_y -= shift; //repositionnement 
+			{
+				printf("you hit a wall\n");
+				game->player.pos_y += shift; // s'il y a un mur on bouge pas
+			}
 		}
 	}
 	else if (key == XK_Down || key == XK_s)
 	{
-		game->player.pos_y -= shift;
+		game->player.pos_y += shift;
 		new_y = (int)game->player.pos_y;
 		if (new_y != game->player.pos_y)
 		{
 			if (game->config.map[new_y] && game->config.map[new_y][game->player.x] != '1')
 				game->player.y = new_y;
 			else
-				game->player.pos_y += shift;
+			{
+				printf("you hit a wall\n");
+				game->player.pos_y -= shift;
+			}
 		}
 	}
+	else if (key == XK_Left)
+	{
+		game->player.pos_x += shift;
+		new_x = (int)game->player.pos_x;
+		if (new_x != game->player.pos_x)
+		{
+			if (new_x >= 0 && game->config.map[game->player.y][new_x] != '1')
+				game->player.x = new_x;
+			else
+			{
+				printf("you hit a wall\n");
+				game->player.pos_x -= shift;
+			}
+		}
+	}
+	else if (key == XK_Right)
+	{
+		game->player.pos_x -= shift;
+		new_x = (int)game->player.pos_x;
+		if (new_x != game->player.pos_x)
+		{
+			if (game->config.map[game->player.y] && game->config.map[game->player.y][new_x] != '1')
+				game->player.x = new_x;
+			else
+			{
+				game->player.pos_x += shift;
+				printf("you hit a wall\n");
+			}
+		}
+	}
+	else if (key == XK_Escape)
+			error_exit(game, NULL);
 }
 
 static int	handle_keypress(int key, t_game *game)
@@ -71,65 +110,9 @@ static int	handle_keypress(int key, t_game *game)
 			error_exit(game, NULL);
 	}
 	else
-	{
-		float step_size = 0.2f;
-		
-		if (key == XK_Up || key == XK_w)
-		{
-			game->player.pos_y -= step_size;
-			// Convertir en indices entiers et vérifier les collisions
-			int new_y = (int)game->player.pos_y;
-			if (new_y != game->player.y)
-			{
-				// Si on a changé de case, vérifier si c'est un mur
-				if (new_y >= 0 && game->config.map[new_y][game->player.x] != '1')
-					game->player.y = new_y;  // Mettre à jour l'indice entier
-				else
-					game->player.pos_y = game->player.y + 0.5f;  // Repositionner au centre
-			}
-		}
-		else if (key == XK_Down || key == XK_s)
-		{
-			game->player.pos_y += step_size;
-			int new_y = (int)game->player.pos_y;
-			if (new_y != game->player.y)
-			{
-				if (game->config.map[new_y] && game->config.map[new_y][game->player.x] != '1')
-					game->player.y = new_y;
-				else
-					game->player.pos_y = game->player.y + 0.5f;
-			}
-		}
-		else if (key == XK_Right)
-		{
-			game->player.pos_x -= step_size;
-			int new_x = (int)game->player.pos_x;
-			if (new_x != game->player.x)
-			{
-				if (new_x >= 0 && game->config.map[game->player.y][new_x] != '1')
-					game->player.x = new_x;
-				else
-					game->player.pos_x = game->player.x + 0.5f;
-			}
-		}
-		else if (key == XK_Left)
-		{
-			game->player.pos_x += step_size;
-			int new_x = (int)game->player.pos_x;
-			if (new_x != game->player.x)
-			{
-				if (game->config.map[game->player.y][new_x] && game->config.map[game->player.y][new_x] != '1')
-					game->player.x = new_x;
-				else
-					game->player.pos_x = game->player.x + 0.5f;
-			}
-		}
-		else if (key == XK_Escape)
-			error_exit(game, NULL);
-		
-		printf("Position: x=%.2f, y=%.2f (case %d,%d)\n", 
-			game->player.pos_x, game->player.pos_y, game->player.x, game->player.y);
-	}
+		handle_movements(key, game);
+		// printf("Position: x=%.2f, y=%.2f (case %d,%d)\n", 
+		// 	game->player.pos_x, game->player.pos_y, game->player.x, game->player.y);
 	return (0);
 }
 
