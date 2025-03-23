@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
+#    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/21 14:21:53 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/03/24 00:39:50 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRC_FILES =	error.c \
 			map_utils.c \
 			init_window.c \
 			minimap.c \
-			utils.c
+			utils.c \
+			render.c \
+			player.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
