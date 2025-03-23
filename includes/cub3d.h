@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:48:14 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 00:55:42 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int     find_map_start_index(char **lines);
 void    store_data(t_game *data, char **lines);
 void	parse_textures(t_game *data, char **lines);
 void	parse_colors(t_game *data, char **lines);
-void	store_player_position(t_game *data);
+void	store_player(t_game *data);
 
 // Window
 void	init_window(t_game *game);
