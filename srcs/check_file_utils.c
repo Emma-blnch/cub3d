@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:52:21 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/23 17:34:01 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_color_format(char *line, t_game *data, char id)
 	free_split(split);
 }
 
-void	check_duplicate(int *flag, t_game *data, char *id)
+void	check_duplicate(bool *flag, t_game *data, char *id)
 {
 	if (*flag)
 	{
