@@ -6,12 +6,14 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/22 16:16:56 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/23 17:30:32 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# include <stdbool.h>
 
 typedef struct s_mlx {
     void        *mlx_ptr;
@@ -31,9 +33,6 @@ typedef struct s_config {
     int         floor_color;
     int         ceiling_color;
     char        **map;
-    int         player_x;
-    int         player_y;
-    char        player_dir;
 }               t_config;
 
 typedef struct s_ray {
@@ -75,26 +74,20 @@ typedef struct s_game {
     t_config    config;
     t_ray       ray;
     t_hud       hud;
-    t_player    player; // Nouvelle structure pour le joueur
-    double      pos_x;
-    double      pos_y;
-    double      dir_x;
-    double      dir_y;
-    double      plane_x;
-    double      plane_y;
+    t_player    player;
     int         win_width;
     int         win_height;
-    int         menu_active; // 1 si on est dans le menu, 0 si on est en jeu
-	int         menu_selection; // 0 = Play, 1 = Exit
+    bool         menu_active;
+	bool         menu_selection;
 }               t_game;
 
 typedef struct s_check {
-    int         found_no;
-	int	        found_so;
-	int	        found_we;
-	int	        found_ea;
-	int	        found_f;
-	int	        found_c;
+    bool            found_no;
+	bool	        found_so;
+	bool	        found_we;
+	bool	        found_ea;
+	bool	        found_f;
+	bool	        found_c;
 }               t_check;
 
 #endif
