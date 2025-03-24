@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:28:37 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 09:41:34 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_player {
     bool    key_up;
     bool    key_down;
     bool    key_left;
-    bool    key_rigth;
+    bool    key_right;
 
     bool    left_rotate;
     bool    right_rotate;

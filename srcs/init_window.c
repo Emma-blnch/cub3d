@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 01:27:01 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 10:04:26 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static int	close_window(t_game *data)
 	return (0);
 }
 
-void	handle_movements(int key, t_game *game)
+void	handle_movements(t_game *game)
 {
 	float	shift; // de combien de pixels on se déplace, ici utile pour se déplacer dans un pixel
 	int		new_y; // avec ça on peut se déplacer de player.y à "player.y,999" par ex, ce qui était pas possible avant
 	// car un mur à 1 pixel de notre position nous bloquait. 
 	int		new_x;
-	float		cosinus;
-	float		sinus;
+	// float		cosinus;
+	// float		sinus;
 
-	cosinus = cos(game->player.angle); // useless pour l'instant, cos(pi/2) vaut 0
-	sinus = sin(game->player.angle);
-	shift = 0.2f;
-	if (key == XK_Up || key == XK_w)
+	// cosinus = cos(game->player.angle); // useless pour l'instant, cos(pi/2) vaut 0
+	// sinus = sin(game->player.angle);
+	shift = 0.05f;
+	if (game->player.key_up)
 	{
 		game->player.pos_y -= shift;
 		new_y = (int)game->player.pos_y;
@@ -46,7 +46,7 @@ void	handle_movements(int key, t_game *game)
 			}
 		}
 	}
-	else if (key == XK_Down || key == XK_s)
+	else if (game->player.key_down)
 	{
 		game->player.pos_y += shift;
 		new_y = (int)game->player.pos_y;
@@ -61,7 +61,7 @@ void	handle_movements(int key, t_game *game)
 			}
 		}
 	}
-	else if (key == XK_Left)
+	else if (game->player.key_left)
 	{
 		game->player.pos_x += shift;
 		new_x = (int)game->player.pos_x;
@@ -76,7 +76,7 @@ void	handle_movements(int key, t_game *game)
 			}
 		}
 	}
-	else if (key == XK_Right)
+	else if (game->player.key_right)
 	{
 		game->player.pos_x -= shift;
 		new_x = (int)game->player.pos_x;
@@ -91,17 +91,30 @@ void	handle_movements(int key, t_game *game)
 			}
 		}
 	}
-	else if (key == XK_Escape)
-			error_exit(game, NULL);
 }
 
-static int	handle_keypress(int key, t_game *game)
+int key_release(int key, t_game *game)
 {
+    printf("keycode : %d\n", key);
+    if (key == XK_Up || key == XK_w)
+        game->player.key_up = false;
+    if (key == XK_Down || key == XK_s)
+        game->player.key_down = false;
+    if (key == XK_Right)
+        game->player.key_right = false;
+    if (key == XK_Left)
+        game->player.key_left = false;
+    return 0;
+}
+
+int key_press(int key, t_game *game)
+{
+    printf("keycode : %d\n", key);
 	if (game->menu_active)
 	{
-		if (key == XK_Up || key == XK_w)
+		if (game->player.key_up)
 			game->menu_selection = (game->menu_selection + 1) % 2;
-		else if (key == XK_Down || key == XK_s)
+		else if (game->player.key_down)
 			game->menu_selection = (game->menu_selection + 1) % 2;
 		else if (key == XK_E)
 		{
@@ -113,9 +126,17 @@ static int	handle_keypress(int key, t_game *game)
 		else if (key == XK_Escape)
 			error_exit(game, NULL);
 	}
-	else
-		handle_movements(key, game);
-	return (0);
+    if (key == XK_Up || key == XK_w)
+        game->player.key_up = true;
+    if (key == XK_Down || key == XK_s)
+        game->player.key_down = true;
+    if (key == XK_Right)
+        game->player.key_right = true;
+    if (key == XK_Left)
+        game->player.key_left = true;
+    if (key == XK_Escape)
+        error_exit(game, NULL);
+    return 0;
 }
 
 void	load_hud(t_game *game)
@@ -148,7 +169,8 @@ void	init_window(t_game *game)
 	game->mlx.addr = mlx_get_data_addr(game->mlx.img,
 		&game->mlx.bpp, &game->mlx.line_length, &game->mlx.endian);
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_hook(game->mlx.win_ptr, 2, 1L<<0, handle_keypress, game);
+	mlx_hook(game->mlx.win_ptr, 2, 1L<<0, key_press, game);
+	mlx_hook(game->mlx.win_ptr, 3, 1L<<1, key_release, game);
 	load_hud(game);
 	mlx_loop_hook(game->mlx.mlx_ptr, render, game);
 	mlx_loop(game->mlx.mlx_ptr);

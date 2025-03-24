@@ -82,6 +82,7 @@ int	render(t_game *game)
 		draw_menu(game);
 	else
 	{
+		handle_movements(game);
 		draw_background(game);
 		draw_minimap(game);
 		draw_player(game);

@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:55:42 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 10:03:12 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,6 @@ void    free_resources(t_game *data);
 void	free_lines(char **lines);
 
 
-void    init_player(t_player *player);
+void	handle_movements(t_game *game);
 
 #endif
