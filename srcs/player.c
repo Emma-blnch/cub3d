@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-// si trouve un player, elle l'initialise et boucle pour vérifier que c'est le seul
+// si trouve un player, l'initialise et boucle pour vérifier que c'est le seul
 void	store_player(t_game *data)
 {
 	int	y;

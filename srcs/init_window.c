@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:51:49 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 01:27:01 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ static int	close_window(t_game *data)
 	return (0);
 }
 
-static	void	handle_movements(int key, t_game *game)
+void	handle_movements(int key, t_game *game)
 {
 	float	shift; // de combien de pixels on se déplace, ici utile pour se déplacer dans un pixel
 	int		new_y; // avec ça on peut se déplacer de player.y à "player.y,999" par ex, ce qui était pas possible avant
 	// car un mur à 1 pixel de notre position nous bloquait. 
 	int		new_x;
+	float		cosinus;
+	float		sinus;
 
+	cosinus = cos(game->player.angle); // useless pour l'instant, cos(pi/2) vaut 0
+	sinus = sin(game->player.angle);
 	shift = 0.2f;
 	if (key == XK_Up || key == XK_w)
 	{
-		game->player.pos_y -= shift,
+		game->player.pos_y -= shift;
 		new_y = (int)game->player.pos_y;
 		if (new_y != game->player.y) // si ça change les coordonnées entières, donc si on a changé de tile
 		{

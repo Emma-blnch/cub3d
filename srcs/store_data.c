@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:54:01 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 01:14:51 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void    store_data(t_game *data, char **lines)
     parse_textures(data, lines);
     parse_colors(data, lines);
     store_map(data, lines);
-    store_player_position(data);
+    store_player(data);
 }
