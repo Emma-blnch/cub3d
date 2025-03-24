@@ -6,52 +6,11 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/15 10:48:41 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/24 11:58:09 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	close_window(t_game *data)
-{
-	error_exit(data, NULL);
-	return (0);
-}
-
-// static int	handle_keypress(int keycode, t_game *data)
-// {
-// 	if (keycode == 53)
-// 		error_exit(data, NULL);
-// 	return (0);
-// }
-
-static int	handle_keypress(int key, t_game *game)
-{
-	// printf("%d\n", key);
-	// (void)game;
-	if (game->menu_active)
-	{
-		if (key == XK_Up || key == XK_w)
-			game->menu_selection = (game->menu_selection + 1) % 2;
-		else if (key == XK_Down || key == XK_s)
-			game->menu_selection = (game->menu_selection + 1) % 2;
-		else if (key == XK_E)
-		{
-			if (game->menu_selection == 0)
-				game->menu_active = 0; // lancer le jeu
-			else
-				error_exit(game, NULL); // quitter
-		}
-		else if (key == XK_Escape)
-			error_exit(game, NULL);
-	}
-	else
-	{
-		if (key == XK_Escape)
-			error_exit(game, NULL);
-	}
-	return (0);
-}
 
 void	load_hud(t_game *game)
 {
@@ -83,8 +42,12 @@ void	init_window(t_game *game)
 	game->mlx.addr = mlx_get_data_addr(game->mlx.img,
 		&game->mlx.bpp, &game->mlx.line_length, &game->mlx.endian);
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	mlx_key_hook(game->mlx.win_ptr, handle_keypress, game);
+	// mlx_key_hook(game->mlx.win_ptr, handle_keypress, game);
+	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
+	mlx_hook(game->mlx.win_ptr, 3, 1L << 1, key_release, game);
+
 	load_hud(game);
+
 	mlx_loop_hook(game->mlx.mlx_ptr, render, game);
 	mlx_loop(game->mlx.mlx_ptr);
 }

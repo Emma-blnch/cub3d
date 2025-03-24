@@ -6,12 +6,14 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/21 14:15:41 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/23 09:50:07 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+#include <stdbool.h>
 
 typedef struct s_mlx {
     void        *mlx_ptr;
@@ -64,11 +66,25 @@ typedef struct s_hud {
     int		    wall_h;
 }	        t_hud;
 
+typedef struct s_player
+{
+    float       x;
+    float       y;
+    float       angle;
+    bool        key_up;
+    bool        key_down;
+    bool        key_left;
+    bool        key_rigth;
+    bool        left_rotate;
+    bool        right_rotate;
+}               t_player;
+
 typedef struct s_game {
     t_mlx       mlx;
     t_config    config;
     t_ray       ray;
     t_hud       hud;
+    t_player    player;
     double      pos_x;
     double      pos_y;
     double      dir_x;

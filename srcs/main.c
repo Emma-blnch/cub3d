@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/14 11:38:08 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:11:56 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			main(int argc, char **argv)
     if (argc != 2 && argc != 4)
         error_exit(data, "Usage: ./cub3d <maps/map.cub> [<WIN WIDTH> <WIN HEIGHT>]");
     data = init_data(argc, argv);
-    validate_file(argv[1], data);   
+    validate_file(argv[1], data);
+    init_player(&data->player, data);
     init_window(data);
     // game_loop();
     free_resources(data);
