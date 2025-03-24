@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 10:03:12 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:54:16 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MAX_LINES 1024
 # define ESC_KEY 65307
 # define TILE_SIZE 10
+# define PI 3.14159265359
 
 # define RESET		"\033[0m"
 # define R		    "\033[31m"
@@ -45,20 +46,20 @@
 // # define XK_Return 65293
 // # define XK_E 101
 
-// TOUCHES MACOS
-# define XK_Up 126
-# define XK_w 6
-# define XK_Down 125
-# define XK_s 1
 # define XK_Escape 53
-# define XK_E 14
-# define XK_a 0   /* Touche 'a' sous MacOS */
-# define XK_d 2   /* Touche 'd' sous MacOS */
+# define XK_E   14
+// arrows mac
+# define XK_Up 126 
+# define XK_Down 125
+# define XK_Left 124 
+# define XK_Right 123
 
-#define XK_Left                          124  /* Move left, left arrow */
-#define XK_Right                         123  /* Move right, right arrow */
+// équivalent WASD mac
+# define XK_z 13 // up
+# define XK_q 0 // left
+# define XK_s 1 // down
+# define XK_d 2 // right
 
-#define PI 3.14159265359
 
 // int     main(int argc, char **argv);
 

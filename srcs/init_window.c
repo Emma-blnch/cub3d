@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 15:38:49 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:54:50 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ void	handle_movements(t_game *game)
 int key_release(int key, t_game *game)
 {
     printf("keycode : %d\n", key);
-    if (key == XK_Up || key == XK_w)
+    if (key == XK_z)
         game->player.key_up = false;
-    if (key == XK_Down || key == XK_s)
+    if (key == XK_s)
         game->player.key_down = false;
-    if (key == XK_Right)
+    if (key == XK_q)
         game->player.key_right = false;
-    if (key == XK_Left)
+    if (key == XK_d)
         game->player.key_left = false;
     return 0;
 }
@@ -139,13 +139,13 @@ int key_press(int key, t_game *game)
 		else if (key == XK_Escape)
 			error_exit(game, NULL);
 	}
-    if (key == XK_Up || key == XK_w)
+    if (key == XK_z)
         game->player.key_up = true;
-    if (key == XK_Down || key == XK_s)
+    if (key == XK_s)
         game->player.key_down = true;
-    if (key == XK_Right)
+    if (key == XK_q)
         game->player.key_right = true;
-    if (key == XK_Left)
+    if (key == XK_d)
         game->player.key_left = true;
     if (key == XK_Escape)
         error_exit(game, NULL);
