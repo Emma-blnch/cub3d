@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 10:04:26 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 15:38:49 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,53 @@ void	handle_movements(t_game *game)
 	int		new_y; // avec ça on peut se déplacer de player.y à "player.y,999" par ex, ce qui était pas possible avant
 	// car un mur à 1 pixel de notre position nous bloquait. 
 	int		new_x;
-	// float		cosinus;
-	// float		sinus;
+	float		cosinus;
+	float		sinus;
 
-	// cosinus = cos(game->player.angle); // useless pour l'instant, cos(pi/2) vaut 0
-	// sinus = sin(game->player.angle);
+	cosinus = cos(game->player.angle);
+	sinus = sin(game->player.angle);
 	shift = 0.05f;
 	if (game->player.key_up)
 	{
-		game->player.pos_y -= shift;
+		game->player.pos_x -= shift * cosinus;
+		game->player.pos_y -= shift * sinus;
+		new_x = (int)game->player.pos_x;
 		new_y = (int)game->player.pos_y;
-		if (new_y != game->player.y) // si ça change les coordonnées entières, donc si on a changé de tile
+		if (new_y != game->player.y || new_x != game->player.x) // si ça change les coordonnées entières, donc si on a changé de tile
 		{
 			//on check si les coordonnées entières sont les coordonnées d'un mur
 			if (new_y >= 0 && game->config.map[new_y][game->player.x] != '1')
+			{
 				game->player.y = new_y;
+				game->player.x = new_x;
+			}
 			else
 			{
 				printf("you hit a wall\n");
-				game->player.pos_y += shift; // s'il y a un mur on bouge pas
+				game->player.pos_y += shift * sinus; // s'il y a un mur on bouge pas
+				game->player.pos_x += shift * cosinus;
 			}
 		}
 	}
 	else if (game->player.key_down)
 	{
-		game->player.pos_y += shift;
+		game->player.pos_y += shift * sinus;
+		game->player.pos_x += shift * cosinus;
 		new_y = (int)game->player.pos_y;
-		if (new_y != game->player.pos_y)
+		new_x = (int)game->player.pos_x;
+
+		if (new_y != game->player.pos_y || new_x != game->player.pos_x)
 		{
 			if (game->config.map[new_y] && game->config.map[new_y][game->player.x] != '1')
+			{
 				game->player.y = new_y;
+				game->player.x = new_x;
+			}
 			else
 			{
 				printf("you hit a wall\n");
-				game->player.pos_y -= shift;
+				game->player.pos_y -= shift * sinus;
+				game->player.pos_x -= shift * cosinus;
 			}
 		}
 	}
