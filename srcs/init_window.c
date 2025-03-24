@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 15:54:50 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/24 23:33:02 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,92 +18,69 @@ static int	close_window(t_game *data)
 	return (0);
 }
 
+static int is_wall(t_game *game, int x, int y)
+{
+    if (y < 0 || x < 0 || !game->config.map[y] || !game->config.map[y][x] || game->config.map[y][x] == '1')
+        return (1);
+    return (0);
+}
+
 void	handle_movements(t_game *game)
 {
-	float	shift; // de combien de pixels on se déplace, ici utile pour se déplacer dans un pixel
-	int		new_y; // avec ça on peut se déplacer de player.y à "player.y,999" par ex, ce qui était pas possible avant
-	// car un mur à 1 pixel de notre position nous bloquait. 
-	int		new_x;
-	float		cosinus;
-	float		sinus;
+    float	shift;
+    float	cosinus;
+    float	sinus;
 
-	cosinus = cos(game->player.angle);
-	sinus = sin(game->player.angle);
+    float	dx;
+	float	dy;
+    float	new_x;
+	float	new_y;
+
 	shift = 0.05f;
-	if (game->player.key_up)
+    if (game->player.left_rotate) {
+        game->player.angle += 0.005f;
+        if (game->player.angle >= 2 * PI)
+            game->player.angle -= 2 * PI;
+    }
+    else if (game->player.right_rotate) {
+        game->player.angle -= 0.005f;
+        if (game->player.angle < 0)
+            game->player.angle += 2 * PI;
+    }
+    cosinus = cos(game->player.angle);
+    sinus = sin(game->player.angle);
+    dx = 0;
+    dy = 0;
+    if (game->player.key_up)
 	{
-		game->player.pos_x -= shift * cosinus;
-		game->player.pos_y -= shift * sinus;
-		new_x = (int)game->player.pos_x;
-		new_y = (int)game->player.pos_y;
-		if (new_y != game->player.y || new_x != game->player.x) // si ça change les coordonnées entières, donc si on a changé de tile
-		{
-			//on check si les coordonnées entières sont les coordonnées d'un mur
-			if (new_y >= 0 && game->config.map[new_y][game->player.x] != '1')
-			{
-				game->player.y = new_y;
-				game->player.x = new_x;
-			}
-			else
-			{
-				printf("you hit a wall\n");
-				game->player.pos_y += shift * sinus; // s'il y a un mur on bouge pas
-				game->player.pos_x += shift * cosinus;
-			}
-		}
-	}
-	else if (game->player.key_down)
+        dx -= cosinus * shift;
+        dy -= sinus * shift;
+    }
+    if (game->player.key_down)
 	{
-		game->player.pos_y += shift * sinus;
-		game->player.pos_x += shift * cosinus;
-		new_y = (int)game->player.pos_y;
-		new_x = (int)game->player.pos_x;
-
-		if (new_y != game->player.pos_y || new_x != game->player.pos_x)
-		{
-			if (game->config.map[new_y] && game->config.map[new_y][game->player.x] != '1')
-			{
-				game->player.y = new_y;
-				game->player.x = new_x;
-			}
-			else
-			{
-				printf("you hit a wall\n");
-				game->player.pos_y -= shift * sinus;
-				game->player.pos_x -= shift * cosinus;
-			}
-		}
-	}
-	else if (game->player.key_left)
+        dx += cosinus * shift;
+        dy += sinus * shift;
+    }
+    if (game->player.key_left)
 	{
-		game->player.pos_x += shift;
-		new_x = (int)game->player.pos_x;
-		if (new_x != game->player.pos_x)
-		{
-			if (new_x >= 0 && game->config.map[game->player.y][new_x] != '1')
-				game->player.x = new_x;
-			else
-			{
-				printf("you hit a wall\n");
-				game->player.pos_x -= shift;
-			}
-		}
-	}
-	else if (game->player.key_right)
+        dx -= sinus * shift;
+        dy += cosinus * shift;
+    }
+    if (game->player.key_right)
 	{
-		game->player.pos_x -= shift;
-		new_x = (int)game->player.pos_x;
-		if (new_x != game->player.pos_x)
-		{
-			if (game->config.map[game->player.y] && game->config.map[game->player.y][new_x] != '1')
-				game->player.x = new_x;
-			else
-			{
-				game->player.pos_x += shift;
-				printf("you hit a wall\n");
-			}
-		}
-	}
+        dx += sinus * shift;
+        dy -= cosinus * shift;
+    }
+    new_x = game->player.pos_x + dx;
+    if (!is_wall(game, (int)new_x, (int)game->player.pos_y)) {
+        game->player.pos_x = new_x;
+        game->player.x = (int)new_x;
+    }
+    new_y = game->player.pos_y + dy;
+    if (!is_wall(game, (int)game->player.pos_x, (int)new_y)) {
+        game->player.pos_y = new_y;
+        game->player.y = (int)new_y;
+    }
 }
 
 int key_release(int key, t_game *game)
@@ -114,9 +91,13 @@ int key_release(int key, t_game *game)
     if (key == XK_s)
         game->player.key_down = false;
     if (key == XK_q)
-        game->player.key_right = false;
-    if (key == XK_d)
         game->player.key_left = false;
+    if (key == XK_d)
+        game->player.key_right = false;
+	if (key == XK_Left)
+		game->player.left_rotate = false;
+	if (key == XK_Right)
+		game->player.right_rotate = false;
     return 0;
 }
 
@@ -144,9 +125,13 @@ int key_press(int key, t_game *game)
     if (key == XK_s)
         game->player.key_down = true;
     if (key == XK_q)
-        game->player.key_right = true;
-    if (key == XK_d)
         game->player.key_left = true;
+    if (key == XK_d)
+        game->player.key_right = true;
+	if (key == XK_Left)
+		game->player.left_rotate = true;
+	if (key == XK_Right)
+		game->player.right_rotate = true;
     if (key == XK_Escape)
         error_exit(game, NULL);
     return 0;
