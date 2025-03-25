@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 17:34:01 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/25 17:55:40 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	check_texture_path(char *line, t_game *data, char *id)
 		ft_printf("Error: Empty path for %s\n", id);
 		error_exit(data, NULL);
 	}
-	// int fd = open(path, O_RDONLY);
-	// if (fd < 0)
-	//     error_exit(data, "Error: Texture path is invalid");
-	// close(fd);
 }
 
 static int	is_valid_rgb_value(char *str)

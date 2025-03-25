@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/25 00:05:48 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/25 21:08:33 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	free_lines(char **lines);
 
 
 void	handle_movements(t_game *game);
+int is_wall(t_game *game, int x, int y);
 
 #endif

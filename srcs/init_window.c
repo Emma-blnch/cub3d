@@ -18,7 +18,7 @@ static int	close_window(t_game *data)
 	return (0);
 }
 
-static int is_wall(t_game *game, int x, int y)
+int is_wall(t_game *game, int x, int y)
 {
     if (y < 0 || x < 0 || !game->config.map[y] || !game->config.map[y][x] || game->config.map[y][x] == '1')
         return (1);
@@ -47,30 +47,31 @@ void	handle_movements(t_game *game)
         if (game->player.angle < 0)
             game->player.angle += 2 * PI;
     }
+	printf("angle : %f\n", game->player.angle);
     cosinus = cos(game->player.angle);
     sinus = sin(game->player.angle);
     dx = 0;
     dy = 0;
-    if (game->player.key_up)
+	if (game->player.key_up)
 	{
-        dx -= cosinus * shift;
-        dy -= sinus * shift;
-    }
-    if (game->player.key_down)
+		dx -= cosinus * shift;
+		dy -= sinus * shift;
+	}
+	else if (game->player.key_down)
 	{
-        dx += cosinus * shift;
-        dy += sinus * shift;
-    }
-    if (game->player.key_left)
+		dx += cosinus * shift;
+		dy += sinus * shift;
+	}
+	else if (game->player.key_left)
 	{
-        dx -= sinus * shift;
-        dy += cosinus * shift;
-    }
-    if (game->player.key_right)
+		dx -= shift * sinus;
+		dy += shift * cosinus;
+	}
+	else if (game->player.key_right)
 	{
-        dx += sinus * shift;
-        dy -= cosinus * shift;
-    }
+		dx += shift * sinus;
+		dy -= shift * cosinus;
+	}
     new_x = game->player.pos_x + dx;
     if (!is_wall(game, (int)new_x, (int)game->player.pos_y)) {
         game->player.pos_x = new_x;
