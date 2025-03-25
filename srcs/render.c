@@ -107,34 +107,20 @@ void	draw_ray(t_game *game, float ray_angle)
 	float	new_y;
 	bool	wall;
 	int		i;
-	float	player_x;
-	float	player_y;
 
-	// Calculer la position du joueur à l'écran exactement comme dans draw_player
-	player_x = game->player.pos_x * (game->win_width / ft_strlen(game->config.map[0]));
-	player_y = game->player.pos_y * (game->win_height / count_lines(game->config.map));
-	
-	// Commencer le rayon à la position exacte du joueur
-	put_pixel_to_img(&game->mlx, (int)player_x, (int)player_y, 0xFF0000);
-	
 	new_x = game->player.pos_x;
 	new_y = game->player.pos_y;
 	wall = 0;
-	i = 1; // Commencer à 1 car on a déjà dessiné le premier pixel
-	
+	i = 0;
 	while (i < 1000 && !wall)
 	{
 		new_x += cos(ray_angle) * 0.05f;
 		new_y += sin(ray_angle) * 0.05f;
-		
-		// Utiliser exactement la même formule que pour le joueur
 		float scaled_x = new_x * (game->win_width / ft_strlen(game->config.map[0]));
 		float scaled_y = new_y * (game->win_height / count_lines(game->config.map));
-		
 		if (scaled_x >= 0 && scaled_x < game->win_width && 
 			scaled_y >= 0 && scaled_y < game->win_height)
 			put_pixel_to_img(&game->mlx, (int)scaled_x, (int)scaled_y, 0xFF0000);
-		
 		if (is_wall(game, new_x, new_y))
 			wall = 1;
 		i++;
