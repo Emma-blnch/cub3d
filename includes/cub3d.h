@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 12:19:58 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/25 17:42:12 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,9 @@ void	error_exit(t_game *data, char *message);
 void    free_map(char **map);
 void    free_resources(t_game *data);
 void	free_lines(char **lines);
+
+
+void    draw_single_line(t_player *player, t_game *game, float start_x);
+bool touch(float px, float py, t_game *game);
 
 #endif

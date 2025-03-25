@@ -5,9 +5,9 @@ void    init_player(t_player *player, t_game *game)
     player->x = (game->config.player_x + 0.5) * TILE_SIZE;
     player->y = (game->config.player_y + 0.5) * TILE_SIZE;
 	if (game->config.player_dir == 'N')
-		player->angle = PI / 2;
-	else if (game->config.player_dir == 'S')
 		player->angle = 3 * PI / 2;
+	else if (game->config.player_dir == 'S')
+		player->angle = PI / 2;
 	else if (game->config.player_dir == 'E')
 		player->angle = 0;
 	else if (game->config.player_dir == 'W')

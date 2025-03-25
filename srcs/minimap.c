@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 12:02:14 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/25 17:46:25 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ void	draw_player(t_game *game, int tile)
 	draw_square(px - size / 2, py - size / 2, size, 0x00FF00, game);
 }
 
+void	draw_ray_on_minimap(t_game *game, float angle)
+{
+	float ray_x = game->player.x; // position joueur en pixel
+	float ray_y = game->player.y; // position joueur en pixel
+	float cos_a = cos(angle);
+	float sin_a = sin(angle);
+	int	tile_size = get_tile_size(game);
+
+	while (!touch(ray_x, ray_y, game))
+	{
+		int mini_x = (ray_x / TILE_SIZE) * tile_size; // on passe des pixels aux cases de la map
+		int mini_y = (ray_y / TILE_SIZE) * tile_size; // on passe des pixels aux cases de la map : ray_x / TILE_SIZE pour avoir numéro de case et * tile_size pour mettre à l'échelle de la minimap
+		put_pixel_to_img(&game->mlx, mini_x, mini_y, 0xFF0000);
+		ray_x += cos_a;
+		ray_y += sin_a;
+	}
+}
+
 void	draw_minimap(t_game *game)
 {
 	int		tile = get_tile_size(game);
@@ -85,4 +103,16 @@ void	draw_minimap(t_game *game)
 		y++;
 	}
 	draw_player(game, tile);
+	// draw_ray_on_minimap(game, game->player.angle); // un seul rayon
+
+	// ----- FOV Conique :
+	float start_x = game->player.angle - PI / 6; //(- PI / 6) -> premier rayon part du plus a gauche de la FOV
+	float fraction = PI / 3 / game->win_width;
+		int i = 0;
+		while (i < game->win_width)
+		{
+			draw_ray_on_minimap(game, start_x); // dessine rayon par rayon
+			start_x += fraction; // va vers droite de la FOV en ayant fraction écart entre chaque rayon
+			i++;
+		}
 }
