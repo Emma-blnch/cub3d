@@ -37,12 +37,14 @@ void	handle_movements(t_game *game)
 	float	new_y;
 
 	shift = 0.05f;
-    if (game->player.left_rotate) {
+    if (game->player.left_rotate)
+	{
         game->player.angle += 0.005f;
         if (game->player.angle >= 2 * PI)
             game->player.angle -= 2 * PI;
     }
-    else if (game->player.right_rotate) {
+    else if (game->player.right_rotate)
+	{
         game->player.angle -= 0.005f;
         if (game->player.angle < 0)
             game->player.angle += 2 * PI;

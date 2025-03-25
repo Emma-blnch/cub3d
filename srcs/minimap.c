@@ -6,13 +6,13 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 00:49:33 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/25 22:22:12 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	get_tile_size(t_game *game)
+int	get_tile_size(t_game *game)
 {
 	int	max_cols;
 	int	nb_rows;
