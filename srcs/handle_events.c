@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 12:18:48 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/25 14:11:30 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	close_window(t_game *data)
 	error_exit(data, NULL);
 	return (0);
 }
+
 static int	handle_menu(int keycode, t_game *game)
 {
 	if (keycode == Up || keycode == W)

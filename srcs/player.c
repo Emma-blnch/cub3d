@@ -9,7 +9,7 @@ void    init_player(t_player *player, t_game *game)
 	else if (game->config.player_dir == 'S')
 		player->angle = 3 * PI / 2;
 	else if (game->config.player_dir == 'E')
-		player->angle = 0; // ou 2 * PI
+		player->angle = 0;
 	else if (game->config.player_dir == 'W')
 		player->angle = PI;
     player->key_down = false;
@@ -41,6 +41,17 @@ void    move_player(t_player *player, t_game *game)
 	float new_y = player->y;
     float cos_angle = cos(player->angle); // décalage sur axe x
     float sin_angle = sin(player->angle); // décalage sur axe y
+    float angle_speed = 0.03; // vitesse de rotation (pas mettre trop rapide sinon effet bizarre)
+
+    if (player->left_rotate)
+        player->angle -= angle_speed;
+    if (player->right_rotate)
+        player->angle += angle_speed;
+    // pour éviter angles négatifs ou qui dépassent 360° :
+    if (player->angle > 2 * PI)
+        player->angle = 0;
+    if (player->angle < 0)
+        player->angle = 2 * PI;
 
     if (player->key_up) // avancer
     {
