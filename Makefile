@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
+#    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/24 11:58:51 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/03/26 19:08:39 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRC_FILES =	error.c \
 			player.c \
 			render.c \
 			handle_events.c \
-			utils.c
+			utils.c \
+			raycasting.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

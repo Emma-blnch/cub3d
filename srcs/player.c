@@ -35,7 +35,7 @@ static void rotation(t_player *player)
         player->angle = 2 * PI;
 }
 
-static void horizontal_moves(t_player *player, float *new_x, float *new_y)
+static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
 {
     int     speed;
 
@@ -70,7 +70,7 @@ void    move_player(t_player *player, t_game *game)
     new_x = player->x;
     new_y = player->y;
     rotation(player);
-    horizontal_moves(player, &new_x, &new_y);
+    perpendicular_moves(player, &new_x, &new_y);
     if (!is_wall(new_x, player->y, game->config.map))
 		player->x = new_x;
 	if (!is_wall(player->x, new_y, game->config.map))

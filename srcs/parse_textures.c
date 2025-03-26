@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:01:30 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:37:09 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 19:12:32 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ static char	*extract_path(char *line)
 
 void	parse_textures(t_game *data, char **lines)
 {
-	int	i = 0;
+	int		i;
 
+	i = 0;
 	while (lines[i])
 	{
 		if (lines[i][0] == '\n' || lines[i][0] == '\0')

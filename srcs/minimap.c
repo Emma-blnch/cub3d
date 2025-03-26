@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 17:39:09 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/26 19:14:04 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ void	draw_ray_on_minimap(t_game *game, float angle)
 	tile_size = get_tile_size(game);
 	while (!is_wall(ray_x, ray_y, game->config.map))
 	{
-		int mini_x = (ray_x / TILE_SIZE) * tile_size;
-		int mini_y = (ray_y / TILE_SIZE) * tile_size;
-		put_pixel_to_img(&game->mlx, mini_x, mini_y, 0xFF0000);
+		// int mini_x = (ray_x / TILE_SIZE) * tile_size;
+		// int mini_y = (ray_y / TILE_SIZE) * tile_size;
+		put_pixel_to_img(&game->mlx, (ray_x / TILE_SIZE) * tile_size,
+			(ray_y / TILE_SIZE) * tile_size, 0xFF0000);
 		ray_x += cos_a;
 		ray_y += sin_a;
 	}

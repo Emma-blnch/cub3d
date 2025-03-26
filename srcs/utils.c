@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:56:18 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 18:32:04 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/26 19:12:56 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	free_split(char **split)
 
 int	ft_str_is_whitespace(char *str)
 {
-	int	i = 0;
+	int		i;
 
+	i = 0;
 	if (!str)
 		return (1);
 	while (str[i])
@@ -60,4 +61,18 @@ int	ft_str_is_whitespace(char *str)
 		i++;
 	}
 	return (1);
+}
+
+bool is_wall(float px, float py, char **map)
+{
+    int		x;
+    int		y;
+
+	x = px / TILE_SIZE;
+	y = py / TILE_SIZE;
+	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
+        return (true);
+    if (map[y][x] == '1')
+        return (true);
+    return (false);
 }
