@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:35:05 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 18:08:32 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_valid_map_line(char *line)
 			return (1);
 		i++;
 	}
-	return (0); // ligne vide
+	return (0);
 }
 
 int	has_wall_start(char *line)

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/24 11:58:09 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 18:07:41 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,9 @@ void	init_window(t_game *game)
 	game->mlx.addr = mlx_get_data_addr(game->mlx.img,
 		&game->mlx.bpp, &game->mlx.line_length, &game->mlx.endian);
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-	// mlx_key_hook(game->mlx.win_ptr, handle_keypress, game);
 	mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
 	mlx_hook(game->mlx.win_ptr, 3, 1L << 1, key_release, game);
-
 	load_hud(game);
-
 	mlx_loop_hook(game->mlx.mlx_ptr, render, game);
 	mlx_loop(game->mlx.mlx_ptr);
 }

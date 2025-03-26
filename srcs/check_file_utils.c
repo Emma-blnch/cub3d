@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/25 16:21:50 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 18:05:31 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	check_color_format(char *line, t_game *data, char id)
 		|| !is_valid_rgb_value(split[2]))
 	{
 		free_split(split);
-		error_exit(data, (id == 'F') ? "Error: Invalid floor color"
-									: "Error: Invalid ceiling color");
+		if (id == 'F')
+			error_exit(data, "Error: Invalid floor color");
+		else
+			error_exit(data, "Error: Invalid ceiling color");
 	}
 	free_split(split);
 }

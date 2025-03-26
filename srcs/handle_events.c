@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/25 14:11:30 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:00:03 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ int key_press(int keycode, t_game *game)
 
 int key_release(int keycode, t_game *game)
 {
-	t_player *player = &game->player;
-
+	t_player *player;
+	
+	player = &game->player;
 	if (game->menu_active)
 		return (0);
 	if (keycode == W)

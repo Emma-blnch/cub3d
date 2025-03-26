@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 10:11:56 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 18:08:25 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_game	*init_data(int argc, char **argv)
 	ft_memset(data, 0, sizeof(t_game));
     data->menu_active = 1;
     data->menu_selection = 0;
+    // a garder ?
     if (argc == 4)
     {
         data->win_width = ft_atoi(argv[2]);
@@ -51,13 +52,6 @@ int			main(int argc, char **argv)
     validate_file(argv[1], data);
     init_player(&data->player, data);
     init_window(data);
-    // game_loop();
     free_resources(data);
     return (0);
 }
-
-// 111111
-// 100001
-// 10N  1
-// 100 01
-// 111 11

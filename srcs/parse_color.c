@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:12:35 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/21 09:49:33 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/26 18:10:30 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	encode_rgb(int r, int g, int b)
 static void	parse_single_color(char *line, t_game *data, char type)
 {
 	char	**split;
-	int		r, g, b;
+	int		r;
+	int		g;
+	int		b;
 
 	line += 2;
 	while (*line == ' ')
