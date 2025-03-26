@@ -26,43 +26,39 @@ static void rotation(t_player *player)
 
     angle_speed = 0.03f;
     if (player->left_rotate)
-    player->angle -= angle_speed;
-if (player->right_rotate)
-    player->angle += angle_speed;
-if (player->angle > 2 * PI)
-    player->angle = 0;
-if (player->angle < 0)
-    player->angle = 2 * PI;
+        player->angle -= angle_speed;
+    if (player->right_rotate)
+        player->angle += angle_speed;
+    if (player->angle > 2 * PI)
+        player->angle = - 2 * PI;
+    if (player->angle < 0)
+        player->angle = 2 * PI;
 }
 
-static void    horizontal_moves(t_player *player, float *new_x, float *new_y)
+static void horizontal_moves(t_player *player, float *new_x, float *new_y)
 {
-    float   cos_angle;
-    float   sin_angle;
     int     speed;
 
     speed = 3;
-    cos_angle = cos(player->angle);
-    sin_angle = sin(player->angle);
     if (player->key_up)
     {
-        *new_x += cos_angle * speed;
-        *new_y += sin_angle * speed;
+        *new_x += cos(player->angle) * speed;
+        *new_y += sin(player->angle)  * speed;
     }
     if (player->key_down)
     {
-        *new_x -= cos_angle * speed;
-        *new_y -= sin_angle * speed;
+        *new_x -= cos(player->angle)  * speed;
+        *new_y -= sin(player->angle) * speed;
     }
     if (player->key_left)
     {
-        *new_y -= cos_angle * speed;
-        *new_x += sin_angle * speed;
+        *new_y -= cos(player->angle)  * speed;
+        *new_x += sin(player->angle) * speed;
     }
     if (player->key_rigth)
     {
-        *new_y += cos_angle * speed;
-        *new_x -= sin_angle * speed;
+        *new_y += cos(player->angle)  * speed;
+        *new_x -= sin(player->angle) * speed;
     }
 }
 

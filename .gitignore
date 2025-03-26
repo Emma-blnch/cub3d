@@ -1,1 +1,5 @@
 .DS_Store
+cub3d
+.vscode
+*.json
+*.o

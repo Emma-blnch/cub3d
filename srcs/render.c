@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 17:37:40 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/26 18:59:25 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,51 +80,15 @@ bool is_wall(float px, float py, char **map)
     return (false);
 }
 
-void    draw_single_line(t_player *player, t_game *game, float start_x)
-{
-    float	cos_angle;
-    float	sin_angle;
-    float	ray_x;
-    float	ray_y;
-	
-	cos_angle = cos(start_x);
-	sin_angle = sin(start_x);
-	ray_x = player->x;
-	ray_y = player->y;
-    while(!is_wall(ray_x, ray_y, game->config.map))
-    {
-		put_pixel_to_img(&game->mlx, ray_x, ray_y, 0xFF0000);
-        ray_x += cos_angle;
-        ray_y += sin_angle;
-    }
-}
-
 float	distance(float x, float y)
 {
     return (sqrt(x * x + y * y));
 }
 
-void    draw_wall(t_player *player, t_game *game, float start_x, int i)
+void	draw_wall_column(t_game *game, float *corrected_dist, int i)
 {
-    float cos_angle;
-    float sin_angle;
-    float ray_x;
-    float ray_y;
 
-	ray_x = player->x;
-	cos_angle = cos(start_x);
-	ray_y = player->y;
-	sin_angle = sin(start_x);
-    while(!is_wall(ray_x, ray_y, game->config.map))
-    {
-        ray_x += cos_angle; // pourquoi pas de facteur ici ?? 
-        ray_y += sin_angle;
-    }
-    float dist = distance(ray_x - player->x, ray_y - player->y);
-    float corrected_dist = dist * cos(start_x - player->angle);
-	if (corrected_dist < 0.01)
-    	corrected_dist = 0.01;
-    float wall_height = (TILE_SIZE * game->win_height) / corrected_dist;
+    float wall_height = (TILE_SIZE * game->win_height) / *corrected_dist;
 
     int wall_start = (game->win_height - wall_height) / 2;
     int wall_end = wall_start + wall_height;
@@ -132,11 +96,30 @@ void    draw_wall(t_player *player, t_game *game, float start_x, int i)
 		wall_start = 0;
 	if (wall_end > game->win_height)
 		wall_end = game->win_height;
-    
 	for (int y = wall_start; y < wall_end; y++)
         put_pixel_to_img(&game->mlx, i, y, 0x0000FF);
 }
 
+void    draw_ray(t_player *player, t_game *game, float start_x, int i)
+{
+    float	ray_x;
+    float	ray_y;
+	float	dist;
+    float	corrected_dist;
+
+	ray_x = player->x;
+	ray_y = player->y;
+    while(!is_wall(ray_x, ray_y, game->config.map))
+    {
+        ray_x += cos(start_x); // pourquoi pas de facteur ici ?? 
+        ray_y += sin(start_x);
+    }
+	dist = distance(ray_x - player->x, ray_y - player->y);
+	corrected_dist = dist * cos(start_x - player->angle);
+	if (corrected_dist < 0.01)
+		corrected_dist = 0.01;
+	draw_wall_column(game, &corrected_dist, i);
+}
 
 void	ray_casting(t_game *game)
 {
@@ -148,7 +131,7 @@ void	ray_casting(t_game *game)
 	int i = 0;
 	while (i < game->win_width)
 	{
-		draw_wall(&game->player, game, start_x, i);
+		draw_ray(&game->player, game, start_x, i);
 		start_x += fraction;
 		i++;
 	}
@@ -165,15 +148,11 @@ int	render(t_game *game)
 	{
 		move_player(&game->player, game);
 		ft_memset(game->mlx.addr, 0, game->win_height * game->mlx.line_length);
-
 		draw_floor_and_ceiling(game);
-
 		ray_casting(game);
 		draw_minimap(game);
-
 		mlx_put_image_to_window(game->mlx.mlx_ptr,
 			game->mlx.win_ptr, game->mlx.img, 0, 0);
-			
 		int x = (game->win_width - game->hud.gun_w) / 2;
 		int y = game->win_height - game->hud.gun_h;
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
