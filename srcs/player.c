@@ -24,22 +24,22 @@ static void rotation(t_player *player)
 {
     float     angle_speed;
 
-    angle_speed = 0.03f;
+    angle_speed = 0.04f;
     if (player->left_rotate)
         player->angle -= angle_speed;
     if (player->right_rotate)
         player->angle += angle_speed;
     if (player->angle > 2 * PI)
-        player->angle = - 2 * PI;
+        player->angle -= 2 * PI;
     if (player->angle < 0)
-        player->angle = 2 * PI;
+        player->angle += 2 * PI;
 }
 
 static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
 {
     int     speed;
 
-    speed = 3;
+    speed = 4;
     if (player->key_up)
     {
         *new_x += cos(player->angle) * speed;

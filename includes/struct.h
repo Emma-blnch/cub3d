@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/23 09:50:07 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/27 09:24:31 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,30 @@ typedef struct s_player
     bool        right_rotate;
 }               t_player;
 
+typedef struct s_img {
+    void        *img;
+    char        *addr;
+    int         bpp;
+    int         line_length;
+    int         endian;
+    int         width;
+    int         height;
+}               t_img;
+
+typedef struct s_texture {
+    t_img       no;
+    t_img       so;
+    t_img       we;
+    t_img       ea;
+}               t_texture;
+
 typedef struct s_game {
     t_mlx       mlx;
     t_config    config;
     t_ray       ray;
     t_hud       hud;
     t_player    player;
+    t_texture   tex;
     double      pos_x;
     double      pos_y;
     double      dir_x;
