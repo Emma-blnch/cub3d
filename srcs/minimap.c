@@ -6,13 +6,13 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 19:14:04 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/28 00:20:44 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_tile_size(t_game *game)
+int	get_mini_tile_size(t_game *game)
 {
 	int	max_cols;
 	int	nb_rows;
@@ -49,12 +49,26 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 	}
 }
 
-void	draw_player_minimap(t_game *game, int tile)
+void	draw_player_minimap(t_game *game, int tile_size)
 {
-	int	size = tile / 2;
-	int	px = game->player.x / TILE_SIZE * tile;
-	int	py = game->player.y / TILE_SIZE * tile;
-	draw_square(px - size / 2, py - size / 2, size, 0x00FF00, game);
+	int player_x_mini;
+	int player_y_mini;
+	int	dx;
+	int	dy;
+
+	player_x_mini = game->player.x * tile_size; //should be pos_x?????
+	player_y_mini = game->player.y * tile_size;
+	dy = 0;
+	while (dy < tile_size / 3)
+	{
+		dx = 0;
+		while(dx < tile_size / 3)
+		{
+			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0xFF0000);
+			dx++;
+		}
+		dy++;
+	}
 }
 
 void	draw_ray_on_minimap(t_game *game, float angle)
@@ -69,11 +83,9 @@ void	draw_ray_on_minimap(t_game *game, float angle)
 	ray_y = game->player.y;
 	cos_a = cos(angle);
 	sin_a = sin(angle);
-	tile_size = get_tile_size(game);
+	tile_size = get_mini_tile_size(game);
 	while (!is_wall(ray_x, ray_y, game->config.map))
 	{
-		// int mini_x = (ray_x / TILE_SIZE) * tile_size;
-		// int mini_y = (ray_y / TILE_SIZE) * tile_size;
 		put_pixel_to_img(&game->mlx, (ray_x / TILE_SIZE) * tile_size,
 			(ray_y / TILE_SIZE) * tile_size, 0xFF0000);
 		ray_x += cos_a;
@@ -114,12 +126,12 @@ int	set_color(char **map, int y, int x)
 
 void	draw_minimap(t_game *game)
 {
-	int		tile = get_tile_size(game);
+	int		tile;
 	int		y;
 	int		x;
 	int		color;
 
-	tile = get_tile_size(game);
+	tile = get_mini_tile_size(game); // sur valid_map.cub 7pixels/tile = 0.2 * win_width / 33(tuiles en largeur)
 	y = 0;
 	while (game->config.map[y])
 	{
