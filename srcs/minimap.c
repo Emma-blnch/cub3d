@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/28 00:20:44 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/28 13:22:42 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ void	draw_player_minimap(t_game *game, int tile_size)
 	int	dx;
 	int	dy;
 
-	player_x_mini = game->player.x * tile_size; //should be pos_x?????
-	player_y_mini = game->player.y * tile_size;
+	player_x_mini = (game->player.x / TILE_SIZE) * tile_size;
+	player_y_mini = (game->player.y / TILE_SIZE) * tile_size;
 	dy = 0;
-	while (dy < tile_size / 3)
+	while (dy < tile_size / 2)
 	{
 		dx = 0;
-		while(dx < tile_size / 3)
+		while(dx < tile_size / 2)
 		{
-			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0xFF0000);
+			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0x00FF00);
 			dx++;
 		}
 		dy++;
