@@ -22,21 +22,6 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i)
 	}
 }
 
-static void	init_ray_struct(t_ray *ray, t_player *player, float angle)
-{
-	ray->step_x = 0;
-	ray->step_y = 0;
-	ray->start_x = player->x / TILE_SIZE;
-	ray->start_y = player->y / TILE_SIZE;
-	ray->map_x = (int)ray->start_x;
-	ray->map_y = (int)ray->start_y;
-	ray->dir_x = cos(angle);
-	ray->dir_y = sin(angle);
-	ray->delta_x = fabs(1.0f / ray->dir_x);
-	ray->delta_y = fabs(1.0f / ray->dir_y);
-	ray->hit = 0;
-	ray->side = -1;
-}
 
 static void	calculate_sides_distances(t_ray *ray)
 {
@@ -62,33 +47,36 @@ static void	calculate_sides_distances(t_ray *ray)
 	}
 }
 
+void	move_until_wall_is_hit(t_ray *ray, char **map)
+{
+	while (!ray->hit)
+	{
+		if (ray->side_x < ray->side_y)
+		{
+			ray->side_x += ray->delta_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_y += ray->delta_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (is_wall(ray->map_x * TILE_SIZE, ray->map_y * TILE_SIZE, map))
+			ray->hit = 1;
+	}
+}
 
 static void	draw_ray(t_player *player, t_game *game, float angle, int col)
 {
 	t_ray	ray;
-
-	init_ray_struct(&ray, player, angle);
-	calculate_sides_distances(&ray);
-	while (!ray.hit)
-	{
-		if (ray.side_x < ray.side_y)
-		{
-			ray.side_x += ray.delta_x;
-			ray.map_x += ray.step_x;
-			ray.side = 0;
-		}
-		else
-		{
-			ray.side_y += ray.delta_y;
-			ray.map_y += ray.step_y;
-			ray.side = 1;
-		}
-		if (is_wall(ray.map_x * TILE_SIZE, ray.map_y * TILE_SIZE, game->config.map))
-			ray.hit = 1;
-	}
 	float	dist;
 	float	corrected;
 
+	init_ray_struct(&ray, player, angle);
+	calculate_sides_distances(&ray);
+	move_until_wall_is_hit(&ray, game->config.map);
 	if (ray.side == 0)
 		dist = (ray.side_x - ray.delta_x) * TILE_SIZE;
 	else

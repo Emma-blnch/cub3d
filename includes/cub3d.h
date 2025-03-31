@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 19:08:21 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/03/31 17:23:17 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void	free_lines(char **lines);
 
 bool    is_wall(float px, float py, char **map);
 void	ray_casting(t_game *game);
+void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 
 #endif

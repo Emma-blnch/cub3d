@@ -6,7 +6,7 @@
 #    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/26 19:08:39 by aelaen           ###   ########.fr        #
+#    Updated: 2025/03/31 17:24:02 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRC_FILES =	error.c \
 			render.c \
 			handle_events.c \
 			utils.c \
-			raycasting.c
+			raycasting.c \
+			raycasting_utils.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
