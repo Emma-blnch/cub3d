@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/27 09:24:31 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/03/31 17:11:21 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ typedef struct s_config {
 }               t_config;
 
 typedef struct s_ray {
-    double      ray_dir_x;
-    double      ray_dir_y;
+    double      start_x;
+    double      start_y;
+    double      dir_x;
+    double      dir_y;
     int         map_x;
     int         map_y;
-    double      side_dist_x;
-    double      side_dist_y;
-    double      delta_dist_x;
-    double      delta_dist_y;
+    double      side_x;
+    double      side_y;
+    double      delta_x;
+    double      delta_y;
     double      perp_wall_dist;
     int         step_x;
     int         step_y;
