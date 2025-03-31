@@ -38,32 +38,37 @@ static void	init_ray_struct(t_ray *ray, t_player *player, float angle)
 	ray->side = -1;
 }
 
+static void	calculate_sides_distances(t_ray *ray)
+{
+	if (ray->dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->side_x = (ray->start_x - ray->map_x) * ray->delta_x;
+	}
+	else
+	{
+		ray->step_x = 1;
+		ray->side_x = (ray->map_x + 1.0f - ray->start_x) * ray->delta_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->side_y = (ray->start_y - ray->map_y) * ray->delta_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->side_y = (ray->map_y + 1.0f - ray->start_y) * ray->delta_y;
+	}
+}
+
 
 static void	draw_ray(t_player *player, t_game *game, float angle, int col)
 {
 	t_ray	ray;
 
 	init_ray_struct(&ray, player, angle);
-	if (ray.dir_x < 0)
-	{
-		ray.step_x = -1;
-		ray.side_x = (ray.start_x - ray.map_x) * ray.delta_x;
-	}
-	else
-	{
-		ray.step_x = 1;
-		ray.side_x = (ray.map_x + 1.0f - ray.start_x) * ray.delta_x;
-	}
-	if (ray.dir_y < 0)
-	{
-		ray.step_y = -1;
-		ray.side_y = (ray.start_y - ray.map_y) * ray.delta_y;
-	}
-	else
-	{
-		ray.step_y = 1;
-		ray.side_y = (ray.map_y + 1.0f - ray.start_y) * ray.delta_y;
-	}
+	calculate_sides_distances(&ray);
 	while (!ray.hit)
 	{
 		if (ray.side_x < ray.side_y)
@@ -96,16 +101,16 @@ static void	draw_ray(t_player *player, t_game *game, float angle, int col)
 
 void	ray_casting(t_game *game)
 {
-	float start_x;
-	float fraction;
+	float	start_angle;
+	float	fraction;
 
-	start_x = game->player.angle - PI / 6;
+	start_angle = game->player.angle - PI / 6;
 	fraction = PI / 3 / game->win_width;
 	int i = 0;
 	while (i < game->win_width)
 	{
-		draw_ray(&game->player, game, start_x, i);
-		start_x += fraction;
+		draw_ray(&game->player, game, start_angle, i);
+		start_angle += fraction;
 		i++;
 	}
 }
