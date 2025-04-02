@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
+/*   Updated: 2025/04/02 08:50:48 by eblancha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i)
@@ -21,7 +33,6 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i)
 		y++;
 	}
 }
-
 
 static void	calculate_sides_distances(t_ray *ray)
 {
