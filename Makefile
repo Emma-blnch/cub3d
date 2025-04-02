@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
+#    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/03/31 17:24:02 by aelaen           ###   ########.fr        #
+#    Updated: 2025/04/02 09:56:05 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX_DIR = minilibx_macos
+MLX_DIR = minilibx-linux
 INC_DIR = includes
 OBJ_DIR = obj
 SRC_DIR = srcs
@@ -45,6 +45,7 @@ SRC_FILES =	error.c \
 			player.c \
 			render.c \
 			handle_events.c \
+			handle_utils.c \
 			utils.c \
 			raycasting.c \
 			raycasting_utils.c
@@ -62,7 +63,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lm -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -lm -L$(MLX_DIR) -lmlx -lXext -lX11 -o $(NAME)
 	@echo "$(GREEN)cub3D Compiled!$(DEF_COLOR)"
 
 $(LIBFT):

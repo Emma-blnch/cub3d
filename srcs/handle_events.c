@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 18:00:03 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 09:55:52 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	close_window(t_game *data)
-{
-	error_exit(data, NULL);
-	return (0);
-}
 
 static int	handle_menu(int keycode, t_game *game)
 {
@@ -39,7 +33,7 @@ static int	handle_menu(int keycode, t_game *game)
 int key_press(int keycode, t_game *game)
 {
 	if (game->menu_active)
-		handle_menu(keycode, game);
+		return handle_menu(keycode, game);
     if (keycode == W)
 		game->player.key_up = true;
 	if (keycode == S)

@@ -39,7 +39,7 @@ static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
 {
     int     speed;
 
-    speed = 3;
+    speed = 4;
     if (player->key_up)
     {
         *new_x += cos(player->angle) * speed;

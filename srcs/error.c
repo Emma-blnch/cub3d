@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 19:16:00 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/02 08:59:43 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void    free_resources(t_game *data)
         mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
     if (data->mlx.win_ptr)
         mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
-    // if (data->mlx.mlx_ptr)
-    // {
-    //     mlx_destroy_display(data->mlx.mlx_ptr);
-    //     free(data->mlx.mlx_ptr);
-    // }
+    if (data->mlx.mlx_ptr)
+    {
+        mlx_destroy_display(data->mlx.mlx_ptr);
+        free(data->mlx.mlx_ptr);
+    }
     free(data);
 }

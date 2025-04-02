@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 08:51:39 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:11:11 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ typedef struct s_game {
     double      plane_y;
     int         win_width;
     int         win_height;
-    int         menu_active; // 1 si on est dans le menu, 0 si on est en jeu
-	int         menu_selection; // 0 = Play, 1 = Exit
+    int         menu_active;
+	int         menu_selection;
 }               t_game;
 
 typedef struct s_check {

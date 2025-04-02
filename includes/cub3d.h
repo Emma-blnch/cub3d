@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/31 17:23:17 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:10:56 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "struct.h"
-# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include "../libft/printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
@@ -39,17 +39,16 @@
 # define B		    "\033[34m"
 
 // TOUCHES MACOS
-# define Up 126
-# define W 13 // (Z) 6 pour W
-# define Down 125
-# define S 1
-# define Escape 53
-# define E 14
-#define A 0 // (Q) 12 pour A
-#define S 1
-#define D 2
-#define LEFT 123
-#define RIGHT 124
+# define Up 65362
+# define W 119
+# define Down 65364
+# define Escape 65307
+# define E 101
+# define A 97
+# define S 115
+# define D 100
+# define LEFT 65361
+# define RIGHT 65363
 
 // Init
 t_game	*init_data(int argc, char **argv);
@@ -77,7 +76,7 @@ void	init_window(t_game *game);
 void	draw_floor_and_ceiling(t_game *game);
 
 // Menu
-void	draw_menu(t_game *game);
+int	draw_menu(t_game *game);
 
 // Mini-map
 int     render(t_game *game);
@@ -87,10 +86,16 @@ void	draw_minimap(t_game *game);
 void    move_player(t_player *player, t_game *game);
 void    init_player(t_player *player, t_game *game);
 
+// Raycasting
+void	ray_casting(t_game *game);
+void	init_ray_struct(t_ray *ray, t_player *player, float angle);
+
 // Events
 int	close_window(t_game *data);
 int key_press(int keycode, t_game *game);
 int key_release(int keycode, t_game *game);
+int key_press_linux(int keycode, void *param);
+int key_release_linux(int keycode, void *param);
 
 // Utils
 int     count_lines(char **lines);
@@ -102,16 +107,12 @@ int     has_wall_start(char *line);
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 void	draw_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **split);
+bool    is_wall(float px, float py, char **map);
 
 // Error and free
 void	error_exit(t_game *data, char *message);
 void    free_map(char **map);
 void    free_resources(t_game *data);
 void	free_lines(char **lines);
-
-
-bool    is_wall(float px, float py, char **map);
-void	ray_casting(t_game *game);
-void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 
 #endif

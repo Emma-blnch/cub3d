@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/27 09:51:34 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 11:11:45 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ void    load_hud(t_game *game)
         "./textures/menu.xpm", &game->hud.menu_bg_w, &game->hud.menu_bg_h);
     if (!game->hud.menu_bg)
         error_exit(game, "Error: Failed to load menu background");
-    // game->hud.wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-    //     "./textures/grey-stone-wall.xpm", &game->hud.wall_w, &game->hud.wall_h);
-    // if (!game->hud.wall)
-    //     error_exit(game, "Error: Failed to load wall sprite");
 }
 
 void    init_window(t_game *game)
@@ -58,11 +54,11 @@ void    init_window(t_game *game)
         game->win_width, game->win_height);
     game->mlx.addr = mlx_get_data_addr(game->mlx.img,
         &game->mlx.bpp, &game->mlx.line_length, &game->mlx.endian);
-    mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
-    mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
-    mlx_hook(game->mlx.win_ptr, 3, 1L << 1, key_release, game);
     load_hud(game);
-    mlx_loop_hook(game->mlx.mlx_ptr, render, game);
     load_textures(game);
+    mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
+    mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press_linux, game);
+    mlx_hook(game->mlx.win_ptr, 3, 1L << 1, key_release_linux, game);
+    mlx_loop_hook(game->mlx.mlx_ptr, render, game);
     mlx_loop(game->mlx.mlx_ptr);
 }
