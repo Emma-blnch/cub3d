@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:08:25 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 11:53:16 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:12:27 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	check_file_config(t_game *data, char **lines)
 {
 	t_check		check;
 	int			i;
-	
+
 	i = 0;
 	ft_memset(&check, 0, sizeof(t_check));
 	while (lines[i])
@@ -79,12 +79,12 @@ void	check_file_config(t_game *data, char **lines)
 			i++;
 			continue ;
 		}
-        if (ft_strchr(" 01", lines[i][0]))
+		if (ft_strchr(" 01", lines[i][0]))
 			break ;
 		handle_config_line(lines[i], data, &check);
 		i++;
 	}
 	if (!check.found_no || !check.found_so || !check.found_we
-			|| !check.found_ea || !check.found_f || !check.found_c)
+		|| !check.found_ea || !check.found_f || !check.found_c)
 		error_exit(data, "Error: Missing configuration element");
 }

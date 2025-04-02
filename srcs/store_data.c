@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 19:10:04 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/02 12:19:24 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	store_player_position(t_game *data)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 	char	**map;
-    
-    map = data->config.map;
+
+	map = data->config.map;
 	y = 0;
 	while (map[y])
 	{
@@ -70,10 +70,10 @@ void	store_map(t_game *data, char **lines)
 	data->config.map[j] = NULL;
 }
 
-void    store_data(t_game *data, char **lines)
+void	store_data(t_game *data, char **lines)
 {
-    parse_textures(data, lines);
-    parse_colors(data, lines);
-    store_map(data, lines);
-    store_player_position(data);
+	parse_textures(data, lines);
+	parse_colors(data, lines);
+	store_map(data, lines);
+	store_player_position(data);
 }

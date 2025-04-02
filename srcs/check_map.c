@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/12 12:33:39 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:13:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	check_map_characters(char **lines, int start, t_game *data)
 	int	i;
 	int	j;
 	int	player_count;
-    
-    player_count = 0;
+
+	player_count = 0;
 	i = start;
 	while (lines[i])
 	{
@@ -54,8 +54,8 @@ int	find_map_start_index(char **lines)
 void	check_map(t_game *data, char **lines)
 {
 	int	start;
-    
-    start = find_map_start_index(lines);
+
+	start = find_map_start_index(lines);
 	check_map_characters(lines, start, data);
 	check_map_is_closed(lines, start, data);
 }

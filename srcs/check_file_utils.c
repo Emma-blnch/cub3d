@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/27 09:39:05 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:13:06 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	check_texture_path(char *line, t_game *data, char *id)
 {
 	char	*path;
+	int		fd;
 
 	path = ft_strchr(line, ' ');
 	if (!path || !*(path + 1))
@@ -31,9 +32,9 @@ void	check_texture_path(char *line, t_game *data, char *id)
 		error_exit(data, NULL);
 	}
 	path[ft_strlen(path) - 1] = '\0';
-	int fd = open(path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	    error_exit(data, "Error: Texture path is invalid");
+		error_exit(data, "Error: Texture path is invalid");
 	close(fd);
 }
 

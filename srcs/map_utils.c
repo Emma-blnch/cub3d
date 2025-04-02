@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 18:08:32 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:22:40 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_map_line(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 	{
@@ -29,7 +29,7 @@ int	is_valid_map_line(char *line)
 int	has_wall_start(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 	{

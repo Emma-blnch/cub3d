@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 09:55:52 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:22:04 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	handle_menu(int keycode, t_game *game)
 {
-	if (keycode == Up || keycode == W)
+	if (keycode == UP || keycode == W)
 		game->menu_selection = (game->menu_selection + 1) % 2;
-	else if (keycode == Down || keycode == S)
+	else if (keycode == DOWN || keycode == S)
 		game->menu_selection = (game->menu_selection + 1) % 2;
 	else if (keycode == E)
 	{
@@ -25,36 +25,36 @@ static int	handle_menu(int keycode, t_game *game)
 		else
 			error_exit(game, NULL);
 	}
-	else if (keycode == Escape)
+	else if (keycode == ESC)
 		error_exit(game, NULL);
 	return (0);
 }
 
-int key_press(int keycode, t_game *game)
+int	key_press(int keycode, t_game *game)
 {
 	if (game->menu_active)
-		return handle_menu(keycode, game);
-    if (keycode == W)
+		return (handle_menu(keycode, game));
+	if (keycode == W)
 		game->player.key_up = true;
 	if (keycode == S)
-        game->player.key_down = true;
+		game->player.key_down = true;
 	if (keycode == D)
-        game->player.key_rigth = true;
+		game->player.key_rigth = true;
 	if (keycode == A)
-        game->player.key_left = true;
+		game->player.key_left = true;
 	if (keycode == LEFT)
-        game->player.left_rotate = true;
+		game->player.left_rotate = true;
 	if (keycode == RIGHT)
-        game->player.right_rotate = true;
-	if (keycode == Escape)
+		game->player.right_rotate = true;
+	if (keycode == ESC)
 		error_exit(game, NULL);
 	return (0);
 }
 
-int key_release(int keycode, t_game *game)
+int	key_release(int keycode, t_game *game)
 {
-	t_player *player;
-	
+	t_player	*player;
+
 	player = &game->player;
 	if (game->menu_active)
 		return (0);

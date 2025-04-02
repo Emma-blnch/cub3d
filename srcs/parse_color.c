@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:12:35 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 18:10:30 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:17:20 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	parse_single_color(char *line, t_game *data, char type)
 void	parse_colors(t_game *data, char **lines)
 {
 	int	i;
-    
-    i = 0;
+
+	i = 0;
 	while (lines[i])
 	{
 		if (lines[i][0] == '\n' || lines[i][0] == '\0')

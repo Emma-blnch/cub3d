@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:47 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/02 09:55:50 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:20:46 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@ int	close_window(t_game *data)
 	return (0);
 }
 
-int key_press_linux(int keycode, void *param)
+int	key_press_linux(int keycode, void *param)
 {
-	t_game *game = (t_game *)param;
-	return key_press(keycode, game);
+	t_game	*game;
+
+	game = (t_game *)param;
+	return (key_press(keycode, game));
 }
 
-int key_release_linux(int keycode, void *param)
+int	key_release_linux(int keycode, void *param)
 {
-	t_game *game = (t_game *)param;
-	return key_release(keycode, game);
+	t_game	*game;
+
+	game = (t_game *)param;
+	return (key_release(keycode, game));
 }

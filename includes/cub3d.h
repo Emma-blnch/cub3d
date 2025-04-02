@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 11:10:56 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:23:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@
 # define B		    "\033[34m"
 
 // TOUCHES MACOS
-# define Up 65362
+# define UP 65362
 # define W 119
-# define Down 65364
-# define Escape 65307
+# define DOWN 65364
+# define ESC 65307
 # define E 101
 # define A 97
 # define S 115
@@ -63,10 +63,10 @@ void	check_map_is_closed(char **lines, int start, t_game *data);
 void	check_duplicate(int *flag, t_game *data, char *id);
 void	check_color_format(char *line, t_game *data, char id);
 void	check_texture_path(char *line, t_game *data, char *id);
-int     find_map_start_index(char **lines);
+int		find_map_start_index(char **lines);
 
 // Store data
-void    store_data(t_game *data, char **lines);
+void	store_data(t_game *data, char **lines);
 void	parse_textures(t_game *data, char **lines);
 void	parse_colors(t_game *data, char **lines);
 void	store_player_position(t_game *data);
@@ -76,43 +76,43 @@ void	init_window(t_game *game);
 void	draw_floor_and_ceiling(t_game *game);
 
 // Menu
-int	draw_menu(t_game *game);
+int		draw_menu(t_game *game);
 
 // Mini-map
-int     render(t_game *game);
+int		render(t_game *game);
 void	draw_minimap(t_game *game);
 
 // Player
-void    move_player(t_player *player, t_game *game);
-void    init_player(t_player *player, t_game *game);
+void	move_player(t_player *player, t_game *game);
+void	init_player(t_player *player, t_game *game);
 
 // Raycasting
 void	ray_casting(t_game *game);
 void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 
 // Events
-int	close_window(t_game *data);
-int key_press(int keycode, t_game *game);
-int key_release(int keycode, t_game *game);
-int key_press_linux(int keycode, void *param);
-int key_release_linux(int keycode, void *param);
+int		close_window(t_game *data);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+int		key_press_linux(int keycode, void *param);
+int		key_release_linux(int keycode, void *param);
 
 // Utils
-int     count_lines(char **lines);
-int     ft_strcmp(char *s1, char *s2);
-int     get_tile_size(t_game *game);
-int     ft_str_is_whitespace(char *str);
-int     is_valid_map_line(char *line);
-int     has_wall_start(char *line);
+int		count_lines(char **lines);
+int		ft_strcmp(char *s1, char *s2);
+int		get_tile_size(t_game *game);
+int		ft_str_is_whitespace(char *str);
+int		is_valid_map_line(char *line);
+int		has_wall_start(char *line);
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 void	draw_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **split);
-bool    is_wall(float px, float py, char **map);
+bool	is_wall(float px, float py, char **map);
 
 // Error and free
 void	error_exit(t_game *data, char *message);
-void    free_map(char **map);
-void    free_resources(t_game *data);
+void	free_map(char **map);
+void	free_resources(t_game *data);
 void	free_lines(char **lines);
 
 #endif

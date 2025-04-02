@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/28 13:22:42 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/02 12:30:34 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	get_mini_tile_size(t_game *game)
 	int	max_cols;
 	int	nb_rows;
 	int	tile;
-    int len;
-    int height_tile;
+	int	len;
+	int	height_tile;
 
-    max_cols = 0;
+	max_cols = 0;
 	nb_rows = 0;
 	while (game->config.map[nb_rows])
 	{
@@ -51,8 +51,8 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 
 void	draw_player_minimap(t_game *game, int tile_size)
 {
-	int player_x_mini;
-	int player_y_mini;
+	int	player_x_mini;
+	int	player_y_mini;
 	int	dx;
 	int	dy;
 
@@ -64,7 +64,8 @@ void	draw_player_minimap(t_game *game, int tile_size)
 		dx = 0;
 		while(dx < tile_size / 2)
 		{
-			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0x00FF00);
+			put_pixel_to_img(&game->mlx, player_x_mini + dx,
+					player_y_mini + dy, 0x00FF00);
 			dx++;
 		}
 		dy++;
