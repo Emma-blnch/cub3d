@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:30:34 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:53:56 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,17 @@ int	get_mini_tile_size(t_game *game)
 	return (tile);
 }
 
-void	draw_square(int x, int y, int size, int color, t_game *game)
-{
-	for (int dy = 0; dy < size; dy++)
-	{
-		for (int dx = 0; dx < size; dx++)
-		{
-			put_pixel_to_img(&game->mlx, x + dx, y + dy, color);
-		}
-	}
-}
 
-void	draw_player_minimap(t_game *game, int tile_size)
+
+void	draw_player_minimap(t_game *game)
 {
 	int	player_x_mini;
 	int	player_y_mini;
 	int	dx;
 	int	dy;
+	int	tile_size;
 
+	tile_size = get_mini_tile_size(game);
 	player_x_mini = (game->player.x / TILE_SIZE) * tile_size;
 	player_y_mini = (game->player.y / TILE_SIZE) * tile_size;
 	dy = 0;
@@ -71,6 +64,8 @@ void	draw_player_minimap(t_game *game, int tile_size)
 		dy++;
 	}
 }
+
+
 
 void	draw_ray_on_minimap(t_game *game, float angle)
 {
@@ -125,14 +120,34 @@ int	set_color(char **map, int y, int x)
 	return (color);
 }
 
-void	draw_minimap(t_game *game)
+
+void	draw_square(int x, int y, int color, t_game *game)
 {
 	int		tile;
+	int		dx;
+	int		dy;
+	
+	tile = get_mini_tile_size(game);
+	dx = 0;
+	dy = 0;
+	while (dy < tile)
+	{
+		dx = 0;
+		while (dx < tile)
+		{
+			put_pixel_to_img(&game->mlx, x * tile + dx, y * tile + dy, color);
+			dx++;
+		}
+		dy++;
+	}
+}
+
+void	draw_minimap(t_game *game)
+{
 	int		y;
 	int		x;
 	int		color;
 
-	tile = get_mini_tile_size(game); // sur valid_map.cub 7pixels/tile = 0.2 * win_width / 33(tuiles en largeur)
 	y = 0;
 	while (game->config.map[y])
 	{
@@ -141,11 +156,11 @@ void	draw_minimap(t_game *game)
 		{
 			color = set_color(game->config.map, y, x);
             if (color != -1)
-				draw_square(x * tile, y * tile, tile, color, game);
+				draw_square(x, y, color, game);
 			x++;
 		}
 		y++;
 	}
-	draw_player_minimap(game, tile);
+	draw_player_minimap(game);
 	ray_casting_minimap(game);
 }

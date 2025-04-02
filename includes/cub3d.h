@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 11:23:22 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:51:39 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define RIGHT 65363
 
 // Init
-t_game	*init_data(int argc, char **argv);
+t_game	*init_data(int argc);
 
 // Check file
 void	validate_file(char *filename, t_game *data);
@@ -100,12 +100,10 @@ int		key_release_linux(int keycode, void *param);
 // Utils
 int		count_lines(char **lines);
 int		ft_strcmp(char *s1, char *s2);
-int		get_tile_size(t_game *game);
 int		ft_str_is_whitespace(char *str);
 int		is_valid_map_line(char *line);
 int		has_wall_start(char *line);
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
-void	draw_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **split);
 bool	is_wall(float px, float py, char **map);
 

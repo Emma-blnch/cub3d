@@ -6,15 +6,16 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:25:04 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:39:46 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_game	*init_data(int argc, char **argv)
+t_game	*init_data(int argc)
 {
 	t_game	*data;
+	(void)argc;
 
 	data = malloc(sizeof(t_game));
 	if (!data)
@@ -34,7 +35,7 @@ int	main(int argc, char **argv)
 	data = NULL;
 	if (argc != 2)
 		error_exit(data, "Usage: ./cub3d <maps/map.cub>");
-	data = init_data(argc, argv);
+	data = init_data(argc);
 	validate_file(argv[1], data);
 	init_player(&data->player, data);
 	init_window(data);
