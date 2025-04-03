@@ -6,11 +6,29 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/03 10:26:27 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/03 11:22:16 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	add_shadow(int color, float corrected_dist)
+{
+	double	shade;
+	int		r;
+	int		g;
+	int		b;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	shade = fmin(1.0, corrected_dist / 900.0);
+	r = ((color >> 16) & 0xFF) * (1.0 - shade);
+	g = ((color >> 8) & 0xFF) * (1.0 - shade);
+	b = (color & 0xFF) * (1.0 - shade);
+	color = (r << 16) | (g << 8) | b;
+	return (color);
+}
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
 {
@@ -56,12 +74,7 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 			tex_y = tex->height - 1;
 		char *pixel = tex->addr + (tex_y * tex->line_length + tex_x * (tex->bpp / 8));
 		int color = *(unsigned int *)pixel;
-		// ombre au loin :
-		double shade = fmin(1.0, *corrected_dist / 800.0); // 800 = distance max avant noir complet
-		int r = ((color >> 16) & 0xFF) * (1.0 - shade);
-		int g = ((color >> 8) & 0xFF) * (1.0 - shade);
-		int b = (color & 0xFF) * (1.0 - shade);
-		color = (r << 16) | (g << 8) | b;
+		color = add_shadow(color, *corrected_dist);
 		put_pixel_to_img(&game->mlx, i, y, color);
 		y++;
 	}
@@ -112,11 +125,34 @@ void	move_until_wall_is_hit(t_ray *ray, char **map)
 	}
 }
 
+t_img	*set_textures(t_ray *ray, t_game *game)
+{
+	t_img	*tex;
+
+	if (ray->side == 0)
+	{
+		if (ray->dir_x > 0)
+			tex = &game->tex.we;
+		else
+			tex = &game->tex.ea;
+	}
+	else
+	{
+		if (ray->dir_y > 0)
+			tex = &game->tex.no;
+		else
+			tex = &game->tex.so;
+	}
+	return (tex);
+}
+
 void	draw_ray(t_player *player, t_game *game, float angle, int col)
 {
-	t_ray ray;
-	float dist;
-	float corrected;
+	t_ray	ray;
+	float	dist;
+	float	corrected;
+	t_img	*tex;
+	double	wall_hit;
 
 	init_ray_struct(&ray, player, angle);
 	calculate_sides_distances(&ray);
@@ -125,30 +161,14 @@ void	draw_ray(t_player *player, t_game *game, float angle, int col)
 		dist = (ray.side_x - ray.delta_x) * TILE_SIZE;
 	else
 		dist = (ray.side_y - ray.delta_y) * TILE_SIZE;
-	// if (dist < 1.0f)
-	// 	dist = 1.0f;
 	corrected = dist * cos(angle - player->angle);
 	if (corrected < 1.0f)
 		corrected = 1.0f;
-
-	t_img *tex;
-	double wall_hit;
+	tex = set_textures(&ray, game);
 	if (ray.side == 0)
-	{
-		if (ray.dir_x > 0)
-			tex = &game->tex.we;
-		else
-			tex = &game->tex.ea;
 		wall_hit = ray.start_y + dist / TILE_SIZE * ray.dir_y;
-	}
 	else
-	{
-		if (ray.dir_y > 0)
-			tex = &game->tex.no;
-		else
-			tex = &game->tex.so;
 		wall_hit = ray.start_x + dist / TILE_SIZE * ray.dir_x;
-	}
 	wall_hit -= floor(wall_hit);
 	draw_wall_column(game, &corrected, col, tex, wall_hit, &ray);
 }
