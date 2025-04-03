@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 09:01:05 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:52:35 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	load_textures(t_game *game)
 void	load_hud(t_game *game)
 {
 	game->hud.gun_img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-			"./textures/hud/weapon.xpm", &game->hud.gun_w, &game->hud.gun_h);
+			"./textures/hud/gun2.xpm", &game->hud.gun_w, &game->hud.gun_h);
 	if (!game->hud.gun_img)
 		error_exit(game, "Error: Failed to load gun sprite");
 	game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,

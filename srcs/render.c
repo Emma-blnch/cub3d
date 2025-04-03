@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:11:35 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:16:03 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	draw_menu(t_game *game)
 
 int	render(t_game *game)
 {
+	int	x;
+	int	y;
+
 	if (!game || !game->mlx.win_ptr || !game->hud.gun_img)
 		return (ft_printf("Missing render info!\n"), 1);
 	if (game->menu_active)
@@ -83,9 +86,9 @@ int	render(t_game *game)
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx.mlx_ptr,
 		game->mlx.win_ptr, game->mlx.img, 0, 0);
-	// int x = (game->win_width - game->hud.gun_w) / 2;
-	// int y = game->win_height - game->hud.gun_h;
-	// mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-	// 	game->hud.gun_img, x, y);
+	x = (game->win_width - game->hud.gun_w) / 2;
+	y = game->win_height - game->hud.gun_h;
+	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
+		game->hud.gun_img, x, y);
 	return (0);
 }

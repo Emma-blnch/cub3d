@@ -1,7 +1,7 @@
-NO ./textures/wall1.xpm
-SO ./textures/wall2.xpm
-WE ./textures/wall3.xpm
-EA ./textures/wall4.xpm
+NO ./textures/green_yellow_wall.xpm
+SO ./textures/bluewall.xpm
+WE ./textures/blue_brown_wall.xpm
+EA ./textures/bluevertical.xpm
 F 180,180,180
 C 60,60,60
 
