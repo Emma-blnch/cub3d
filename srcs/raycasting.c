@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/02 08:50:48 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:26:27 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_wall_column(t_game *game, float *corrected_dist, int i)
+static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
 {
-    float	wall_height;
-    int		wall_start;
-    int		wall_end;
+	int	wall_height;
+	int		wall_start;
+	int		wall_end;
 	int		y;
+	int		tex_x;
 
 	wall_height = (TILE_SIZE * game->win_height) / *corrected_dist;
 	wall_start = (game->win_height - wall_height) / 2;
@@ -27,9 +28,41 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i)
 	if (wall_end > game->win_height)
 		wall_end = game->win_height;
 	y = wall_start;
+	
+	tex_x = (int)(wall_hit * tex->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= tex->width)
+		tex_x = tex->width - 1;	
+	if((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+		tex_x = tex->width - tex_x - 1;
+
+	double step = 1.0 * tex->height / wall_height;
+	double tex_pos = (wall_start - game->win_height / 2 + wall_height / 2) * step; // À chaque pixel y de wall_start à wall_end, quel pixel de la texture dois-je prendre ?
+	// game->win_height / 2 = milieu de l’écran
+	// wall_start = haut du mur
+	// wall_height / 2 = screen_center
+	// wall_start - screen_center = distance entre le haut du mur et le milieu de l’écran
+	// + wall_height / 2.0 = place l’origine (y=0) au milieu du mur, ça recentre ton repère
+	// le tout = combien de pixels séparent le haut du mur du centre vertical du mur sur l’écran
+	// * step = convertit cette distance en pixels dans la texture
 	while (y < wall_end)
 	{
-        put_pixel_to_img(&game->mlx, i, y, 0x0000FF);
+		int tex_y = (int)tex_pos;
+		tex_pos += step;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= tex->height)
+			tex_y = tex->height - 1;
+		char *pixel = tex->addr + (tex_y * tex->line_length + tex_x * (tex->bpp / 8));
+		int color = *(unsigned int *)pixel;
+		// ombre au loin :
+		double shade = fmin(1.0, *corrected_dist / 800.0); // 800 = distance max avant noir complet
+		int r = ((color >> 16) & 0xFF) * (1.0 - shade);
+		int g = ((color >> 8) & 0xFF) * (1.0 - shade);
+		int b = (color & 0xFF) * (1.0 - shade);
+		color = (r << 16) | (g << 8) | b;
+		put_pixel_to_img(&game->mlx, i, y, color);
 		y++;
 	}
 }
@@ -79,11 +112,11 @@ void	move_until_wall_is_hit(t_ray *ray, char **map)
 	}
 }
 
-static void	draw_ray(t_player *player, t_game *game, float angle, int col)
+void	draw_ray(t_player *player, t_game *game, float angle, int col)
 {
-	t_ray	ray;
-	float	dist;
-	float	corrected;
+	t_ray ray;
+	float dist;
+	float corrected;
 
 	init_ray_struct(&ray, player, angle);
 	calculate_sides_distances(&ray);
@@ -92,10 +125,32 @@ static void	draw_ray(t_player *player, t_game *game, float angle, int col)
 		dist = (ray.side_x - ray.delta_x) * TILE_SIZE;
 	else
 		dist = (ray.side_y - ray.delta_y) * TILE_SIZE;
+	// if (dist < 1.0f)
+	// 	dist = 1.0f;
 	corrected = dist * cos(angle - player->angle);
-	if (corrected < 0.01)
-		corrected = 0.01;
-	draw_wall_column(game, &corrected, col);
+	if (corrected < 1.0f)
+		corrected = 1.0f;
+
+	t_img *tex;
+	double wall_hit;
+	if (ray.side == 0)
+	{
+		if (ray.dir_x > 0)
+			tex = &game->tex.we;
+		else
+			tex = &game->tex.ea;
+		wall_hit = ray.start_y + dist / TILE_SIZE * ray.dir_y;
+	}
+	else
+	{
+		if (ray.dir_y > 0)
+			tex = &game->tex.no;
+		else
+			tex = &game->tex.so;
+		wall_hit = ray.start_x + dist / TILE_SIZE * ray.dir_x;
+	}
+	wall_hit -= floor(wall_hit);
+	draw_wall_column(game, &corrected, col, tex, wall_hit, &ray);
 }
 
 void	ray_casting(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/27 09:51:34 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/03 10:10:26 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 static void    load_texture(t_game *game, t_img *tex, char *path)
 {
-	// printf("'%s'\n", path);
     tex->img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &tex->width, &tex->height);
     if (!tex->img)
         error_exit(game, "Error: Failed to load texture");
-    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_length, &tex->endian);
+    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_length, &tex->endian);   
 }
 
 static void load_textures(t_game *game)
@@ -32,17 +31,13 @@ static void load_textures(t_game *game)
 void    load_hud(t_game *game)
 {
     game->hud.gun_img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-        "./textures/hud/weapon.xpm", &game->hud.gun_w, &game->hud.gun_h);
+        "./textures/hud/gun2.xpm", &game->hud.gun_w, &game->hud.gun_h);
     if (!game->hud.gun_img)
         error_exit(game, "Error: Failed to load gun sprite");
     game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
         "./textures/menu.xpm", &game->hud.menu_bg_w, &game->hud.menu_bg_h);
     if (!game->hud.menu_bg)
         error_exit(game, "Error: Failed to load menu background");
-    // game->hud.wall = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-    //     "./textures/grey-stone-wall.xpm", &game->hud.wall_w, &game->hud.wall_h);
-    // if (!game->hud.wall)
-    //     error_exit(game, "Error: Failed to load wall sprite");
 }
 
 void    init_window(t_game *game)

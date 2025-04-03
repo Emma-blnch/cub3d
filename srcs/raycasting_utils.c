@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:43 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/02 08:50:45 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:26:53 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// Étape 1 – Initialiser le rayon
 void	init_ray_struct(t_ray *ray, t_player *player, float angle)
 {
 	ray->step_x = 0;
