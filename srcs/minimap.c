@@ -6,39 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:53:56 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:56:10 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_mini_tile_size(t_game *game)
-{
-	int	max_cols;
-	int	nb_rows;
-	int	tile;
-	int	len;
-	int	height_tile;
-
-	max_cols = 0;
-	nb_rows = 0;
-	while (game->config.map[nb_rows])
-	{
-		len = ft_strlen(game->config.map[nb_rows]);
-		if (len > max_cols)
-			max_cols = len;
-		nb_rows++;
-	}
-	tile = (int)(game->win_width * 0.2 / max_cols);
-	height_tile = (int)(game->win_height * 0.2 / nb_rows);
-	if (height_tile < tile)
-		tile = height_tile;
-	if (tile < 1)
-		tile = 1;
-	return (tile);
-}
-
-
 
 void	draw_player_minimap(t_game *game)
 {
@@ -55,17 +27,15 @@ void	draw_player_minimap(t_game *game)
 	while (dy < tile_size / 2)
 	{
 		dx = 0;
-		while(dx < tile_size / 2)
+		while (dx < tile_size / 2)
 		{
 			put_pixel_to_img(&game->mlx, player_x_mini + dx,
-					player_y_mini + dy, 0x00FF00);
+				player_y_mini + dy, 0x00FF00);
 			dx++;
 		}
 		dy++;
 	}
 }
-
-
 
 void	draw_ray_on_minimap(t_game *game, float angle)
 {
@@ -98,35 +68,20 @@ void	ray_casting_minimap(t_game *game)
 	i = 0;
 	fraction = PI / 3 / game->win_width;
 	start_x = game->player.angle - PI / 6;
-		while (i < game->win_width)
-		{
-			draw_ray_on_minimap(game, start_x);
-			start_x += fraction;
-			i++;
-		}
+	while (i < game->win_width)
+	{
+		draw_ray_on_minimap(game, start_x);
+		start_x += fraction;
+		i++;
+	}
 }
-
-int	set_color(char **map, int y, int x)
-{
-	int		color;
-
-	color = -1;
-	if (map[y][x] == '1')
-		color = 0x555555;
-	else if (map[y][x] == '0')
-		color = 0xFFFFFF;
-	else if (ft_strchr("NSEW", map[y][x]))
-		color = 0xFFFFFF;
-	return (color);
-}
-
 
 void	draw_square(int x, int y, int color, t_game *game)
 {
 	int		tile;
 	int		dx;
 	int		dy;
-	
+
 	tile = get_mini_tile_size(game);
 	dx = 0;
 	dy = 0;
@@ -155,7 +110,7 @@ void	draw_minimap(t_game *game)
 		while (x < (int)ft_strlen(game->config.map[y]))
 		{
 			color = set_color(game->config.map, y, x);
-            if (color != -1)
+			if (color != -1)
 				draw_square(x, y, color, game);
 			x++;
 		}

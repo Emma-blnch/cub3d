@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:39:46 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:52:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_game	*init_data(int argc)
 {
 	t_game	*data;
-	(void)argc;
 
+	(void)argc;
 	data = malloc(sizeof(t_game));
 	if (!data)
 		error_exit(NULL, "Error: Struct init failed");

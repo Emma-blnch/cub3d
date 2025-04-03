@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:51:39 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:56:53 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int		draw_menu(t_game *game);
 
 // Mini-map
 int		render(t_game *game);
+int	set_color(char **map, int y, int x);
+int	get_mini_tile_size(t_game *game);
 void	draw_minimap(t_game *game);
 
 // Player
