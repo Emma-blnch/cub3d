@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:20:07 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:29:35 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	free_map(char **map)
 
 void	free_textures(t_game *data)
 {
+	if (data->hud.gun.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.gun.img);
+	if (data->hud.menu_bg)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.menu_bg);
 	if (data->tex.no.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.no.img);
 	if (data->tex.so.img)
@@ -57,6 +61,10 @@ void	free_textures(t_game *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.ea.img);
 	if (data->tex.we.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.we.img);
+	if (data->hud.gun_shot.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.gun_shot.img);
+	if (data->hud.ammo.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.ammo.img);
 }
 
 void	free_resources(t_game *data)
@@ -69,6 +77,7 @@ void	free_resources(t_game *data)
 	free(data->config.ea_path);
 	free_map(data->config.map);
 	free_textures(data);
+	free(data->sprites);
 	if (data->mlx.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	if (data->mlx.win_ptr)

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:47 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 17:24:22 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:28:59 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ int	key_release_linux(int keycode, void *param)
 
 	game = (t_game *)param;
 	return (key_release(keycode, game));
+}
+
+unsigned long	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:54:50 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:50:11 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_config {
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	char		*sp_path;
 	int			floor_color;
 	int			ceiling_color;
 	char		**map;
@@ -95,6 +96,15 @@ typedef struct s_texture {
 	t_img		ea;
 }				t_texture;
 
+typedef struct s_sprite
+{
+    double x;
+    double y;
+    char    *path;
+    t_img   image;
+    double dist;
+} t_sprite;
+
 typedef struct s_game {
 	t_mlx			mlx;
 	t_config		config;
@@ -116,6 +126,9 @@ typedef struct s_game {
 	int				fire_timer;
 	int				ammo;
 	unsigned long	last_shot_time;
+	t_sprite		*sprites;
+	int				sprites_count;
+	float			*z_buffer;
 }				t_game;
 
 typedef struct s_check {

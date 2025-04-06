@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:22:13 by eblancha         ###   ########.fr       */
+/*   Created: 2025/04/02 08:50:43 by eblancha          #+#    #+#             */
+/*   Updated: 2025/04/02 08:50:45 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_valid_map_line(char *line)
+void	init_ray_struct(t_ray *ray, t_player *player, float angle)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	has_wall_start(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '1' || line[i] == '0')
-			return (1);
-		if (line[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (0);
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->start_x = player->x / TILE_SIZE;
+	ray->start_y = player->y / TILE_SIZE;
+	ray->map_x = (int)ray->start_x;
+	ray->map_y = (int)ray->start_y;
+	ray->dir_x = cos(angle);
+	ray->dir_y = sin(angle);
+	ray->delta_x = fabs(1.0f / ray->dir_x);
+	ray->delta_y = fabs(1.0f / ray->dir_y);
+	ray->hit = 0;
+	ray->side = -1;
 }

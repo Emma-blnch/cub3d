@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:57:35 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:51:55 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void			init_player(t_player *player, t_game *game);
 // Raycasting
 void			ray_casting(t_game *game);
 void			init_ray_struct(t_ray *ray, t_player *player, float angle);
+void			draw_sprites(t_game *game);
 
 // Events
 int				close_window(t_game *data);
@@ -117,7 +118,9 @@ void			draw_sprite_to_img(t_mlx *dst, t_img *sprite,
 					int x_offset, int y_offset);
 void			free_split(char **split);
 bool			is_wall(float px, float py, char **map);
+bool			is_sprite(float px, float py, char **map);
 unsigned long	get_time_ms(void);
+
 
 // Error and free
 void			error_exit(t_game *data, char *message);
