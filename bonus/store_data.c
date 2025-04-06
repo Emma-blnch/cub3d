@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/05 13:04:49 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:11:21 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	store_sprites(t_game *data)
 		{
 			if (data->config.map[y][x] == '2')
 			{
-				data->sprites[sprite_nb].x = x + 0.5;
-				data->sprites[sprite_nb].y = y + 0.5; // au centre de la tile
+				data->sprites[sprite_nb].x = (x + 0.5) * TILE_SIZE;
+				data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE; // au centre de la tile
 				data->sprites[sprite_nb].dist = 0;
 				data->sprites[sprite_nb].path = ft_strdup(data->config.sp_path);
 

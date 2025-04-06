@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/05 13:48:38 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:14:17 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_game	*init_data(int argc, char **argv)
 	if (!data)
 		error_exit(NULL, "Error: Struct init failed");
 	ft_memset(data, 0, sizeof(t_game));
-    data->menu_active = 1;
+    data->menu_active = 0;
     data->menu_selection = 0;
     // a garder ?
     if (argc == 4)

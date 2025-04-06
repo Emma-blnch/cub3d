@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 12:58:51 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/06 16:06:04 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,21 +262,30 @@ void	draw_sprites(t_game *game)
 	{
 		sprite_x = game->sprites[i].x - game->player.x;
 		sprite_y = game->sprites[i].y - game->player.y;
-		
+
 		dir_x = cos(game->player.angle);
 		dir_y = sin(game->player.angle);
-		perp_x = -sin(game->player.angle);
-		perp_y = cos(game->player.angle);
+		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
+
+		perp_x = -sin(game->player.angle) * 0.66f;
+		perp_y = cos(game->player.angle) * 0.66f;
 		
-		transform_x = perp_x * sprite_x + perp_y * sprite_y;
-		transform_y = dir_x * sprite_x + dir_y * sprite_y; 
+		transform_x = inv_det * (dir_y * sprite_x - dir_x * sprite_y);
+		transform_y = inv_det * (-perp_y * sprite_x + perp_x * sprite_y);
+		// transform_x = perp_x * sprite_x + perp_y * sprite_y;
+		// transform_y = dir_x * sprite_x + dir_y * sprite_y; 
 		if (transform_y <= 0)
 		{
 			i++;
 			continue ;
 		}
-		sprite_screen_x = (int)(game->win_width / 2) * (1 + transform_x / transform_y);
-		sprite_height = abs((int)(game->win_height / transform_y));
+		sprite_screen_x = (int)((game->win_width / 2) * (1 + transform_x / transform_y));
+		float sprite_scale = game->win_height / transform_y * TILE_SIZE;
+
+		sprite_height = (int)sprite_scale;
+		sprite_width = (int)sprite_scale;
+
+		// sprite_height = abs((int)(game->win_height / transform_y)) * TILE_SIZE;
 		draw_start_y = -sprite_height / 2 + game->win_height / 2;
         if (draw_start_y < 0)
             draw_start_y = 0;
@@ -284,14 +293,14 @@ void	draw_sprites(t_game *game)
 		if (draw_end_y >= game->win_height)
 			draw_end_y = game->win_height - 1;
 		
-		sprite_width = abs((int)(game->win_height / transform_y));
+		// sprite_width = abs((int)(game->win_height / transform_y)) * TILE_SIZE;
 		draw_start_x = -sprite_width / 2 + sprite_screen_x;
 		if (draw_start_x < 0)
 			draw_start_x = 0;
 		draw_end_x = sprite_width / 2 + sprite_screen_x;
 		if (draw_end_x >= game->win_width)
 			draw_end_x = game->win_width - 1;
-		
+
 		//loop through every vertical stripe of the sprite on screen
 		column = draw_start_x;
 		while (column < draw_end_x)
@@ -299,7 +308,7 @@ void	draw_sprites(t_game *game)
 			int tex_x = (int)(256 * (column - (-sprite_width / 2 + sprite_screen_x)) 
 					* game->sprites[i].image.width / sprite_width) / 256;
 			
-			if (transform_y > 0 && column >= 0 && column < game->win_width 
+			if (transform_y > 0 && column > 0 && column < game->win_width 
 				&& transform_y < game->z_buffer[column])
 			{
 				int y = draw_start_y;
@@ -310,9 +319,10 @@ void	draw_sprites(t_game *game)
 					u_int32_t color = *(unsigned int*)(game->sprites[i].image.addr 
 							+ (tex_y * game->sprites[i].image.line_length 
 							+ tex_x * (game->sprites[i].image.bpp / 8)));
-					
 					if ((color & 0x00FFFFFF) != 0)
+					{
 						put_pixel_to_img(&game->mlx, column, y, color);
+					}
 					y++;
 				}
 			}

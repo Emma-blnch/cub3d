@@ -62,6 +62,18 @@ static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
     }
 }
 
+bool is_sprite(float px, float py, char **map)
+{
+    int x = px / TILE_SIZE;
+    int y = py / TILE_SIZE;
+
+    if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
+        return (true);
+    if (map[y][x] == '2')
+        return (true);
+    return (false);
+}
+
 void    move_player(t_player *player, t_game *game)
 {
     float   new_x;
@@ -71,8 +83,8 @@ void    move_player(t_player *player, t_game *game)
     new_y = player->y;
     rotation(player);
     perpendicular_moves(player, &new_x, &new_y);
-    if (!is_wall(new_x, player->y, game->config.map))
+    if (!is_wall(new_x, player->y, game->config.map) && !is_sprite(new_x, player->y, game->config.map))
 		player->x = new_x;
-	if (!is_wall(player->x, new_y, game->config.map))
+	if (!is_wall(player->x, new_y, game->config.map) && !is_sprite(new_x, player->y, game->config.map))
 		player->y = new_y;
 }

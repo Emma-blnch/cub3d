@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/05 14:39:47 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/06 15:23:56 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || x >= 1280 || y < 0 || y >= 720)
+		return ;
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -84,10 +86,10 @@ int	render(t_game *game)
 		draw_sprites(game);
 		mlx_put_image_to_window(game->mlx.mlx_ptr,
 			game->mlx.win_ptr, game->mlx.img, 0, 0);
-		int x = (game->win_width - game->hud.gun_w) / 2;
-		int y = game->win_height - game->hud.gun_h;
-		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-			game->hud.gun_img, x, y);
+		// int x = (game->win_width - game->hud.gun_w) / 2;
+		// int y = game->win_height - game->hud.gun_h;
+		// mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
+		// 	game->hud.gun_img, x, y);
 	}
     return 0;
 }
