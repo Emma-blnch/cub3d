@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 10:10:26 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/06 15:07:55 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ static void load_textures(t_game *game)
     load_texture(game, &game->tex.so, game->config.so_path);
     load_texture(game, &game->tex.ea, game->config.ea_path);
     load_texture(game, &game->tex.we, game->config.we_path);
+    
+    for (int i = 0; i < game->sprites_count; i++)
+    {
+        if (game->sprites[i].path)
+        {
+            game->sprites[i].image.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, 
+                game->sprites[i].path, &game->sprites[i].image.width, &game->sprites[i].image.height);
+            if (!game->sprites[i].image.img)
+                error_exit(game, "Error: Failed to load sprite texture");
+            game->sprites[i].image.addr = mlx_get_data_addr(game->sprites[i].image.img, 
+                &game->sprites[i].image.bpp, &game->sprites[i].image.line_length, &game->sprites[i].image.endian);
+        }
+    }
 }
 
 void    load_hud(t_game *game)

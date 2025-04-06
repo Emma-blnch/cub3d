@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 08:51:39 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/05 13:46:13 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_config {
     char        *so_path;
     char        *we_path;
     char        *ea_path;
+    char        *sp_path;  // Ajout du chemin du sprite
     int         floor_color;
     int         ceiling_color;
     char        **map;
@@ -49,7 +50,7 @@ typedef struct s_ray {
     float      side_y;
     float      delta_x;
     float      delta_y;
-    float      perp_wall_dist;
+    double      perp_wall_dist;
     int         step_x;
     int         step_y;
     int         hit;
@@ -67,6 +68,7 @@ typedef struct s_hud {
     int		    wall_w;
     int		    wall_h;
 }	        t_hud;
+
 
 typedef struct s_player
 {
@@ -98,6 +100,15 @@ typedef struct s_texture {
     t_img       ea;
 }               t_texture;
 
+typedef struct s_sprite
+{
+    double x;
+    double y;
+    char    *path;
+    t_img   image;
+    double dist;
+} t_sprite;
+
 typedef struct s_game {
     t_mlx       mlx;
     t_config    config;
@@ -115,6 +126,11 @@ typedef struct s_game {
     int         win_height;
     int         menu_active; // 1 si on est dans le menu, 0 si on est en jeu
 	int         menu_selection; // 0 = Play, 1 = Exit
+
+    //
+    t_sprite *sprites;
+	int       sprites_count;
+    float    *z_buffer;
 }               t_game;
 
 typedef struct s_check {
