@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:10:15 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:27:57 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_hud {
 	void		*wall;
 	int			wall_w;
 	int			wall_h;
+	void		*gun_shot;
+	int			shot_w;
+	int			shot_h;
+	void		*ammo_img;
+	int			ammo_w;
+	int			ammo_h;
 }				t_hud;
 
 typedef struct s_player
@@ -99,22 +105,26 @@ typedef struct s_texture {
 }				t_texture;
 
 typedef struct s_game {
-	t_mlx		mlx;
-	t_config	config;
-	t_ray		ray;
-	t_hud		hud;
-	t_player	player;
-	t_texture	tex;
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	int			win_width;
-	int			win_height;
-	int			menu_active;
-	int			menu_selection;
+	t_mlx			mlx;
+	t_config		config;
+	t_ray			ray;
+	t_hud			hud;
+	t_player		player;
+	t_texture		tex;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	int				win_width;
+	int				win_height;
+	int				menu_active;
+	int				menu_selection;
+	bool			is_firing;
+	int				fire_timer;
+	int				ammo;
+	unsigned long	last_shot_time;
 }				t_game;
 
 typedef struct s_check {

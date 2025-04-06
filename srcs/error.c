@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 10:56:27 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:01:03 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void	free_textures(t_game *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.ea.img);
 	if (data->tex.we.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.we.img);
+	if (data->hud.gun_shot)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.gun_shot);
+	if (data->hud.ammo_img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.ammo_img);
 }
 
 void	free_resources(t_game *data)

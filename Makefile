@@ -6,7 +6,7 @@
 #    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/02 09:56:05 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/06 13:05:22 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_FILES =	error.c \
 			handle_utils.c \
 			utils.c \
 			raycasting.c \
-			raycasting_utils.c
+			raycasting_utils.c \
+			hud.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

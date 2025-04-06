@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 08:56:53 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:27:01 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdbool.h>
+# include <sys/time.h>
 
 # define MAX_LINES 1024
 # define ESC_KEY 65307
@@ -78,10 +79,14 @@ void	draw_floor_and_ceiling(t_game *game);
 // Menu
 int		draw_menu(t_game *game);
 
+// Hud
+void	draw_ammo(t_game *game);
+void	draw_gun(t_game *game);
+
 // Mini-map
 int		render(t_game *game);
-int	set_color(char **map, int y, int x);
-int	get_mini_tile_size(t_game *game);
+int		set_color(char **map, int y, int x);
+int		get_mini_tile_size(t_game *game);
 void	draw_minimap(t_game *game);
 
 // Player
@@ -98,6 +103,8 @@ int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		key_press_linux(int keycode, void *param);
 int		key_release_linux(int keycode, void *param);
+int		mouse_click(int button, int x, int y, void *param);
+int		mouse_move(int x, int y, t_game *game);
 
 // Utils
 int		count_lines(char **lines);

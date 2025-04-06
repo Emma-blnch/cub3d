@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 11:16:03 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:04:46 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,8 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	draw_menu(t_game *game)
-{
-	int	x;
-	int	y;
-
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-		game->hud.menu_bg, 0, 0);
-	x = game->win_width / 2 - 50;
-	y = game->win_height / 2 - 20;
-	if (game->menu_selection == 1)
-	{
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40,
-			0xFF0000, "> Exit");
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y,
-			0xFFFFFF, "> Play");
-	}
-	else
-	{
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y + 40,
-			0xFFFFFF, "> Exit");
-		mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, x, y,
-			0xFF0000, "> Play");
-	}
-	return (0);
-}
-
 int	render(t_game *game)
 {
-	int	x;
-	int	y;
-
 	if (!game || !game->mlx.win_ptr || !game->hud.gun_img)
 		return (ft_printf("Missing render info!\n"), 1);
 	if (game->menu_active)
@@ -86,9 +57,7 @@ int	render(t_game *game)
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx.mlx_ptr,
 		game->mlx.win_ptr, game->mlx.img, 0, 0);
-	x = (game->win_width - game->hud.gun_w) / 2;
-	y = game->win_height - game->hud.gun_h;
-	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-		game->hud.gun_img, x, y);
+	draw_gun(game);
+	draw_ammo(game);
 	return (0);
 }
