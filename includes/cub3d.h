@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:27:01 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:57:35 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,74 +52,77 @@
 # define RIGHT 65363
 
 // Init
-t_game	*init_data(int argc);
+t_game			*init_data(int argc);
 
 // Check file
-void	validate_file(char *filename, t_game *data);
-char	**read_all_lines(char *filename, t_game *data);
-void	check_filename(t_game *data, char *filename);
-void	check_file_config(t_game *data, char **lines);
-void	check_map(t_game *data, char **lines);
-void	check_map_is_closed(char **lines, int start, t_game *data);
-void	check_duplicate(int *flag, t_game *data, char *id);
-void	check_color_format(char *line, t_game *data, char id);
-void	check_texture_path(char *line, t_game *data, char *id);
-int		find_map_start_index(char **lines);
+void			validate_file(char *filename, t_game *data);
+char			**read_all_lines(char *filename, t_game *data);
+void			check_filename(t_game *data, char *filename);
+void			check_file_config(t_game *data, char **lines);
+void			check_map(t_game *data, char **lines);
+void			check_map_is_closed(char **lines, int start, t_game *data);
+void			check_duplicate(int *flag, t_game *data, char *id);
+void			check_color_format(char *line, t_game *data, char id);
+void			check_texture_path(char *line, t_game *data, char *id);
+int				find_map_start_index(char **lines);
 
 // Store data
-void	store_data(t_game *data, char **lines);
-void	parse_textures(t_game *data, char **lines);
-void	parse_colors(t_game *data, char **lines);
-void	store_player_position(t_game *data);
+void			store_data(t_game *data, char **lines);
+void			parse_textures(t_game *data, char **lines);
+void			parse_colors(t_game *data, char **lines);
+void			store_player_position(t_game *data);
 
 // Window
-void	init_window(t_game *game);
-void	draw_floor_and_ceiling(t_game *game);
+void			init_window(t_game *game);
+void			draw_floor_and_ceiling(t_game *game);
 
 // Menu
-int		draw_menu(t_game *game);
+int				draw_menu(t_game *game);
 
 // Hud
-void	draw_ammo(t_game *game);
-void	draw_gun(t_game *game);
+void			draw_ammo(t_game *game);
+void			draw_gun(t_game *game);
 
 // Mini-map
-int		render(t_game *game);
-int		set_color(char **map, int y, int x);
-int		get_mini_tile_size(t_game *game);
-void	draw_minimap(t_game *game);
+int				render(t_game *game);
+int				set_color(char **map, int y, int x);
+int				get_mini_tile_size(t_game *game);
+void			draw_minimap(t_game *game);
 
 // Player
-void	move_player(t_player *player, t_game *game);
-void	init_player(t_player *player, t_game *game);
+void			move_player(t_player *player, t_game *game);
+void			init_player(t_player *player, t_game *game);
 
 // Raycasting
-void	ray_casting(t_game *game);
-void	init_ray_struct(t_ray *ray, t_player *player, float angle);
+void			ray_casting(t_game *game);
+void			init_ray_struct(t_ray *ray, t_player *player, float angle);
 
 // Events
-int		close_window(t_game *data);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-int		key_press_linux(int keycode, void *param);
-int		key_release_linux(int keycode, void *param);
-int		mouse_click(int button, int x, int y, void *param);
-int		mouse_move(int x, int y, t_game *game);
+int				close_window(t_game *data);
+int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_game *game);
+int				key_press_linux(int keycode, void *param);
+int				key_release_linux(int keycode, void *param);
+int				mouse_click(int button, int x, int y, void *param);
+int				mouse_move(int x, int y, t_game *game);
 
 // Utils
-int		count_lines(char **lines);
-int		ft_strcmp(char *s1, char *s2);
-int		ft_str_is_whitespace(char *str);
-int		is_valid_map_line(char *line);
-int		has_wall_start(char *line);
-void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
-void	free_split(char **split);
-bool	is_wall(float px, float py, char **map);
+int				count_lines(char **lines);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_str_is_whitespace(char *str);
+int				is_valid_map_line(char *line);
+int				has_wall_start(char *line);
+void			put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
+void			draw_sprite_to_img(t_mlx *dst, t_img *sprite,
+					int x_offset, int y_offset);
+void			free_split(char **split);
+bool			is_wall(float px, float py, char **map);
+unsigned long	get_time_ms(void);
 
 // Error and free
-void	error_exit(t_game *data, char *message);
-void	free_map(char **map);
-void	free_resources(t_game *data);
-void	free_lines(char **lines);
+void			error_exit(t_game *data, char *message);
+void			free_map(char **map);
+void			free_resources(t_game *data);
+void			free_lines(char **lines);
 
 #endif

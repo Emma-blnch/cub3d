@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:04:46 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:50:08 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 
 int	render(t_game *game)
 {
-	if (!game || !game->mlx.win_ptr || !game->hud.gun_img)
+	if (!game || !game->mlx.win_ptr || !game->hud.gun.img)
 		return (ft_printf("Missing render info!\n"), 1);
 	if (game->menu_active)
 	{

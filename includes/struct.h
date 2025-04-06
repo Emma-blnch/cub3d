@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:27:57 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:54:50 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ typedef struct s_config {
 	char		player_dir;
 }				t_config;
 
+typedef struct s_img {
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+}				t_img;
+
 typedef struct s_ray {
 	float		start_x;
 	float		start_y;
@@ -57,21 +67,12 @@ typedef struct s_ray {
 }				t_ray;
 
 typedef struct s_hud {
-	void		*gun_img;
-	int			gun_w;
-	int			gun_h;
+	t_img		gun;
+	t_img		gun_shot;
+	t_img		ammo;
 	void		*menu_bg;
 	int			menu_bg_w;
 	int			menu_bg_h;
-	void		*wall;
-	int			wall_w;
-	int			wall_h;
-	void		*gun_shot;
-	int			shot_w;
-	int			shot_h;
-	void		*ammo_img;
-	int			ammo_w;
-	int			ammo_h;
 }				t_hud;
 
 typedef struct s_player
@@ -86,16 +87,6 @@ typedef struct s_player
 	bool		left_rotate;
 	bool		right_rotate;
 }				t_player;
-
-typedef struct s_img {
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_length;
-	int			endian;
-	int			width;
-	int			height;
-}				t_img;
 
 typedef struct s_texture {
 	t_img		no;

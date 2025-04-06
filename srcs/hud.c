@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 13:05:00 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 13:20:14 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 13:59:28 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,31 @@ int	draw_menu(t_game *game)
 	return (0);
 }
 
+void	draw_sprite_to_img(t_mlx *dst, t_img *sprite,
+			int x_offset, int y_offset)
+{
+	int		x;
+	int		y;
+	int		color;
+	char	*pixel;
+
+	y = 0;
+	while (y < sprite->height)
+	{
+		x = 0;
+		while (x < sprite->width)
+		{
+			pixel = sprite->addr
+				+ (y * sprite->line_length + x * (sprite->bpp / 8));
+			color = *(unsigned int *)pixel;
+			if ((color & 0x00FFFFFF) != 0)
+				put_pixel_to_img(dst, x + x_offset, y + y_offset, color);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	draw_ammo(t_game *game)
 {
 	int	i;
@@ -49,12 +74,11 @@ void	draw_ammo(t_game *game)
 	i = 0;
 	spacing = 7;
 	x_start = 20;
-	y = game->win_height - game->hud.ammo_h - 20;
+	y = game->win_height - game->hud.ammo.height - 20;
 	while (i < game->ammo)
 	{
-		x = x_start + i * (game->hud.ammo_w + spacing);
-		mlx_put_image_to_window(game->mlx.mlx_ptr,
-			game->mlx.win_ptr, game->hud.ammo_img, x, y);
+		x = x_start + i * (game->hud.ammo.width + spacing);
+		draw_sprite_to_img(&game->mlx, &game->hud.ammo, x, y);
 		i++;
 	}
 }
@@ -64,18 +88,16 @@ void	draw_gun(t_game *game)
 	int	x;
 	int	y;
 
-	x = (game->win_width - game->hud.gun_w) / 2;
-	y = game->win_height - game->hud.gun_h;
+	x = (game->win_width - game->hud.gun.width) / 2;
+	y = game->win_height - game->hud.gun.height;
 	if (game->is_firing && game->fire_timer > 0)
 	{
-		mlx_put_image_to_window(game->mlx.mlx_ptr,
-			game->mlx.win_ptr, game->hud.gun_shot, x, y);
+		draw_sprite_to_img(&game->mlx, &game->hud.gun_shot, x, y);
 		game->fire_timer--;
 	}
 	else
 	{
-		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
-			game->hud.gun_img, x, y);
+		draw_sprite_to_img(&game->mlx, &game->hud.gun, x, y);
 		game->is_firing = false;
 	}
 }

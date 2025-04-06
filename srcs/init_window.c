@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:21:01 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:01:08 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,41 @@ static void	load_textures(t_game *game)
 	load_texture(game, &game->tex.we, game->config.we_path);
 }
 
-void	load_hud(t_game *game)
+static void	load_menu(t_game *game)
 {
-	game->hud.gun_img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-			"./textures/hud/gun2.xpm", &game->hud.gun_w, &game->hud.gun_h);
-	if (!game->hud.gun_img)
-		error_exit(game, "Error: Failed to load gun sprite");
-	game->hud.gun_shot = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-			"./textures/hud/gun2-shot.xpm",
-			&game->hud.shot_w, &game->hud.shot_h);
-	if (!game->hud.gun_shot)
-		error_exit(game, "Error: Failed to load gun shot sprite");
-	game->hud.ammo_img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-			"./textures/hud/bullet32.xpm",
-			&game->hud.ammo_w, &game->hud.ammo_h);
-	if (!game->hud.ammo_img)
-		error_exit(game, "Error: Failed to load ammo sprite");
 	game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"./textures/menu.xpm",
 			&game->hud.menu_bg_w, &game->hud.menu_bg_h);
 	if (!game->hud.menu_bg)
 		error_exit(game, "Error: Failed to load menu background");
+}
+
+void	load_hud(t_game *game)
+{
+	game->hud.gun.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			"./textures/hud/gun2.xpm",
+			&game->hud.gun.width, &game->hud.gun.height);
+	if (!game->hud.gun.img)
+		error_exit(game, "Error: Failed to load gun sprite");
+	game->hud.gun.addr = mlx_get_data_addr(game->hud.gun.img,
+			&game->hud.gun.bpp, &game->hud.gun.line_length,
+			&game->hud.gun.endian);
+	game->hud.gun_shot.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			"./textures/hud/gun2-shot.xpm",
+			&game->hud.gun_shot.width, &game->hud.gun_shot.height);
+	if (!game->hud.gun_shot.img)
+		error_exit(game, "Error: Failed to load gun shot sprite");
+	game->hud.gun_shot.addr = mlx_get_data_addr(game->hud.gun_shot.img,
+			&game->hud.gun_shot.bpp, &game->hud.gun_shot.line_length,
+			&game->hud.gun_shot.endian);
+	game->hud.ammo.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			"./textures/hud/bullet32.xpm",
+			&game->hud.ammo.width, &game->hud.ammo.height);
+	if (!game->hud.ammo.img)
+		error_exit(game, "Error: Failed to load ammo sprite");
+	game->hud.ammo.addr = mlx_get_data_addr(game->hud.ammo.img,
+			&game->hud.ammo.bpp, &game->hud.ammo.line_length,
+			&game->hud.ammo.endian);
 }
 
 void	init_window(t_game *game)
@@ -69,6 +83,7 @@ void	init_window(t_game *game)
 	mlx_mouse_hide(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	mlx_mouse_move(game->mlx.mlx_ptr, game->mlx.win_ptr,
 		game->win_width / 2, game->win_height / 2);
+	load_menu(game);
 	load_hud(game);
 	load_textures(game);
 	mlx_hook(game->mlx.win_ptr, 17, 0, close_window, game);
