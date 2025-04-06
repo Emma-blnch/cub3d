@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/03 11:22:16 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/04 16:38:22 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 	if((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
 		tex_x = tex->width - tex_x - 1;
 
-	double step = 1.0 * tex->height / wall_height;
-	double tex_pos = (wall_start - game->win_height / 2 + wall_height / 2) * step; // À chaque pixel y de wall_start à wall_end, quel pixel de la texture dois-je prendre ?
+	double step = (double)tex->height / wall_height; // plus de 1.0
+	double tex_pos = (wall_start + (wall_height / 2 - game->win_height / 2)) * step; // plus intuitif : on part de wall_start pour aller chercher le pixel de la colonne
 	// game->win_height / 2 = milieu de l’écran
 	// wall_start = haut du mur
 	// wall_height / 2 = screen_center
@@ -166,9 +166,9 @@ void	draw_ray(t_player *player, t_game *game, float angle, int col)
 		corrected = 1.0f;
 	tex = set_textures(&ray, game);
 	if (ray.side == 0)
-		wall_hit = ray.start_y + dist / TILE_SIZE * ray.dir_y;
+		wall_hit = ray.start_y + (dist * ray.dir_y)/ TILE_SIZE; // plus clair pour exprimer le déplacement selon l'angle
 	else
-		wall_hit = ray.start_x + dist / TILE_SIZE * ray.dir_x;
+		wall_hit = ray.start_x + (dist * ray.dir_x)/ TILE_SIZE;
 	wall_hit -= floor(wall_hit);
 	draw_wall_column(game, &corrected, col, tex, wall_hit, &ray);
 }
