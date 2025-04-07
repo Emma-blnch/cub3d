@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 15:14:17 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 01:14:57 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,8 @@ t_game	*init_data(int argc, char **argv)
 	ft_memset(data, 0, sizeof(t_game));
     data->menu_active = 0;
     data->menu_selection = 0;
-    // a garder ?
-    if (argc == 4)
-    {
-        data->win_width = ft_atoi(argv[2]);
-        data->win_height = ft_atoi(argv[3]);
-    }
-    else
-    {
-        data->win_width = 1280;
-        data->win_height = 720;
-    }
-    if (data->win_width < 300 || data->win_height < 300
-        || data->win_width > 1920 || data->win_height > 1080)
-    {
-        error_exit(data, "Error: Window size must be between 300x300 and 1920x1080");
-    }
+    data->win_width = 1280;
+    data->win_height = 720;
     data->z_buffer = malloc(sizeof(float) * data->win_width);
     if (!data->z_buffer)
         error_exit(data, "Error: Could not allocate z_buffer");
