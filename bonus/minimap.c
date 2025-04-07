@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/28 13:22:42 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 15:52:52 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	draw_player_minimap(t_game *game, int tile_size)
 		dx = 0;
 		while(dx < tile_size / 2)
 		{
-			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0x00FF00);
+			put_pixel_to_img(&game->mlx, player_x_mini + dx, player_y_mini + dy, 0x0f056b);
 			dx++;
 		}
 		dy++;
@@ -87,7 +87,7 @@ void	draw_ray_on_minimap(t_game *game, float angle)
 	while (!is_wall(ray_x, ray_y, game->config.map))
 	{
 		put_pixel_to_img(&game->mlx, (ray_x / TILE_SIZE) * tile_size,
-			(ray_y / TILE_SIZE) * tile_size, 0xFF0000);
+			(ray_y / TILE_SIZE) * tile_size, 0x77b5fe);
 		ray_x += cos_a;
 		ray_y += sin_a;
 	}
@@ -116,9 +116,11 @@ int	set_color(char **map, int y, int x)
 
 	color = -1;
 	if (map[y][x] == '1')
-		color = 0x555555;
-	else if (map[y][x] == '0')
+		color = 0xe82380;
+	else if (map[y][x] == '0' || map[y][x] == '2' || map[y][x] == '4')
 		color = 0xFFFFFF;
+	else if (map[y][x] == '3')
+		color = 0xff8916;
 	else if (ft_strchr("NSEW", map[y][x]))
 		color = 0xFFFFFF;
 	return (color);

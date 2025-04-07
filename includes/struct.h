@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 14:08:28 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 14:25:18 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_config {
     char        *ea_path;
     char        *sp_path;
     char        *door_path;
+    char        *door_open_path;
     int         floor_color;
     int         ceiling_color;
     char        **map;
@@ -100,6 +101,7 @@ typedef struct s_texture {
     t_img       we;
     t_img       ea;
     t_img       door;
+    t_img       door_open;
 }               t_texture;
 
 typedef struct s_sprite

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 12:45:36 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 15:55:50 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ void    free_resources(t_game *data)
     free(data->config.so_path);
     free(data->config.we_path);
     free(data->config.ea_path);
+    free(data->config.door_path);
+    free(data->config.sp_path);
+    free(data->config.door_open_path);
     free_map(data->config.map);
     free(data->z_buffer);
     free(data->sprites); // à voir 

@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/07 12:30:39 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 15:58:44 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,31 @@ static int	add_shadow(int color, float corrected_dist)
 	b = (color & 0xFF) * (1.0 - shade);
 	color = (r << 16) | (g << 8) | b;
 	return (color);
+}
+
+void	draw_sprite_to_img(t_mlx *dst, t_img *sprite,
+	int x_offset, int y_offset)
+{
+	int		x;
+	int		y;
+	int		color;
+	char	*pixel;
+
+	y = 0;
+	while (y < sprite->height)
+	{
+	x = 0;
+	while (x < sprite->width)
+	{
+		pixel = sprite->addr
+			+ (y * sprite->line_length + x * (sprite->bpp / 8));
+		color = *(unsigned int *)pixel;
+		if ((color & 0x00FFFFFF) != 0)
+			put_pixel_to_img(dst, x + x_offset, y + y_offset, color);
+		x++;
+	}
+	y++;
+	}
 }
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
@@ -66,6 +91,7 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 	// + wall_height / 2.0 = place l’origine (y=0) au milieu du mur, ça recentre ton repère
 	// le tout = combien de pixels séparent le haut du mur du centre vertical du mur sur l’écran
 	// * step = convertit cette distance en pixels dans la texture
+	bool	is_transparent_tex = (tex == &game->tex.door_open);
 	while (y < wall_end)
 	{
 		int tex_y = (int)tex_pos;
@@ -76,8 +102,13 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 			tex_y = tex->height - 1;
 		char *pixel = tex->addr + (tex_y * tex->line_length + tex_x * (tex->bpp / 8));
 		int color = *(unsigned int *)pixel;
-		color = add_shadow(color, *corrected_dist);
-		put_pixel_to_img(&game->mlx, i, y, color);
+		// color = add_shadow(color, *corrected_dist);
+		// put_pixel_to_img(&game->mlx, i, y, color);
+		if ((color & 0x00FFFFFF) != 0 || !is_transparent_tex)
+		{
+			color = add_shadow(color, *corrected_dist);
+			put_pixel_to_img(&game->mlx, i, y, color);
+		}
 		y++;
 	}
 }
@@ -105,6 +136,20 @@ static void	calculate_sides_distances(t_ray *ray)
 		ray->side_y = (ray->map_y + 1.0f - ray->start_y) * ray->delta_y;
 	}
 }
+
+// bool is_door(float px, float py, char **map)
+// {
+//     int		x;
+//     int		y;
+
+// 	x = px / TILE_SIZE;
+// 	y = py / TILE_SIZE;
+// 	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
+//         return (true);
+//     if (map[y][x] == '1' || map[y][x] == '3' || map[y][x] == '4')
+//         return (true);
+//     return (false);
+// }
 
 void	move_until_wall_is_hit(t_ray *ray, char **map)
 {
@@ -135,7 +180,8 @@ t_img	*set_textures(t_ray *ray, t_game *game)
 	c = game->config.map[ray->map_y][ray->map_x];
 	if (c == '3')
 		return (&game->tex.door);
-
+	// else if (c == '4')
+	// 	return (&game->tex.door_open);
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
@@ -338,23 +384,3 @@ void	draw_sprites(t_game *game)
 		i++;
  	}
 }
-// draw_wall_column :
-// if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
-// 		tex_x = tex->width - tex_x - 1;
-
-// draw_sprites :
-// float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y); APRES perp_x et Y
-
-// changement des textures et couleurs sol/plafond
-
-
-
-
-
-// door : ajout door dans struct text
-// modifier la map pour ajouter genre DO ./textures/door.xpm
-// la charger dans load_textures
-// ajouter le chargement de la text dans set_textures
-// modifier is_wall pour que le joueur ne puisse pas rentrer dedans
-// ajouter une touche dans key_press pour l'ouvrir
-// implémenter fonction pour regarder si une case est une porte et 'louvrir

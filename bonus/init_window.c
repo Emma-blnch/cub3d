@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 12:51:13 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 15:35:52 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void load_textures(t_game *game)
     load_texture(game, &game->tex.ea, game->config.ea_path);
     load_texture(game, &game->tex.we, game->config.we_path);
     load_texture(game, &game->tex.door, game->config.door_path);
+    // game->config.door_open_path = "./textures/door.xpm";
+    // load_texture(game, &game->tex.door_open, game->config.door_open_path);
     
     for (int i = 0; i < game->sprites_count; i++)
     {
@@ -71,7 +73,7 @@ void    init_window(t_game *game)
     mlx_hook(game->mlx.win_ptr, 2, 1L << 0, key_press, game);
     mlx_hook(game->mlx.win_ptr, 3, 1L << 1, key_release, game);
     load_hud(game);
-    mlx_loop_hook(game->mlx.mlx_ptr, render, game);
     load_textures(game);
+    mlx_loop_hook(game->mlx.mlx_ptr, render, game);
     mlx_loop(game->mlx.mlx_ptr);
 }

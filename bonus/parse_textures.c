@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:01:30 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 13:23:03 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 14:20:38 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_textures(t_game *data, char **lines)
 			i++;
 			continue ;
 		}
-		if (ft_strchr("0123 ", lines[i][0]))
+		if (ft_strchr("01234 ", lines[i][0]))
 			break ;
 		if (ft_strncmp(lines[i], "NO ", 3) == 0)
 			data->config.no_path = extract_path(lines[i]);
