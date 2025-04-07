@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 14:25:18 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 00:57:45 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct s_sprite
     char    *path;
     t_img   image;
     double dist;
-    bool is_door;
 } t_sprite;
 
 typedef struct s_game {
@@ -129,10 +128,8 @@ typedef struct s_game {
     double      plane_y;
     int         win_width;
     int         win_height;
-    int         menu_active; // 1 si on est dans le menu, 0 si on est en jeu
-	int         menu_selection; // 0 = Play, 1 = Exit
-
-    //
+    int         menu_active;
+	int         menu_selection;
     t_sprite *sprites;
 	int       sprites_count;
     float    *z_buffer;

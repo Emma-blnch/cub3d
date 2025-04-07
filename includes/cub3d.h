@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 15:51:56 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 00:54:49 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ int     has_wall_start(char *line);
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 void	draw_square(int x, int y, int size, int color, t_game *game);
 void	free_split(char **split);
+bool    is_wall(float px, float py, char **map);
+bool    is_sprite(float px, float py, char **map);
+int     add_shadow(int color, float corrected_dist);
+
 
 // Error and free
 void	error_exit(t_game *data, char *message);
@@ -110,11 +114,13 @@ void    free_resources(t_game *data);
 void	free_lines(char **lines);
 
 
-bool    is_wall(float px, float py, char **map);
 void	ray_casting(t_game *game);
 void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 void	draw_sprites(t_game *game);
-void open_and_close_doors(t_game *game);
-bool is_sprite(float px, float py, char **map);
+void    open_and_close_doors(t_game *game);
+void	draw_sprite_to_img(t_mlx *dst, t_img *sprite, int x_offset, int y_offset);
+void    load_hud(t_game *game);
+void    load_textures(t_game *game);
+t_img   *set_textures(t_ray *ray, t_game *game);
 
 #endif

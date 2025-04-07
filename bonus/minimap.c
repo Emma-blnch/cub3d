@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 15:52:52 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 00:31:24 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,19 @@ int	get_mini_tile_size(t_game *game)
 
 void	draw_square(int x, int y, int size, int color, t_game *game)
 {
-	for (int dy = 0; dy < size; dy++)
+	int	dx;
+	int	dy;
+
+	dy =0;
+	while (dy < size)
 	{
-		for (int dx = 0; dx < size; dx++)
+		dx = 0;
+		while (dx < size)
 		{
 			put_pixel_to_img(&game->mlx, x + dx, y + dy, color);
+			dx++;
 		}
+		dy++;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/03/26 18:08:32 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 00:53:16 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,30 @@ int	has_wall_start(char *line)
 		i++;
 	}
 	return (0);
+}
+
+bool is_wall(float px, float py, char **map)
+{
+    int		x;
+    int		y;
+
+	x = px / TILE_SIZE;
+	y = py / TILE_SIZE;
+	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
+        return (true);
+    if (map[y][x] == '1' || map[y][x] == '3')
+        return (true);
+    return (false);
+}
+
+bool is_sprite(float px, float py, char **map)
+{
+    int x = px / TILE_SIZE;
+    int y = py / TILE_SIZE;
+
+    if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
+        return (true);
+    if (map[y][x] == '2')
+        return (true);
+    return (false);
 }

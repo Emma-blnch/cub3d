@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
+#    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/06 19:10:57 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/04/08 00:42:26 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ BONUS_DIR = bonus
 BONUS_NAME = cub3D_bonus
 BONUS_OBJ_DIR = obj_bonus
 
-BONUS_FILES = $(wildcard $(BONUS_DIR)/*.c)
+# BONUS_FILES = $(wildcard $(BONUS_DIR)/*.c)
 BONUS_OBJS = $(BONUS_FILES:$(BONUS_DIR)/%.c=$(BONUS_OBJ_DIR)/%.o)
 
 MAKEFLAGS += --no-print-directory
@@ -54,7 +54,30 @@ SRC_FILES =	error.c \
 			handle_events.c \
 			utils.c \
 			raycasting.c \
-			raycasting_utils.c \
+			raycasting_utils.c
+
+BONUS_FILES = bonus/error.c \
+			bonus/main.c \
+			bonus/validate_file.c \
+			bonus/check_file_config.c \
+			bonus/check_map.c \
+			bonus/check_map_closed.c \
+			bonus/check_file_utils.c \
+			bonus/store_data.c \
+			bonus/parse_textures.c \
+			bonus/parse_color.c \
+			bonus/map_utils.c \
+			bonus/init_window.c \
+			bonus/minimap.c \
+			bonus/player.c \
+			bonus/render.c \
+			bonus/handle_events.c \
+			bonus/utils.c \
+			bonus/raycasting.c \
+			bonus/raycasting_utils.c \
+			bonus/sprites.c \
+			bonus/doors.c \
+			bonus/load_and_set_textures.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

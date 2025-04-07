@@ -62,18 +62,6 @@ static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
     }
 }
 
-bool is_sprite(float px, float py, char **map)
-{
-    int x = px / TILE_SIZE;
-    int y = py / TILE_SIZE;
-
-    if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
-        return (true);
-    if (map[y][x] == '2')
-        return (true);
-    return (false);
-}
-
 void    move_player(t_player *player, t_game *game)
 {
     float   new_x;

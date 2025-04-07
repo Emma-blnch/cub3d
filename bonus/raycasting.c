@@ -3,57 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/07 15:58:44 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 01:05:10 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	add_shadow(int color, float corrected_dist)
-{
-	double	shade;
-	int		r;
-	int		g;
-	int		b;
-
-	r = 0;
-	g = 0;
-	b = 0;
-	shade = fmin(1.0, corrected_dist / 900.0);
-	r = ((color >> 16) & 0xFF) * (1.0 - shade);
-	g = ((color >> 8) & 0xFF) * (1.0 - shade);
-	b = (color & 0xFF) * (1.0 - shade);
-	color = (r << 16) | (g << 8) | b;
-	return (color);
-}
-
-void	draw_sprite_to_img(t_mlx *dst, t_img *sprite,
-	int x_offset, int y_offset)
-{
-	int		x;
-	int		y;
-	int		color;
-	char	*pixel;
-
-	y = 0;
-	while (y < sprite->height)
-	{
-	x = 0;
-	while (x < sprite->width)
-	{
-		pixel = sprite->addr
-			+ (y * sprite->line_length + x * (sprite->bpp / 8));
-		color = *(unsigned int *)pixel;
-		if ((color & 0x00FFFFFF) != 0)
-			put_pixel_to_img(dst, x + x_offset, y + y_offset, color);
-		x++;
-	}
-	y++;
-	}
-}
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
 {
@@ -71,26 +28,16 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 	if (wall_end > game->win_height)
 		wall_end = game->win_height;
 	y = wall_start;
-	
 	tex_x = (int)(wall_hit * tex->width);
 	if (tex_x < 0)
 		tex_x = 0;
 	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;	
-	// if((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
-	// 	tex_x = tex->width - tex_x - 1;
 	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
 		tex_x = tex->width - tex_x - 1;
 
-	double step = (double)tex->height / wall_height; // plus de 1.0
-	double tex_pos = (wall_start + (wall_height / 2 - game->win_height / 2)) * step; // plus intuitif : on part de wall_start pour aller chercher le pixel de la colonne
-	// game->win_height / 2 = milieu de l’écran
-	// wall_start = haut du mur
-	// wall_height / 2 = screen_center
-	// wall_start - screen_center = distance entre le haut du mur et le milieu de l’écran
-	// + wall_height / 2.0 = place l’origine (y=0) au milieu du mur, ça recentre ton repère
-	// le tout = combien de pixels séparent le haut du mur du centre vertical du mur sur l’écran
-	// * step = convertit cette distance en pixels dans la texture
+	double step = (double)tex->height / wall_height;
+	double tex_pos = (wall_start + (wall_height / 2 - game->win_height / 2)) * step;
 	bool	is_transparent_tex = (tex == &game->tex.door_open);
 	while (y < wall_end)
 	{
@@ -102,8 +49,6 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 			tex_y = tex->height - 1;
 		char *pixel = tex->addr + (tex_y * tex->line_length + tex_x * (tex->bpp / 8));
 		int color = *(unsigned int *)pixel;
-		// color = add_shadow(color, *corrected_dist);
-		// put_pixel_to_img(&game->mlx, i, y, color);
 		if ((color & 0x00FFFFFF) != 0 || !is_transparent_tex)
 		{
 			color = add_shadow(color, *corrected_dist);
@@ -137,20 +82,6 @@ static void	calculate_sides_distances(t_ray *ray)
 	}
 }
 
-// bool is_door(float px, float py, char **map)
-// {
-//     int		x;
-//     int		y;
-
-// 	x = px / TILE_SIZE;
-// 	y = py / TILE_SIZE;
-// 	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
-//         return (true);
-//     if (map[y][x] == '1' || map[y][x] == '3' || map[y][x] == '4')
-//         return (true);
-//     return (false);
-// }
-
 void	move_until_wall_is_hit(t_ray *ray, char **map)
 {
 	while (!ray->hit)
@@ -172,33 +103,6 @@ void	move_until_wall_is_hit(t_ray *ray, char **map)
 	}
 }
 
-t_img	*set_textures(t_ray *ray, t_game *game)
-{
-	t_img	*tex;
-	char	c;
-
-	c = game->config.map[ray->map_y][ray->map_x];
-	if (c == '3')
-		return (&game->tex.door);
-	// else if (c == '4')
-	// 	return (&game->tex.door_open);
-	if (ray->side == 0)
-	{
-		if (ray->dir_x > 0)
-			tex = &game->tex.ea;
-		else
-			tex = &game->tex.we;
-	}
-	else
-	{
-		if (ray->dir_y > 0)
-			tex = &game->tex.so;
-		else
-			tex = &game->tex.no;
-	}
-	return (tex);
-}
-
 	void	draw_ray(t_player *player, t_game *game, float angle, int col, float *perp_ray_dist)
 {
 	t_ray	ray;
@@ -218,9 +122,9 @@ t_img	*set_textures(t_ray *ray, t_game *game)
 		*perp_ray_dist = 1.0f;
 	tex = set_textures(&ray, game);
 	if (ray.side == 0)
-		wall_hit = ray.start_y + (dist * ray.dir_y)/ TILE_SIZE; // plus clair pour exprimer le déplacement selon l'angle
+		wall_hit = ray.start_y + (dist * ray.dir_y) / TILE_SIZE; // plus clair pour exprimer le déplacement selon l'angle
 	else
-		wall_hit = ray.start_x + (dist * ray.dir_x)/ TILE_SIZE;
+		wall_hit = ray.start_x + (dist * ray.dir_x) / TILE_SIZE;
 	wall_hit -= floor(wall_hit);
 	draw_wall_column(game, perp_ray_dist, col, tex, wall_hit, &ray);
 }
@@ -243,144 +147,4 @@ void	ray_casting(t_game *game)
 		start_angle += fraction;
 		i++;
 	}
-}
-
-void	calculate_sprites_dist(t_game *game)
-{
-	int	i;
-	float	x;
-	float	y;
-
-	i = 0;
-	x = 0;
-	y = 0;
-	while (i < game->sprites_count)
-	{
-		x = game->sprites[i].x - game->player.x;
-		y = game->sprites[i].y - game->player.y;
-		game->sprites[i].dist = sqrtf(x * x + y * y);
-		i++;
-	}
-}
-
-void	sort_sprites_dist(t_game *game)
-{
-	int	i;
-	int	j;
-	t_sprite tmp;
-
-	i = 0;
-	while (i < game->sprites_count - 1)
-	{
-		j = 0;
-		while (j < game->sprites_count - i - 1)
-		{
-			if (game->sprites[j].dist < game->sprites[j + 1].dist)
-			{
-				tmp = game->sprites[j];
-				game->sprites[j] = game->sprites[j + 1];
-				game->sprites[j + 1] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_sprites(t_game *game)
-{
-	calculate_sprites_dist(game);
-	sort_sprites_dist(game);
-	int i;
-	int	sprite_x;
-	int	sprite_y;
-	
-	float	dir_x;
-	float	dir_y;
-	float	perp_x;
-	float	perp_y;
-	float	transform_x;
-	float	transform_y;
-	int	sprite_screen_x;
-	int	sprite_height;
-	int	sprite_width;
-	int	draw_start_x;
-	int	draw_start_y;
-	int	draw_end_x;
-	int	draw_end_y;
-	int	column;
-	
-	i = 0;
-	while (i < game->sprites_count)
-	{
-		sprite_x = game->sprites[i].x - game->player.x;
-		sprite_y = game->sprites[i].y - game->player.y;
-
-		dir_x = cos(game->player.angle);
-		dir_y = sin(game->player.angle);
-
-		perp_x = -sin(game->player.angle) * 0.66f;
-		perp_y = cos(game->player.angle) * 0.66f;
-
-		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
-		
-		transform_x = inv_det * (dir_y * sprite_x - dir_x * sprite_y);
-		transform_y = inv_det * (-perp_y * sprite_x + perp_x * sprite_y);
-		// transform_x = perp_x * sprite_x + perp_y * sprite_y;
-		// transform_y = dir_x * sprite_x + dir_y * sprite_y; 
-		if (transform_y <= 0)
-		{
-			i++;
-			continue ;
-		}
-		sprite_screen_x = (int)((game->win_width / 2) * (1 + transform_x / transform_y));
-		float sprite_scale = game->win_height / transform_y * TILE_SIZE;
-
-		sprite_height = (int)sprite_scale;
-		sprite_width = (int)sprite_scale;
-
-		draw_start_y = -sprite_height / 2 + game->win_height / 2;
-        if (draw_start_y < 0)
-            draw_start_y = 0;
-		draw_end_y = sprite_height / 2 + game->win_height / 2;
-		if (draw_end_y >= game->win_height)
-			draw_end_y = game->win_height - 1;
-		
-		// sprite_width = abs((int)(game->win_height / transform_y)) * TILE_SIZE;
-		draw_start_x = -sprite_width / 2 + sprite_screen_x;
-		if (draw_start_x < 0)
-			draw_start_x = 0;
-		draw_end_x = sprite_width / 2 + sprite_screen_x;
-		if (draw_end_x >= game->win_width)
-			draw_end_x = game->win_width - 1;
-
-		//loop through every vertical stripe of the sprite on screen
-		column = draw_start_x;
-		while (column < draw_end_x)
-		{
-			int tex_x = (int)(256 * (column - (-sprite_width / 2 + sprite_screen_x)) 
-					* game->sprites[i].image.width / sprite_width) / 256;
-			
-			if (transform_y > 0 && column > 0 && column < game->win_width 
-				&& transform_y < game->z_buffer[column])
-			{
-				int y = draw_start_y;
-				while (y < draw_end_y)
-				{
-					int d = (y * 256) - (game->win_height * 128) + (sprite_height * 128);
-					int tex_y = ((d * game->sprites[i].image.height) / sprite_height) / 256;
-					u_int32_t color = *(unsigned int*)(game->sprites[i].image.addr 
-							+ (tex_y * game->sprites[i].image.line_length 
-							+ tex_x * (game->sprites[i].image.bpp / 8)));
-					if ((color & 0x00FFFFFF) != 0)
-					{
-						put_pixel_to_img(&game->mlx, column, y, color);
-					}
-					y++;
-				}
-			}
-			column++;
-		}
-		i++;
- 	}
 }
