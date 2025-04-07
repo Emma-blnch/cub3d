@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 15:11:21 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/06 17:04:34 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	store_sprites(t_game *data)
 	y = 0;
 	sprite_nb = 0;
 	data->sprites = init_sprites(data);
-
 	while (data->config.map[y])
 	{
 		x = 0;

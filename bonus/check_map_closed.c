@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_closed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/04 17:25:53 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/07 12:53:23 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_valid_tile(char c)
 {
-	return (c == '0' || c == '2' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c == '0' || c == '2' || c == '3' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
 static int	is_in_bounds(char **map, int i, int j)

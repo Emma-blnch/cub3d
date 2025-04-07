@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
+#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/04 18:09:50 by aelaen           ###   ########.fr        #
+#    Updated: 2025/04/06 19:10:57 by ema_blnch        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,6 @@ SRC_FILES =	error.c \
 			utils.c \
 			raycasting.c \
 			raycasting_utils.c \
-			sprites.C
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

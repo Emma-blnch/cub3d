@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/05 13:46:13 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/07 14:08:28 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_config {
     char        *so_path;
     char        *we_path;
     char        *ea_path;
-    char        *sp_path;  // Ajout du chemin du sprite
+    char        *sp_path;
+    char        *door_path;
     int         floor_color;
     int         ceiling_color;
     char        **map;
@@ -98,6 +99,7 @@ typedef struct s_texture {
     t_img       so;
     t_img       we;
     t_img       ea;
+    t_img       door;
 }               t_texture;
 
 typedef struct s_sprite
@@ -107,6 +109,7 @@ typedef struct s_sprite
     char    *path;
     t_img   image;
     double dist;
+    bool is_door;
 } t_sprite;
 
 typedef struct s_game {

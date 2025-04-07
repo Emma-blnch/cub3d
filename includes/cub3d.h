@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/05 14:39:35 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/07 13:33:34 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ bool    is_wall(float px, float py, char **map);
 void	ray_casting(t_game *game);
 void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 void	draw_sprites(t_game *game);
+void open_and_close_doors(t_game *game);
 
 #endif

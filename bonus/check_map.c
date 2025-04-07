@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/04 17:20:44 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/07 12:53:39 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_map_characters(char **lines, int start, t_game *data)
 		j = 0;
 		while (lines[i][j])
 		{
-			if (!ft_strchr("012NSEW \n", lines[i][j])) // ajout de 2
+			if (!ft_strchr("0123NSEW \n", lines[i][j])) // ajout de 2 et 3
 				error_exit(data, "Error: Invalid character in map");
 			if (ft_strchr("NSEW", lines[i][j]))
 				player_count++;

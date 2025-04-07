@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 15:07:55 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 12:51:13 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void load_textures(t_game *game)
     load_texture(game, &game->tex.so, game->config.so_path);
     load_texture(game, &game->tex.ea, game->config.ea_path);
     load_texture(game, &game->tex.we, game->config.we_path);
+    load_texture(game, &game->tex.door, game->config.door_path);
     
     for (int i = 0; i < game->sprites_count; i++)
     {

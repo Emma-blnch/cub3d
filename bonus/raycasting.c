@@ -6,7 +6,7 @@
 /*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 16:06:04 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/07 12:30:39 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 		tex_x = 0;
 	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;	
-	if((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+	// if((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+	// 	tex_x = tex->width - tex_x - 1;
+	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
 		tex_x = tex->width - tex_x - 1;
 
 	double step = (double)tex->height / wall_height; // plus de 1.0
@@ -128,20 +130,25 @@ void	move_until_wall_is_hit(t_ray *ray, char **map)
 t_img	*set_textures(t_ray *ray, t_game *game)
 {
 	t_img	*tex;
+	char	c;
+
+	c = game->config.map[ray->map_y][ray->map_x];
+	if (c == '3')
+		return (&game->tex.door);
 
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			tex = &game->tex.we;
-		else
 			tex = &game->tex.ea;
+		else
+			tex = &game->tex.we;
 	}
 	else
 	{
 		if (ray->dir_y > 0)
-			tex = &game->tex.no;
-		else
 			tex = &game->tex.so;
+		else
+			tex = &game->tex.no;
 	}
 	return (tex);
 }
@@ -265,10 +272,11 @@ void	draw_sprites(t_game *game)
 
 		dir_x = cos(game->player.angle);
 		dir_y = sin(game->player.angle);
-		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
 
 		perp_x = -sin(game->player.angle) * 0.66f;
 		perp_y = cos(game->player.angle) * 0.66f;
+
+		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
 		
 		transform_x = inv_det * (dir_y * sprite_x - dir_x * sprite_y);
 		transform_y = inv_det * (-perp_y * sprite_x + perp_x * sprite_y);
@@ -285,7 +293,6 @@ void	draw_sprites(t_game *game)
 		sprite_height = (int)sprite_scale;
 		sprite_width = (int)sprite_scale;
 
-		// sprite_height = abs((int)(game->win_height / transform_y)) * TILE_SIZE;
 		draw_start_y = -sprite_height / 2 + game->win_height / 2;
         if (draw_start_y < 0)
             draw_start_y = 0;
@@ -331,39 +338,23 @@ void	draw_sprites(t_game *game)
 		i++;
  	}
 }
+// draw_wall_column :
+// if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
+// 		tex_x = tex->width - tex_x - 1;
 
-// pour (chaque sprite) {
-//     1. calcul distance au joueur
+// draw_sprites :
+// float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y); APRES perp_x et Y
 
-//     1.2 trier les sprites par distance (pour éviter suraffichage)
+// changement des textures et couleurs sol/plafond
 
-//     2. coordonnées relatives entre joueur et sprite
-//     // double spriteX = sprite[spriteOrder[i]].x - posX;
-//     //  double spriteY = sprite[spriteOrder[i]].y - posY;
 
-//     3. calcul de inverse de la matrice de caméra
-//     // double invDet = 1.0 / (planeX * dirY - dirX * planeY);
-//     3.2 coordonnées transformées dans espace de la caméra
-//     //  double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-//     //  double transformY = invDet * (-planeY * spriteX + planeX * spriteY);
-//     3.3 pos horizontale du sprite a ecran (colonne centrale du sprite ?)
-//     //  int spriteScreenX = int((w / 2) * (1 + transformX / transformY));
 
-//     4. calcul hauteur du sprite projeté
 
-//     5. calcul largeur du sprite projeté
 
-//     6. rendu pixel par pixel comme les murs
-//     // if (transformY > 0 && transformY < z_buffer[col])
-//     // {
-//     //     // le sprite est plus proche que le mur : on dessine
-//     // }
-//     // else
-//     // {
-//     //     // le mur est devant, on ne dessine pas ce pixel
-//     // }
-
-// }
-
-// 2 Ko
-// (ce qui est commenté sur le fichier si c'est des formules ca vient de son article, le reste c'est moi qui ai rajouté)
+// door : ajout door dans struct text
+// modifier la map pour ajouter genre DO ./textures/door.xpm
+// la charger dans load_textures
+// ajouter le chargement de la text dans set_textures
+// modifier is_wall pour que le joueur ne puisse pas rentrer dedans
+// ajouter une touche dans key_press pour l'ouvrir
+// implémenter fonction pour regarder si une case est une porte et 'louvrir

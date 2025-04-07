@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:01:30 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/04 18:16:20 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/07 13:23:03 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	parse_textures(t_game *data, char **lines)
 			i++;
 			continue ;
 		}
-		if (ft_strchr("012 ", lines[i][0]))
+		if (ft_strchr("0123 ", lines[i][0]))
 			break ;
 		if (ft_strncmp(lines[i], "NO ", 3) == 0)
 			data->config.no_path = extract_path(lines[i]);
@@ -45,6 +45,8 @@ void	parse_textures(t_game *data, char **lines)
 			data->config.ea_path = extract_path(lines[i]);
 		else if (ft_strncmp(lines[i], "SP ", 3) == 0)
 			data->config.sp_path = extract_path(lines[i]);
+		else if (ft_strncmp(lines[i], "DO ", 3) == 0)
+			data->config.door_path = extract_path(lines[i]);
 		i++;
 	}
 }
