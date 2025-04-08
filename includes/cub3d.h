@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 00:54:49 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:54:51 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@
 #define LEFT 123
 #define RIGHT 124
 
-// Init
-t_game	*init_data(int argc, char **argv);
 
 // Check file
 void	validate_file(char *filename, t_game *data);
@@ -80,6 +78,8 @@ void	draw_floor_and_ceiling(t_game *game);
 void	draw_menu(t_game *game);
 
 // Mini-map
+int     get_mini_tile_size(t_game *game);
+int     set_color(char **map, int y, int x);
 int     render(t_game *game);
 void	draw_minimap(t_game *game);
 
@@ -118,7 +118,6 @@ void	ray_casting(t_game *game);
 void	init_ray_struct(t_ray *ray, t_player *player, float angle);
 void	draw_sprites(t_game *game);
 void    open_and_close_doors(t_game *game);
-void	draw_sprite_to_img(t_mlx *dst, t_img *sprite, int x_offset, int y_offset);
 void    load_hud(t_game *game);
 void    load_textures(t_game *game);
 t_img   *set_textures(t_ray *ray, t_game *game);

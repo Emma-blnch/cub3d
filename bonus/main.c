@@ -6,13 +6,13 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 01:14:57 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/08 11:50:27 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_game	*init_data(int argc, char **argv)
+static t_game	*init_data()
 {
 	t_game	*data;
 
@@ -37,7 +37,7 @@ int			main(int argc, char **argv)
     data = NULL;
     if (argc != 2 && argc != 4)
         error_exit(data, "Usage: ./cub3d <maps/map.cub> [<WIN WIDTH> <WIN HEIGHT>]");
-    data = init_data(argc, argv);
+    data = init_data();
     validate_file(argv[1], data);
     init_player(&data->player, data);
     init_window(data);

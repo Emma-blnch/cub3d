@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 15:23:56 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 12:07:17 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	draw_menu(t_game *game)
 	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 		game->hud.menu_bg, 0, 0);
-		// adapter  ?
 	x = game->win_width / 2 - 50;
 	y = game->win_height / 2 - 20;
 	if (game->menu_selection == 1)

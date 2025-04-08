@@ -6,7 +6,7 @@
 #    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 00:42:26 by aelaen           ###   ########.fr        #
+#    Updated: 2025/04/08 11:55:42 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ BONUS_DIR = bonus
 BONUS_NAME = cub3D_bonus
 BONUS_OBJ_DIR = obj_bonus
 
-# BONUS_FILES = $(wildcard $(BONUS_DIR)/*.c)
 BONUS_OBJS = $(BONUS_FILES:$(BONUS_DIR)/%.c=$(BONUS_OBJ_DIR)/%.o)
 
 MAKEFLAGS += --no-print-directory
@@ -69,6 +68,7 @@ BONUS_FILES = bonus/error.c \
 			bonus/map_utils.c \
 			bonus/init_window.c \
 			bonus/minimap.c \
+			bonus/minimap_utils.c \
 			bonus/player.c \
 			bonus/render.c \
 			bonus/handle_events.c \

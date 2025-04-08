@@ -25,14 +25,6 @@ t_img	*set_textures(t_ray *ray, t_game *game)
 	return (tex);
 }
 
-static void    load_texture(t_game *game, t_img *tex, char *path)
-{
-    tex->img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &tex->width, &tex->height);
-    if (!tex->img)
-        error_exit(game, "Error: Failed to load texture");
-    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_length, &tex->endian);   
-}
-
 static void load_sprites(t_game *game)
 {
     int i;
@@ -51,6 +43,14 @@ static void load_sprites(t_game *game)
         }
         i++;
     }
+}
+
+static void    load_texture(t_game *game, t_img *tex, char *path)
+{
+    tex->img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, path, &tex->width, &tex->height);
+    if (!tex->img)
+        error_exit(game, "Error: Failed to load texture");
+    tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_length, &tex->endian);   
 }
 
 void load_textures(t_game *game)

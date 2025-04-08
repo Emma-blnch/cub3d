@@ -49,6 +49,6 @@ static void	open_and_close_horizontal_doors(t_game *game)
 
 void open_and_close_doors(t_game *game)
 {
-	open_and_close_horizontal_doors(game); // https://english.stackexchange.com/questions/60372/is-there-a-word-that-means-both-opening-and-closing-a-door
+	open_and_close_horizontal_doors(game);
 	open_and_close_vertical_doors(game);
 }
