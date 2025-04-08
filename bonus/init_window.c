@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 08:58:55 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:23:16 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 static void	load_menu(t_game *game)
 {
-	game->hud.menu_bg = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
-			"./textures/menu.xpm",
-			&game->hud.menu_bg_w, &game->hud.menu_bg_h);
-	if (!game->hud.menu_bg)
-		error_exit(game, "Error: Failed to load menu background");
+	game->hud.menu_play = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			"./textures/hud/menu_play.xpm",
+			&game->hud.menu_play_w, &game->hud.menu_play_h);
+	if (!game->hud.menu_play)
+		error_exit(game, "Error: Failed to load menu_play background");
+	game->hud.menu_exit = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			"./textures/hud/menu_exit.xpm",
+			&game->hud.menu_exit_w, &game->hud.menu_exit_h);
+	if (!game->hud.menu_exit)
+		error_exit(game, "Error: Failed to load menu_exit background");
 }
 
 void	init_window(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 09:23:23 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:25:18 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	free_textures(t_game *data)
 {
 	if (data->hud.gun.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.gun.img);
-	if (data->hud.menu_bg)
-		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.menu_bg);
+	if (data->hud.menu_play)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.menu_play);
+	if (data->hud.menu_exit)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.menu_exit);
 	if (data->tex.no.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.no.img);
 	if (data->tex.so.img)
@@ -61,8 +63,6 @@ void	free_textures(t_game *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.ea.img);
 	if (data->tex.we.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.we.img);
-	// if (data->tex.sp.img)
-	// 	mlx_destroy_image(data->mlx.mlx_ptr, data->tex.sp.img);
 	if (data->tex.door.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->tex.door.img);
 	if (data->hud.gun_shot.img)

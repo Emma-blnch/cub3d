@@ -1,10 +1,9 @@
-NO ./textures/wall1.xpm
-SO ./textures/wall2.xpm
-WE ./textures/wall3.xpm
-EA     // <- ❌ Chemin vide
+NO ./textures/windows.xpm
+SO ./textures/explorer2.xpm
+WE ./textures/mspaint.xpm
+EA 
 F 220,100,0
-F 255,255,255      // ❌ doublon floor
-C 300,-20,0        // ❌ valeurs RGB invalides
+C 300,-20,0 
 
 111111
 100001

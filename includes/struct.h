@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 09:23:04 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:23:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ typedef struct s_hud {
 	t_img		gun;
 	t_img		gun_shot;
 	t_img		ammo;
-	void		*menu_bg;
-	int			menu_bg_w;
-	int			menu_bg_h;
+	void		*menu_play;
+	void		*menu_exit;
+	int			menu_exit_w;
+	int			menu_exit_h;
+	int			menu_play_w;
+	int			menu_play_h;
 }				t_hud;
 
 typedef struct s_player
