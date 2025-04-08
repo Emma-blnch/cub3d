@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 10:25:18 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:01:06 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,21 @@ void	free_textures(t_game *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.ammo.img);
 }
 
+void free_sprites(t_game *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->sprites_count)
+	{
+		if (data->sprites[i].image.img)
+			mlx_destroy_image(data->mlx.mlx_ptr, data->sprites[i].image.img);
+		free(data->sprites[i].path);
+		i++;
+	}	
+	free(data->sprites);
+}
+
 void	free_resources(t_game *data)
 {
 	if (!data)
@@ -83,7 +98,10 @@ void	free_resources(t_game *data)
     free(data->config.door_path);
 	free_map(data->config.map);
 	free_textures(data);
-	free(data->sprites);
+	if (data->sprites)
+		free_sprites(data);
+	if (data->z_buffer)
+		free(data->z_buffer);
 	if (data->mlx.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	if (data->mlx.win_ptr)

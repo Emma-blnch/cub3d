@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_config.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:08:25 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/02 12:12:27 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:36:15 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ void	check_file_config(t_game *data, char **lines)
 	}
 	if (!check.found_no || !check.found_so || !check.found_we
 		|| !check.found_ea || !check.found_f || !check.found_c)
+	{
+		free(lines);
 		error_exit(data, "Error: Missing configuration element");
+	}
 }
