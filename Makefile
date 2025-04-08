@@ -6,7 +6,7 @@
 #    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 09:47:00 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/08 10:34:31 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC_FILES =	error.c \
 			handle_utils.c \
 			utils.c \
 			raycasting.c \
-			raycasting_utils.c
+			raycasting_utils.c \
+			load_and_set_textures.c
 			
 BONUS_FILES =	error.c \
 				main.c \

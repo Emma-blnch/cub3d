@@ -6,29 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 09:48:16 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:35:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	add_shadow(int color, float corrected_dist)
-{
-	double	shade;
-	int		r;
-	int		g;
-	int		b;
-
-	r = 0;
-	g = 0;
-	b = 0;
-	shade = fmin(1.0, corrected_dist / 900.0);
-	r = ((color >> 16) & 0xFF) * (1.0 - shade);
-	g = ((color >> 8) & 0xFF) * (1.0 - shade);
-	b = (color & 0xFF) * (1.0 - shade);
-	color = (r << 16) | (g << 8) | b;
-	return (color);
-}
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
 {
@@ -94,48 +76,6 @@ static void	calculate_sides_distances(t_ray *ray)
 		ray->step_y = 1;
 		ray->side_y = (ray->map_y + 1.0f - ray->start_y) * ray->delta_y;
 	}
-}
-
-void	move_until_wall_is_hit(t_ray *ray, char **map)
-{
-	while (!ray->hit)
-	{
-		if (ray->side_x < ray->side_y)
-		{
-			ray->side_x += ray->delta_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_y += ray->delta_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
-		}
-		if (is_wall(ray->map_x * TILE_SIZE, ray->map_y * TILE_SIZE, map))
-			ray->hit = 1;
-	}
-}
-
-t_img	*set_textures(t_ray *ray, t_game *game)
-{
-	t_img	*tex;
-
-	if (ray->side == 0)
-	{
-		if (ray->dir_x > 0)
-			tex = &game->tex.ea;
-		else
-			tex = &game->tex.we;
-	}
-	else
-	{
-		if (ray->dir_y > 0)
-			tex = &game->tex.so;
-		else
-			tex = &game->tex.no;
-	}
-	return (tex);
 }
 
 void	draw_ray(t_player *player, t_game *game, float angle, int col)

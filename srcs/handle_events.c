@@ -6,12 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:23:55 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:32:55 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 int	key_press(int keycode, t_game *game)
 {

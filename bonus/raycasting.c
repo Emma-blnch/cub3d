@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 09:19:04 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:36:02 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,6 @@ static void	calculate_sides_distances(t_ray *ray)
 	{
 		ray->step_y = 1;
 		ray->side_y = (ray->map_y + 1.0f - ray->start_y) * ray->delta_y;
-	}
-}
-
-void	move_until_wall_is_hit(t_ray *ray, char **map)
-{
-	while (!ray->hit)
-	{
-		if (ray->side_x < ray->side_y)
-		{
-			ray->side_x += ray->delta_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_y += ray->delta_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
-		}
-		if (is_wall(ray->map_x * TILE_SIZE, ray->map_y * TILE_SIZE, map))
-			ray->hit = 1;
 	}
 }
 

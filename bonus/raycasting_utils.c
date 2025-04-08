@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:43 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 09:04:43 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:36:05 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,25 @@ int	add_shadow(int color, float corrected_dist)
 	b = (color & 0xFF) * (1.0 - shade);
 	color = (r << 16) | (g << 8) | b;
 	return (color);
+}
+
+void	move_until_wall_is_hit(t_ray *ray, char **map)
+{
+	while (!ray->hit)
+	{
+		if (ray->side_x < ray->side_y)
+		{
+			ray->side_x += ray->delta_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_y += ray->delta_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (is_wall(ray->map_x * TILE_SIZE, ray->map_y * TILE_SIZE, map))
+			ray->hit = 1;
+	}
 }

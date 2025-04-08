@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 10:32:11 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:36:45 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			ray_casting(t_game *game);
 void			init_ray_struct(t_ray *ray, t_player *player, float angle);
 void			draw_sprites(t_game *game);
 int				add_shadow(int color, float corrected_dist);
+void			move_until_wall_is_hit(t_ray *ray, char **map);
 
 // Events
 int				close_window(t_game *data);
