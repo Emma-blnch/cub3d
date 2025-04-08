@@ -6,13 +6,13 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/03 11:01:51 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:48:16 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	add_shadow(int color, float corrected_dist)
+int	add_shadow(int color, float corrected_dist)
 {
 	double	shade;
 	int		r;
@@ -51,7 +51,7 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 		tex_x = 0;
 	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
 		tex_x = tex->width - tex_x - 1;
 
 	double step = 1.0 * tex->height / wall_height;
@@ -124,16 +124,16 @@ t_img	*set_textures(t_ray *ray, t_game *game)
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
-			tex = &game->tex.we;
-		else
 			tex = &game->tex.ea;
+		else
+			tex = &game->tex.we;
 	}
 	else
 	{
 		if (ray->dir_y > 0)
-			tex = &game->tex.no;
-		else
 			tex = &game->tex.so;
+		else
+			tex = &game->tex.no;
 	}
 	return (tex);
 }

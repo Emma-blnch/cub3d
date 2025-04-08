@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:07:40 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:07:39 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	store_map(t_game *data, char **lines)
 	data->config.map[j] = NULL;
 }
 
-t_sprite    *init_sprites(t_game *data)
+static t_sprite    *init_sprites(t_game *data)
 {
     int    x;
     int y;
@@ -108,7 +108,6 @@ void    store_sprites(t_game *data)
     y = 0;
     sprite_nb = 0;
     data->sprites = init_sprites(data);
-
     while (data->config.map[y])
     {
         x = 0;
@@ -117,7 +116,7 @@ void    store_sprites(t_game *data)
             if (data->config.map[y][x] == '2')
             {
                 data->sprites[sprite_nb].x = (x + 0.5) * TILE_SIZE;
-                data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE; // au centre de la tile
+                data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE;
                 data->sprites[sprite_nb].dist = 0;
                 data->sprites[sprite_nb].path = ft_strdup(data->config.sp_path);
                 sprite_nb++;

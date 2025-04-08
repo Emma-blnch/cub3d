@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:17:16 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:44:57 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 			&tex->line_length, &tex->endian);
 }
 
-static void	load_textures(t_game *game)
+void	load_textures(t_game *game)
 {
 	load_texture(game, &game->tex.no, game->config.no_path);
 	load_texture(game, &game->tex.so, game->config.so_path);

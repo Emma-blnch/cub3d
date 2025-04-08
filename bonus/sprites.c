@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void    calculate_sprites_dist(t_game *game)
+static void    calculate_sprites_dist(t_game *game)
 {
     int    i;
     float    x;
@@ -18,7 +18,7 @@ void    calculate_sprites_dist(t_game *game)
     }
 }
 
-void    sort_sprites_dist(t_game *game)
+static void    sort_sprites_dist(t_game *game)
 {
     int    i;
     int    j;
@@ -74,10 +74,11 @@ void	draw_sprites(t_game *game)
 
 		dir_x = cos(game->player.angle);
 		dir_y = sin(game->player.angle);
-		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
 
 		perp_x = -sin(game->player.angle) * 0.66f;
 		perp_y = cos(game->player.angle) * 0.66f;
+
+		float inv_det = 1.0f / (perp_x * dir_y - dir_x * perp_y);
 		
 		transform_x = inv_det * (dir_y * sprite_x - dir_x * sprite_y);
 		transform_y = inv_det * (-perp_y * sprite_x + perp_x * sprite_y);

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:22:33 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:44:32 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_game	*init_data(int argc)
 	if (!data)
 		error_exit(NULL, "Error: Struct init failed");
 	ft_memset(data, 0, sizeof(t_game));
-	data->win_width = 1280;
-	data->win_height = 720;
+	data->win_width = 1920;
+	data->win_height = 1080;
 	return (data);
 }
 

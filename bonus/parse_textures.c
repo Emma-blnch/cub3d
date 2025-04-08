@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:01:30 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:07:15 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:08:59 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	parse_textures(t_game *data, char **lines)
 			data->config.ea_path = extract_path(lines[i]);
 		else if (ft_strncmp(lines[i], "SP ", 3) == 0)
 			data->config.sp_path = extract_path(lines[i]);
+		else if (ft_strncmp(lines[i], "DO ", 3) == 0)
+			data->config.door_path = extract_path(lines[i]);
 		i++;
 	}
 }

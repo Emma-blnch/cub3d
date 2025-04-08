@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 16:33:28 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:03:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	set_color(char **map, int y, int x)
 
 	color = -1;
 	if (map[y][x] == '1')
-		color = 0x555555;
-	else if (map[y][x] == '2')
-		color = 0x0000FF;
-	else if (map[y][x] == '0')
+		color = 0xe82380;
+	else if (map[y][x] == '0' || map[y][x] == '2' || map[y][x] == '4')
 		color = 0xFFFFFF;
+	else if (map[y][x] == '3')
+		color = 0xff8916;
 	else if (ft_strchr("NSEW", map[y][x]))
 		color = 0xFFFFFF;
 	return (color);

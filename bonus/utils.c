@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:56:18 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 16:39:44 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:17:18 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	is_wall(float px, float py, char **map)
 	y = py / TILE_SIZE;
 	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
 		return (true);
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == '3')
 		return (true);
 	return (false);
 }

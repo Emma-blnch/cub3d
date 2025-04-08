@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:20:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 13:28:46 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:14:42 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	key_press(int keycode, t_game *game)
 		if (game->ammo < 5)
 			game->ammo = 5;
 	}
+	if (keycode == 32)
+		open_and_close_doors(game);
 	return (0);
 }
 

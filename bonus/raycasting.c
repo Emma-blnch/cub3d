@@ -6,29 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 16:49:46 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:19:04 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	add_shadow(int color, float corrected_dist)
-{
-	double	shade;
-	int		r;
-	int		g;
-	int		b;
-
-	r = 0;
-	g = 0;
-	b = 0;
-	shade = fmin(1.0, corrected_dist / 900.0);
-	r = ((color >> 16) & 0xFF) * (1.0 - shade);
-	g = ((color >> 8) & 0xFF) * (1.0 - shade);
-	b = (color & 0xFF) * (1.0 - shade);
-	color = (r << 16) | (g << 8) | b;
-	return (color);
-}
 
 static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
 {
@@ -51,7 +33,7 @@ static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *
 		tex_x = 0;
 	if (tex_x >= tex->width)
 		tex_x = tex->width - 1;
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
 		tex_x = tex->width - tex_x - 1;
 
 	double step = 1.0 * tex->height / wall_height;
@@ -115,27 +97,6 @@ void	move_until_wall_is_hit(t_ray *ray, char **map)
 		if (is_wall(ray->map_x * TILE_SIZE, ray->map_y * TILE_SIZE, map))
 			ray->hit = 1;
 	}
-}
-
-t_img	*set_textures(t_ray *ray, t_game *game)
-{
-	t_img	*tex;
-
-	if (ray->side == 0)
-	{
-		if (ray->dir_x > 0)
-			tex = &game->tex.we;
-		else
-			tex = &game->tex.ea;
-	}
-	else
-	{
-		if (ray->dir_y > 0)
-			tex = &game->tex.no;
-		else
-			tex = &game->tex.so;
-	}
-	return (tex);
 }
 
 void	draw_ray(t_game *game, float angle, int col, float *perp_ray_dist)

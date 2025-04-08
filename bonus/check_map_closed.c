@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 16:28:09 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:54:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_valid_tile(char c)
 {
-	return (c == '0' || c == '2' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c == '0' || c == '2' || c == '3' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
 static int	is_in_bounds(char **map, int i, int j)

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:27:23 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/03 08:56:10 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:02:28 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_player_minimap(t_game *game)
 		while (dx < tile_size / 2)
 		{
 			put_pixel_to_img(&game->mlx, player_x_mini + dx,
-				player_y_mini + dy, 0x00FF00);
+				player_y_mini + dy, 0x0f056b);
 			dx++;
 		}
 		dy++;
@@ -53,7 +53,7 @@ void	draw_ray_on_minimap(t_game *game, float angle)
 	while (!is_wall(ray_x, ray_y, game->config.map))
 	{
 		put_pixel_to_img(&game->mlx, (ray_x / TILE_SIZE) * tile_size,
-			(ray_y / TILE_SIZE) * tile_size, 0xFF0000);
+			(ray_y / TILE_SIZE) * tile_size, 0x77b5fe);
 		ray_x += cos_a;
 		ray_y += sin_a;
 	}
@@ -83,7 +83,6 @@ void	draw_square(int x, int y, int color, t_game *game)
 	int		dy;
 
 	tile = get_mini_tile_size(game);
-	dx = 0;
 	dy = 0;
 	while (dy < tile)
 	{

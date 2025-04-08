@@ -1,0 +1,13 @@
+NO ./textures/wall1.xpm
+SO ./textures/wall2.xpm
+WE ./textures/wall3.xpm
+EA     // <- ❌ Chemin vide
+F 220,100,0
+F 255,255,255      // ❌ doublon floor
+C 300,-20,0        // ❌ valeurs RGB invalides
+
+111111
+100001
+1000N1
+100001
+111111

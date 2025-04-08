@@ -1,0 +1,16 @@
+NO ./textures/wall1.xpm
+SO ./textures/wall2.xpm
+WE ./textures/wall3.xpm
+EA ./textures/wall4.xpm
+F 150,150,150
+C 100,100,255
+
+
+111111111
+100000001
+10X000001     // ❌ caractère invalide : X
+1000000E1
+100000001
+111101111
+111111111
+

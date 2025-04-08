@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 16:51:55 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 09:19:28 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void			draw_floor_and_ceiling(t_game *game);
 int				draw_menu(t_game *game);
 
 // Hud
+void	load_hud(t_game *game);
 void			draw_ammo(t_game *game);
 void			draw_gun(t_game *game);
 
@@ -89,6 +90,9 @@ int				set_color(char **map, int y, int x);
 int				get_mini_tile_size(t_game *game);
 void			draw_minimap(t_game *game);
 
+// Doors
+void open_and_close_doors(t_game *game);
+
 // Player
 void			move_player(t_player *player, t_game *game);
 void			init_player(t_player *player, t_game *game);
@@ -97,6 +101,7 @@ void			init_player(t_player *player, t_game *game);
 void			ray_casting(t_game *game);
 void			init_ray_struct(t_ray *ray, t_player *player, float angle);
 void			draw_sprites(t_game *game);
+int	add_shadow(int color, float corrected_dist);
 
 // Events
 int				close_window(t_game *data);
@@ -116,10 +121,12 @@ int				has_wall_start(char *line);
 void			put_pixel_to_img(t_mlx *mlx, int x, int y, int color);
 void			draw_sprite_to_img(t_mlx *dst, t_img *sprite,
 					int x_offset, int y_offset);
+void	load_textures(t_game *game);
 void			free_split(char **split);
 bool			is_wall(float px, float py, char **map);
 bool			is_sprite(float px, float py, char **map);
 unsigned long	get_time_ms(void);
+t_img	*set_textures(t_ray *ray, t_game *game);
 
 
 // Error and free
