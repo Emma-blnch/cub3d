@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
+#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 10:34:31 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/08 13:49:26 by ema_blnch        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,18 +66,19 @@ BONUS_FILES =	error.c \
 				parse_color.c \
 				map_utils.c \
 				init_window.c \
+				minimap.c \
+				minimap_utils.c \
 				player.c \
 				render.c \
 				handle_events.c \
-				handle_utils.c \
 				utils.c \
 				raycasting.c \
 				raycasting_utils.c \
 				sprites.c \
-				hud.c \
-				minimap.c \
-				load_and_set_textures.c \
-				doors.c
+				draw_sprite_loop.c \
+				sprite_loop_vars.c \
+				doors.c \
+				load_and_set_textures.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

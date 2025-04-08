@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:34:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 00:53:16 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/08 09:03:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_map_line(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 	{
@@ -29,7 +29,7 @@ int	is_valid_map_line(char *line)
 int	has_wall_start(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i])
 	{
@@ -42,28 +42,44 @@ int	has_wall_start(char *line)
 	return (0);
 }
 
-bool is_wall(float px, float py, char **map)
+int	set_color(char **map, int y, int x)
 {
-    int		x;
-    int		y;
+	int		color;
 
-	x = px / TILE_SIZE;
-	y = py / TILE_SIZE;
-	if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
-        return (true);
-    if (map[y][x] == '1' || map[y][x] == '3')
-        return (true);
-    return (false);
+	color = -1;
+	if (map[y][x] == '1')
+		color = 0xe82380;
+	else if (map[y][x] == '0' || map[y][x] == '2' || map[y][x] == '4')
+		color = 0xFFFFFF;
+	else if (map[y][x] == '3')
+		color = 0xff8916;
+	else if (ft_strchr("NSEW", map[y][x]))
+		color = 0xFFFFFF;
+	return (color);
 }
 
-bool is_sprite(float px, float py, char **map)
+int	get_mini_tile_size(t_game *game)
 {
-    int x = px / TILE_SIZE;
-    int y = py / TILE_SIZE;
+	int	max_cols;
+	int	nb_rows;
+	int	tile;
+	int	len;
+	int	height_tile;
 
-    if (y < 0 || x < 0 || map[y] == NULL || x >= (int)ft_strlen(map[y]))
-        return (true);
-    if (map[y][x] == '2')
-        return (true);
-    return (false);
+	max_cols = 0;
+	nb_rows = 0;
+	while (game->config.map[nb_rows])
+	{
+		len = ft_strlen(game->config.map[nb_rows]);
+		if (len > max_cols)
+			max_cols = len;
+		nb_rows++;
+	}
+	tile = (int)(game->win_width * 0.2 / max_cols);
+	height_tile = (int)(game->win_height * 0.2 / nb_rows);
+	if (height_tile < tile)
+		tile = height_tile;
+	if (tile < 1)
+		tile = 1;
+	return (tile);
 }

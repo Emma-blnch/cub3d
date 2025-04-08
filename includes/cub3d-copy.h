@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 13:51:56 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 11:48:59 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,6 @@ void			set_values_wall(t_game *game, float *corrected_dist,
 void			move_until_wall_is_hit(t_ray *ray, char **map);
 int				add_shadow(int color, float corrected_dist);
 int				get_tex_x(t_ray *ray, t_img *tex, float wall_hit);
-
-// Sprites
-void	draw_sprite_loop(t_game *game);
-void	init_draw_sprite_struct(t_draw_sprite *sprite);
-void	init_sprite_column_vars(t_sprite_column	*vars);
 
 // Events
 int				close_window(t_game *data);

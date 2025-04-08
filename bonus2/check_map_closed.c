@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_closed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 14:36:29 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 11:42:41 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_closed_around(char **map, int i, int j)
 	return (1);
 }
 
-void	check_map_is_closed(char **lines, int start, t_game *data)
+int	check_map_is_closed(char **lines, int start)
 {
 	int	i;
 	int	j;
@@ -51,10 +51,11 @@ void	check_map_is_closed(char **lines, int start, t_game *data)
 			if (is_valid_tile(lines[i][j]))
 			{
 				if (!is_closed_around(lines, i, j))
-					error_exit(data, "Error: Map is not closed");
+					return (ft_printf("Error: Map is not closed"), 1);
 			}
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }

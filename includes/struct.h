@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 11:01:14 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:54:37 by ema_blnch        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,29 @@ typedef struct s_wall {
 	double			wall_hit;
 	t_img			*tex;
 }					t_wall;
+
+typedef struct s_draw_sprite
+{
+	float	transform_x;
+	float	transform_y;
+	int		screen_x;
+	int		height;
+	int		width;
+	int		draw_start_x;
+	int		draw_start_y;
+	int		draw_end_x;
+	int		draw_end_y;
+	int		column;
+}	t_draw_sprite;
+
+typedef	struct	s_sprite_column
+{
+	int				y;
+	int				d;
+	int				tex_x;
+	int				tex_y;
+	unsigned int	color;
+}	t_sprite_column;
 
 typedef struct s_game {
 	t_mlx			mlx;
