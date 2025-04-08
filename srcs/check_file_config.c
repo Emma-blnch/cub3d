@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:08:25 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 11:36:15 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	handle_texture_config(char *line, t_game *data, t_check *check)
 		check_texture_path(line, data, "EA");
 	}
 	else
-		error_exit(data, "Error: Unknown texture identifier");
+		error_exit(data, "Unknown texture identifier");
 }
 
 static void	handle_color_config(char *line, t_game *data, t_check *check)
@@ -51,7 +51,7 @@ static void	handle_color_config(char *line, t_game *data, t_check *check)
 		check_color_format(line, data, 'C');
 	}
 	else
-		error_exit(data, "Error: Unknown color identifier");
+		error_exit(data, "Unknown color identifier");
 }
 
 static void	handle_config_line(char *line, t_game *data, t_check *check)
@@ -62,7 +62,7 @@ static void	handle_config_line(char *line, t_game *data, t_check *check)
 	else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 		handle_color_config(line, data, check);
 	else
-		error_exit(data, "Error: Unknown identifier");
+		error_exit(data, "Unknown identifier");
 }
 
 void	check_file_config(t_game *data, char **lines)
@@ -88,6 +88,6 @@ void	check_file_config(t_game *data, char **lines)
 		|| !check.found_ea || !check.found_f || !check.found_c)
 	{
 		free(lines);
-		error_exit(data, "Error: Missing configuration element");
+		error_exit(data, "Missing configuration element");
 	}
 }

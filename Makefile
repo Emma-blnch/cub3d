@@ -6,7 +6,7 @@
 #    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 16:50:01 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/08 17:26:24 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC_DIR = includes
 OBJ_DIR = obj
 SRC_DIR = srcs
 
-BONUS_DIR = bonus2
+BONUS_DIR = bonus
 BONUS_NAME = cub3D_bonus
 BONUS_OBJ_DIR = obj_bonus
 

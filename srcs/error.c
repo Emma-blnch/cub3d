@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/06 17:20:07 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:08:23 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	error_exit(t_game *data, char *message)
 {
+	ft_printf(R"Error\n"RESET);
 	if (message)
 		ft_printf(R"%s\n"RESET, message);
 	free_resources(data);

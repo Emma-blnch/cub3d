@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_and_set_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:37:10 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 10:37:12 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 	tex->img = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			path, &tex->width, &tex->height);
 	if (!tex->img)
-		error_exit(game, "Error: Failed to load texture");
+		error_exit(game, "Failed to load texture");
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->line_length, &tex->endian);
 }

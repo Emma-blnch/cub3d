@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 11:27:24 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_map_characters(char **lines, int start)
 		while (lines[i][j])
 		{
 			if (!ft_strchr("01NSEW \n", lines[i][j]))
-				return (ft_printf("Error: Invalid character in map"), 1);
+				return (ft_printf("Invalid character in map"), 1);
 			if (ft_strchr("NSEW", lines[i][j]))
 				player_count++;
 			j++;
@@ -34,7 +34,7 @@ static int	check_map_characters(char **lines, int start)
 		i++;
 	}
 	if (player_count != 1)
-		return (ft_printf("Error: Map must contain exactly one player"), 1);
+		return (ft_printf("Map must contain exactly one player"), 1);
 	return (0);
 }
 

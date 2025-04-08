@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/07 13:10:56 by ema_blnch        ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	check_texture_path(char *line, t_game *data, char *id)
 {
 	char	*path;
+	int		fd;
 
 	path = ft_strchr(line, ' ');
 	if (!path || !*(path + 1))
 	{
-		ft_printf("Error: Missing path for %s\n", id);
+		ft_printf("Missing path for %s\n", id);
 		error_exit(data, NULL);
 	}
 	path++;
@@ -27,13 +28,13 @@ void	check_texture_path(char *line, t_game *data, char *id)
 		path++;
 	if (!*path)
 	{
-		ft_printf("Error: Empty path for %s\n", id);
+		ft_printf("Empty path for %s\n", id);
 		error_exit(data, NULL);
 	}
 	path[ft_strlen(path) - 1] = '\0';
-	int fd = open(path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	    error_exit(data, "Error: Texture path is invalid");
+		error_exit(data, "Texture path is invalid");
 	close(fd);
 }
 
@@ -57,7 +58,7 @@ void	check_color_format(char *line, t_game *data, char id)
 	line += 2;
 	split = ft_split(line, ',');
 	if (!split)
-		error_exit(data, "Error: Failed to split color line");
+		error_exit(data, "Failed to split color line");
 	i = 0;
 	while (split[i])
 		i++;
@@ -67,9 +68,9 @@ void	check_color_format(char *line, t_game *data, char id)
 	{
 		free_split(split);
 		if (id == 'F')
-			error_exit(data, "Error: Invalid floor color");
+			error_exit(data, "Invalid floor color");
 		else
-			error_exit(data, "Error: Invalid ceiling color");
+			error_exit(data, "Invalid ceiling color");
 	}
 	free_split(split);
 }
@@ -78,7 +79,7 @@ void	check_duplicate(int *flag, t_game *data, char *id)
 {
 	if (*flag)
 	{
-		ft_printf("Error: Duplicate %s\n", id);
+		ft_printf("Duplicate %s\n", id);
 		error_exit(data, NULL);
 	}
 	*flag = 1;

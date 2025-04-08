@@ -25,7 +25,6 @@ static void sort_sprites_dist(t_game *game)
 	t_sprite	tmp;
 
 	i = 0;
-	tmp = NULL;
 	while (i < game->sprites_count - 1)
 	{
 		j = 0;

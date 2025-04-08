@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:19:57 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 10:35:00 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	init_window(t_game *game)
 {
 	game->mlx.mlx_ptr = mlx_init();
 	if (!game->mlx.mlx_ptr)
-		error_exit(game, "Error: Failed to initiate Minilibx");
+		error_exit(game, "Failed to initiate Minilibx");
 	game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr,
 			game->win_width, game->win_height, "Cub3D");
 	if (!game->mlx.win_ptr)
-		error_exit(game, "Error: Failed to create window");
+		error_exit(game, "Failed to create window");
 	game->mlx.img = mlx_new_image(game->mlx.mlx_ptr,
 			game->win_width, game->win_height);
 	game->mlx.addr = mlx_get_data_addr(game->mlx.img,

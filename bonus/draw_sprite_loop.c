@@ -21,7 +21,6 @@ static void	sprite_position_from_player(t_game *game, float *transform_x, float 
 	*transform_y = inv_det * (-perp_y * sprite_x + perp_x * sprite_y);
 }
 
-
 static void	set_draw_sprite_values(t_game *game, t_draw_sprite *sprite)
 {
 	sprite->screen_x = (int)((game->win_width / 2) * (1 + sprite->transform_x / sprite->transform_y));
@@ -42,6 +41,17 @@ static void	set_draw_sprite_values(t_game *game, t_draw_sprite *sprite)
 	sprite->column = sprite->draw_start_x;
 }
 
+static void	put_pixel_in_column(t_game *game, t_draw_sprite *sprite, t_sprite_column *vars, int *i)
+{
+	vars->d = (vars->y * 256) - (game->win_height * 128) + (sprite->height * 128);
+	vars->tex_y = ((vars->d * game->sprites[*i].image.height) / sprite->height) / 256;
+	vars->color = *(unsigned int*)(game->sprites[*i].image.addr 
+			+ (vars->tex_y * game->sprites[*i].image.line_length 
+			+ vars->tex_x * (game->sprites[*i].image.bpp / 8)));
+	if ((vars->color & 0x00FFFFFF) != 0)
+		put_pixel_to_img(&game->mlx, sprite->column, vars->y, vars->color);
+}
+
 static void	loop_through_sprite_columns(t_game *game, t_draw_sprite *sprite, int *i)
 {
 	t_sprite_column	vars;
@@ -57,13 +67,7 @@ static void	loop_through_sprite_columns(t_game *game, t_draw_sprite *sprite, int
 			vars.y = sprite->draw_start_y;
 			while (vars.y < sprite->draw_end_y)
 			{
-				vars.d = (vars.y * 256) - (game->win_height * 128) + (sprite->height * 128);
-				vars.tex_y = ((vars.d * game->sprites[*i].image.height) / sprite->height) / 256;
-				vars.color = *(unsigned int*)(game->sprites[*i].image.addr 
-						+ (vars.tex_y * game->sprites[*i].image.line_length 
-						+ vars.tex_x * (game->sprites[*i].image.bpp / 8)));
-				if ((vars.color & 0x00FFFFFF) != 0)
-					put_pixel_to_img(&game->mlx, sprite->column, vars.y, vars.color);
+				put_pixel_in_column(game, sprite, &vars, i);
 				vars.y++;
 			}
 		}

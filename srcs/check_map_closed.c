@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 11:41:12 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_map_is_closed(char **lines, int start)
 			if (is_valid_tile(lines[i][j]))
 			{
 				if (!is_closed_around(lines, i, j))
-					return (ft_printf("Error: Map is not closed"), 1);
+					return (ft_printf("Map is not closed"), 1);
 			}
 			j++;
 		}
