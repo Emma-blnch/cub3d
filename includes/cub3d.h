@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 11:54:51 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/08 13:08:19 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,9 @@ void    open_and_close_doors(t_game *game);
 void    load_hud(t_game *game);
 void    load_textures(t_game *game);
 t_img   *set_textures(t_ray *ray, t_game *game);
+void	draw_sprite_loop(t_game *game);
+
+void	init_draw_sprite_struct(t_draw_sprite *sprite);
+void	init_sprite_column_vars(t_sprite_column	*vars);
 
 #endif

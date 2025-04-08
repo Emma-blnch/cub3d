@@ -6,7 +6,7 @@
 #    By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 11:55:42 by aelaen           ###   ########.fr        #
+#    Updated: 2025/04/08 13:07:37 by aelaen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ BONUS_FILES = bonus/error.c \
 			bonus/raycasting.c \
 			bonus/raycasting_utils.c \
 			bonus/sprites.c \
+			bonus/draw_sprite_loop.c \
+			bonus/sprite_loop_vars.c \
 			bonus/doors.c \
 			bonus/load_and_set_textures.c
 

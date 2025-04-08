@@ -6,7 +6,7 @@
 /*   By: aelaen <aelaen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 00:37:22 by aelaen           ###   ########.fr       */
+/*   Updated: 2025/04/08 13:09:51 by aelaen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	store_sprites(t_game *data)
 			if (data->config.map[y][x] == '2')
 			{
 				data->sprites[sprite_nb].x = (x + 0.5) * TILE_SIZE;
-				data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE; // au centre de la tile
+				data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE;
 				data->sprites[sprite_nb].dist = 0;
 				data->sprites[sprite_nb].path = ft_strdup(data->config.sp_path);
 				sprite_nb++;
