@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ema_blnch <ema_blnch@student.42.fr>        +#+  +:+       +#+         #
+#    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 13:49:26 by ema_blnch        ###   ########.fr        #
+#    Updated: 2025/04/08 16:50:01 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC_DIR = includes
 OBJ_DIR = obj
 SRC_DIR = srcs
 
-BONUS_DIR = bonus
+BONUS_DIR = bonus2
 BONUS_NAME = cub3D_bonus
 BONUS_OBJ_DIR = obj_bonus
 
@@ -67,15 +67,16 @@ BONUS_FILES =	error.c \
 				map_utils.c \
 				init_window.c \
 				minimap.c \
-				minimap_utils.c \
 				player.c \
 				render.c \
 				handle_events.c \
+				handle_utils.c \
+				hud.c \
 				utils.c \
 				raycasting.c \
 				raycasting_utils.c \
-				sprites.c \
 				draw_sprite_loop.c \
+				sprites.c \
 				sprite_loop_vars.c \
 				doors.c \
 				load_and_set_textures.c
