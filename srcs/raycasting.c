@@ -6,51 +6,34 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 10:35:22 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:03:49 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_wall_column(t_game *game, float *corrected_dist, int i, t_img *tex, float wall_hit, t_ray *ray)
+static void	draw_wall_column(t_game *game, float *corrected_dist,
+		int i, t_ray *ray)
 {
-	int		wall_height;
-	int		wall_start;
-	int		wall_end;
-	int		y;
-	int		tex_x;
+	int		tex_y;
+	char	*pixel;
+	int		color;
 
-	wall_height = (TILE_SIZE * game->win_height) / *corrected_dist;
-	wall_start = (game->win_height - wall_height) / 2;
-	wall_end = wall_start + wall_height;
-	if (wall_start < 0)
-		wall_start = 0;
-	if (wall_end > game->win_height)
-		wall_end = game->win_height;
-	y = wall_start;
-	tex_x = (int)(wall_hit * tex->width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= tex->width)
-		tex_x = tex->width - 1;
-	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))
-		tex_x = tex->width - tex_x - 1;
-
-	double step = 1.0 * tex->height / wall_height;
-	double tex_pos = (wall_start - game->win_height / 2 + wall_height / 2) * step;
-	while (y < wall_end)
+	set_values_wall(game, corrected_dist, ray);
+	while (game->wall.wall_start < game->wall.wall_end)
 	{
-		int tex_y = (int)tex_pos;
-		tex_pos += step;
+		tex_y = (int)game->wall.tex_pos;
+		game->wall.tex_pos += game->wall.step;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= tex->height)
-			tex_y = tex->height - 1;
-		char *pixel = tex->addr + (tex_y * tex->line_length + tex_x * (tex->bpp / 8));
-		int color = *(unsigned int *)pixel;
-		color = add_shadow(color, *corrected_dist);
-		put_pixel_to_img(&game->mlx, i, y, color);
-		y++;
+		if (tex_y >= game->wall.tex->height)
+			tex_y = game->wall.tex ->height - 1;
+		pixel = game->wall.tex ->addr
+			+ (tex_y * game->wall.tex ->line_length + game->wall.tex_x
+				* (game->wall.tex ->bpp / 8));
+		color = add_shadow(*(unsigned int *)pixel, *corrected_dist);
+		put_pixel_to_img(&game->mlx, i, game->wall.wall_start, color);
+		game->wall.wall_start++;
 	}
 }
 
@@ -83,8 +66,6 @@ void	draw_ray(t_player *player, t_game *game, float angle, int col)
 	t_ray	ray;
 	float	dist;
 	float	corrected;
-	t_img	*tex;
-	double	wall_hit;
 
 	init_ray_struct(&ray, player, angle);
 	calculate_sides_distances(&ray);
@@ -96,13 +77,13 @@ void	draw_ray(t_player *player, t_game *game, float angle, int col)
 	corrected = dist * cos(angle - player->angle);
 	if (corrected < 1.0f)
 		corrected = 1.0f;
-	tex = set_textures(&ray, game);
+	game->wall.tex = set_textures(&ray, game);
 	if (ray.side == 0)
-		wall_hit = ray.start_y + dist / TILE_SIZE * ray.dir_y;
+		game->wall.wall_hit = ray.start_y + dist / TILE_SIZE * ray.dir_y;
 	else
-		wall_hit = ray.start_x + dist / TILE_SIZE * ray.dir_x;
-	wall_hit -= floor(wall_hit);
-	draw_wall_column(game, &corrected, col, tex, wall_hit, &ray);
+		game->wall.wall_hit = ray.start_x + dist / TILE_SIZE * ray.dir_x;
+	game->wall.wall_hit -= floor(game->wall.wall_hit);
+	draw_wall_column(game, &corrected, col, &ray);
 }
 
 void	ray_casting(t_game *game)

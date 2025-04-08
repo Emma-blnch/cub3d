@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 10:31:22 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:01:14 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,17 @@ typedef struct s_sprite
 	double		dist;
 }				t_sprite;
 
+typedef struct s_wall {
+	int				wall_start;
+	int				wall_end;
+	int				wall_height;
+	int				tex_x;
+	double			step;
+	double			tex_pos;
+	double			wall_hit;
+	t_img			*tex;
+}					t_wall;
+
 typedef struct s_game {
 	t_mlx			mlx;
 	t_config		config;
@@ -117,6 +128,7 @@ typedef struct s_game {
 	t_hud			hud;
 	t_player		player;
 	t_texture		tex;
+	t_wall			wall;
 	double			pos_x;
 	double			pos_y;
 	double			dir_x;
