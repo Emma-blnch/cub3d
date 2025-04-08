@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 10:23:22 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:31:22 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_config {
 	char		*we_path;
 	char		*ea_path;
 	char		*sp_path;
-    char        *door_path;
+	char		*door_path;
 	int			floor_color;
 	int			ceiling_color;
 	char		**map;
@@ -98,17 +98,17 @@ typedef struct s_texture {
 	t_img		so;
 	t_img		we;
 	t_img		ea;
-	t_img       door;
+	t_img		door;
 }				t_texture;
 
 typedef struct s_sprite
 {
-    double x;
-    double y;
-    char    *path;
-    t_img   image;
-    double dist;
-} t_sprite;
+	double		x;
+	double		y;
+	char		*path;
+	t_img		image;
+	double		dist;
+}				t_sprite;
 
 typedef struct s_game {
 	t_mlx			mlx;
