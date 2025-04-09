@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:36:11 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:33 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:10:55 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void    check_filename(t_game *data, char *filename)
     int        i;
     char    *real_filename;
     
-    i = 0;
     if (!filename || !*filename)
-        error_exit(data, "Empty file name");
+    {
+		error_exit(data, "Empty file name");
+	}
+	real_filename = filename;
+    i = 0;
     while (filename[i])
     {
         if (filename[i] == '/')
@@ -69,14 +72,11 @@ char	**read_all_lines(char *filename, t_game *data)
 
 void	validate_file(char *filename, t_game *data)
 {
-	char	**lines;
-
 	check_filename(data, filename);
-	lines = read_all_lines(filename, data);
-	if (!lines || count_lines(lines) < 9)
+	data->lines = read_all_lines(filename, data);
+	if (!data->lines || count_lines(data->lines) < 9)
 		error_exit(data, "File too short");
-	check_file_config(data, lines);
-	check_map(data, lines);
-	store_data(data, lines);
-	free_lines(lines);
+	check_file_config(data, data->lines);
+	check_map(data, data->lines);
+	store_data(data, data->lines);
 }

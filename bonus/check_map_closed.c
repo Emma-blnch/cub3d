@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:31 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:51:14 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_closed_around(char **map, int i, int j)
 	return (1);
 }
 
-int	check_map_is_closed(char **lines, int start)
+void	check_map_is_closed(char **lines, int start, t_game *data)
 {
 	int	i;
 	int	j;
@@ -51,11 +51,10 @@ int	check_map_is_closed(char **lines, int start)
 			if (is_valid_tile(lines[i][j]))
 			{
 				if (!is_closed_around(lines, i, j))
-					return (ft_printf("Map is not closed"), 1);
+					error_exit(data, "Map is not closed");
 			}
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }

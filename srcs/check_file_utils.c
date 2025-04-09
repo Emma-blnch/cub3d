@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:46:50 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:54:01 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ void	check_color_format(char *line, t_game *data, char id)
 	free_split(split);
 }
 
-void	check_duplicate(int *flag, t_game *data, char *id)
+void	check_duplicate(int *flag, t_game *data)
 {
 	if (*flag)
 	{
-		ft_printf("Duplicate %s\n", id);
-		error_exit(data, NULL);
+		error_exit(data, "Duplicate in file");
 	}
 	*flag = 1;
 }

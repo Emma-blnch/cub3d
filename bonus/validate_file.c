@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 13:36:11 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:11:35 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void    check_filename(t_game *data, char *filename)
     int        i;
     char    *real_filename;
     
-    i = 0;
     if (!filename || !*filename)
-        error_exit(data, "Empty file name");
+    {
+		error_exit(data, "Empty file name");
+	}
+	real_filename = filename;
+    i = 0;
     while (filename[i])
     {
         if (filename[i] == '/')
@@ -35,7 +38,7 @@ void    check_filename(t_game *data, char *filename)
     while (i >= 0 && filename[i] != '.')
         i--;
     if (i < 0 || ft_strcmp(filename + i, ".cub") != 0)
-        error_exit(data, "file must have <.cub> extension");
+        error_exit(data, "File must have <.cub> extension");
 } 
 
 char	**read_all_lines(char *filename, t_game *data)
@@ -78,5 +81,4 @@ void	validate_file(char *filename, t_game *data)
 	check_file_config(data, lines);
 	check_map(data, lines);
 	store_data(data, lines);
-	free_lines(lines);
 }

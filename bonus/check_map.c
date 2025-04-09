@@ -6,13 +6,13 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:50:52 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_map_characters(char **lines, int start)
+static void	check_map_characters(char **lines, int start, t_game *data)
 {
 	int	i;
 	int	j;
@@ -25,8 +25,8 @@ static int	check_map_characters(char **lines, int start)
 		j = 0;
 		while (lines[i][j])
 		{
-			if (!ft_strchr("0123NSEW \n", lines[i][j]))
-				return (ft_printf("Invalid character in map"), 1);
+			if (!ft_strchr("01NSEW \n", lines[i][j]))
+				error_exit(data, "Invalid character in map");
 			if (ft_strchr("NSEW", lines[i][j]))
 				player_count++;
 			j++;
@@ -34,8 +34,7 @@ static int	check_map_characters(char **lines, int start)
 		i++;
 	}
 	if (player_count != 1)
-		return (ft_printf("Map must contain exactly one player"), 1);
-	return (0);
+		error_exit(data, "Map must contain exactly one player");
 }
 
 int	find_map_start_index(char **lines)
@@ -57,9 +56,6 @@ void	check_map(t_game *data, char **lines)
 	int	start;
 
 	start = find_map_start_index(lines);
-	if (check_map_characters(lines, start) || check_map_is_closed(lines, start))
-	{
-		free_lines(lines);
-		error_exit(data, NULL);
-	}
+	check_map_characters(lines, start, data);
+	check_map_is_closed(lines, start, data);
 }

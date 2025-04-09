@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:08:23 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:05:14 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	error_exit(t_game *data, char *message)
 {
-	ft_printf(R"Error\n"RESET);
+	// printf(R"Error\n"RESET);
 	if (message)
+	{
+		printf(R"Error\n"RESET);
 		ft_printf(R"%s\n"RESET, message);
+	}
 	free_resources(data);
 	exit(1);
 }
@@ -69,6 +72,8 @@ void	free_resources(t_game *data)
 	free(data->config.we_path);
 	free(data->config.ea_path);
 	free_map(data->config.map);
+	if (data->lines)
+		free_lines(data->lines);
 	free_textures(data);
 	if (data->mlx.img)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);

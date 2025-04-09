@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:08:25 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 08:54:39 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ static void	handle_texture_config(char *line, t_game *data, t_check *check)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		check_duplicate(&check->found_no, data, "NO");
+		check_duplicate(&check->found_no, data);
 		check_texture_path(line, data, "NO");
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		check_duplicate(&check->found_so, data, "SO");
+		check_duplicate(&check->found_so, data);
 		check_texture_path(line, data, "SO");
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		check_duplicate(&check->found_we, data, "WE");
+		check_duplicate(&check->found_we, data);
 		check_texture_path(line, data, "WE");
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		check_duplicate(&check->found_ea, data, "EA");
+		check_duplicate(&check->found_ea, data);
 		check_texture_path(line, data, "EA");
 	}
 	else
@@ -42,12 +42,12 @@ static void	handle_color_config(char *line, t_game *data, t_check *check)
 {
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
-		check_duplicate(&check->found_f, data, "F");
+		check_duplicate(&check->found_f, data);
 		check_color_format(line, data, 'F');
 	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
-		check_duplicate(&check->found_c, data, "C");
+		check_duplicate(&check->found_c, data);
 		check_color_format(line, data, 'C');
 	}
 	else
