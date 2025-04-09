@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	init_player(t_player *player, t_game *game)
+void init_player(t_player *player, t_game *game)
 {
 	player->x = (game->config.player_x + 0.5) * TILE_SIZE;
 	player->y = (game->config.player_y + 0.5) * TILE_SIZE;
@@ -32,9 +32,9 @@ void	init_player(t_player *player, t_game *game)
 	player->right_rotate = false;
 }
 
-static void	rotation(t_player *player)
+static void rotation(t_player *player)
 {
-	float	angle_speed;
+	float angle_speed;
 
 	angle_speed = 0.04f;
 	if (player->left_rotate)
@@ -47,9 +47,9 @@ static void	rotation(t_player *player)
 		player->angle += 2 * PI;
 }
 
-static void	perpendicular_moves(t_player *player, float *new_x, float *new_y)
+static void perpendicular_moves(t_player *player, float *new_x, float *new_y)
 {
-	int	speed;
+	int speed;
 
 	speed = 4;
 	if (player->key_up)
@@ -74,19 +74,18 @@ static void	perpendicular_moves(t_player *player, float *new_x, float *new_y)
 	}
 }
 
-void	move_player(t_player *player, t_game *game)
+void move_player(t_player *player, t_game *game)
 {
-	float	new_x;
-	float	new_y;
+	float new_x;
+	float new_y;
 
 	new_x = player->x;
 	new_y = player->y;
 	rotation(player);
 	perpendicular_moves(player, &new_x, &new_y);
-	if (!is_wall(new_x, player->y, game->config.map)
-		&& !is_sprite(new_x, player->y, game->config.map))
-		player->x = new_x;
-	if (!is_wall(player->x, new_y, game->config.map)
-		&& !is_sprite(new_x, player->y, game->config.map))
-		player->y = new_y;
+	if (!is_wall(new_x, new_y, game->config.map) && !is_sprite(new_x, new_y, game->config.map))
+    {
+        player->x = new_x;
+        player->y = new_y;
+    }
 }
