@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_and_set_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eblancha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:32:44 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/09 09:35:04 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:17:44 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 			path, &tex->width, &tex->height);
 	if (!tex->img)
 		error_exit(game, "Failed to load texture");
+	if (tex->width > MAX_TEX_WIDTH || tex->height > MAX_TEX_HEIGHT)
+		error_exit(game, "Texture resolution too high");
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->line_length, &tex->endian);
 }
@@ -37,6 +39,9 @@ static void	load_sprites(t_game *game)
 					&game->sprites[i].image.height);
 			if (!game->sprites[i].image.img)
 				error_exit(game, "Failed to load sprite texture");
+			if (game->sprites->image.width > MAX_TEX_WIDTH || game->sprites->image.height
+				 > MAX_TEX_HEIGHT)
+				error_exit(game, "Sprite resolution too high");
 			game->sprites[i].image.addr
 				= mlx_get_data_addr(game->sprites[i].image.img,
 					&game->sprites[i].image.bpp,

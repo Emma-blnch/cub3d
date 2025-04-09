@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:37:10 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:16:46 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 			path, &tex->width, &tex->height);
 	if (!tex->img)
 		error_exit(game, "Failed to load texture");
+	if (tex->width > MAX_TEX_WIDTH || tex->height > MAX_TEX_HEIGHT)
+		error_exit(game, "Texture resolution too high");
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->line_length, &tex->endian);
 }

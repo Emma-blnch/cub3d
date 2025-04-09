@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 09:12:53 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:16:44 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define MAX_LINES 1024
 # define ESC_KEY 65307
 # define TILE_SIZE 64
+# define MAX_TEX_WIDTH 1024
+# define MAX_TEX_HEIGHT 1024
 
 # define PI 3.14159265359
 
