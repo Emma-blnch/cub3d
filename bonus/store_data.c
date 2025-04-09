@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 09:45:20 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:04:33 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,7 @@ void	store_data(t_game *data, char **lines)
 	parse_colors(data, lines);
 	store_map(data, lines);
 	store_player_position(data);
+	if (!data->config.sp_path)
+		error_exit(data, "Sprite texture path is missing");
 	store_sprites(data);
 }

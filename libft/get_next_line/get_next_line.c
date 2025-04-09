@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 09:03:47 by eblancha          #+#    #+#             */
-/*   Updated: 2025/01/15 08:23:42 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:57:05 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ static int	check_errors(int fd, char **stored_lines)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	if (!*stored_lines)
+	{
 		*stored_lines = allocate_string(0);
+		if (!*stored_lines)
+			return 0;
+	}
 	return (1);
 }
 
