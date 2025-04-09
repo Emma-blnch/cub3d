@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:49:54 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 09:13:27 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:51:58 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ typedef struct s_check {
 	int			found_ea;
 	int			found_f;
 	int			found_c;
+	int			found_do;
+	int			found_sp;
 }				t_check;
 
 #endif

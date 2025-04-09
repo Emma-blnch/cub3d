@@ -6,7 +6,7 @@
 #    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/09 09:32:06 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/09 10:07:39 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,9 @@ $(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ_DIR)
 $(BONUS_OBJ_DIR):
 	mkdir -p $(BONUS_OBJ_DIR)
 
-bonus: $(LIBFT) $(BONUS_OBJS)
+bonus: $(LIBFT) $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS)
 	$(CC) $(CFLAGS) $(BONUS_OBJS) -L$(LIBFT_DIR) -lft -lm -L$(MLX_DIR) -lmlx -lXext -lX11 -o $(BONUS_NAME)
 	@echo "$(GREEN)cub3D Bonus Compiled!$(DEF_COLOR)"
 
@@ -128,5 +130,7 @@ fclean: clean
 re: fclean all
 	@echo "$(GREEN)Cleaned and rebuilt !$(DEF_COLOR)"
 
+re-bonus: fclean bonus
+	@echo "$(GREEN)Cleaned and rebuilt !$(DEF_COLOR)"
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re re-bonus bonus

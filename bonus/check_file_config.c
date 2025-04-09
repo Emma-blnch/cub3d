@@ -6,18 +6,24 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:08:25 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 09:16:57 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:54:09 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	handle_texture_config2(char *line, t_game *data)
+static void	handle_texture_config2(char *line, t_game *data, t_check *check)
 {
 	if (ft_strncmp(line, "SP ", 3) == 0)
+	{
+		check_duplicate(&check->found_sp, data);
 		check_texture_path(line, data, "SP");
+	}
 	else if (ft_strncmp(line, "DO ", 3) == 0)
+	{
+		check_duplicate(&check->found_do, data);
 		check_texture_path(line, data, "DO");
+	}
 	else
 		error_exit(data, "Unknown texture identifier");
 }
@@ -45,7 +51,7 @@ static void	handle_texture_config(char *line, t_game *data, t_check *check)
 		check_texture_path(line, data, "EA");
 	}
 	else
-		handle_texture_config2(line, data);
+		handle_texture_config2(line, data, check);
 }
 
 static void	handle_color_config(char *line, t_game *data, t_check *check)
@@ -97,6 +103,7 @@ void	check_file_config(t_game *data, char **lines)
 		i++;
 	}
 	if (!check.found_no || !check.found_so || !check.found_we
-		|| !check.found_ea || !check.found_f || !check.found_c)
+		|| !check.found_sp || !check.found_ea || !check.found_f
+		|| !check.found_c || !check.found_do)
 		error_exit(data, "Missing configuration element");
 }
