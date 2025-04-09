@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:01:30 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 09:08:59 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:39:45 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ static char	*extract_path(char *line)
 	while (*line == ' ')
 		line++;
 	return (ft_strdup(line));
+}
+
+static void	parse_sprites(char **lines, t_game *data, int i)
+{
+	if (ft_strncmp(lines[i], "SP ", 3) == 0)
+		data->config.sp_path = extract_path(lines[i]);
+	else if (ft_strncmp(lines[i], "DO ", 3) == 0)
+		data->config.door_path = extract_path(lines[i]);
 }
 
 void	parse_textures(t_game *data, char **lines)
@@ -43,10 +51,8 @@ void	parse_textures(t_game *data, char **lines)
 			data->config.we_path = extract_path(lines[i]);
 		else if (ft_strncmp(lines[i], "EA ", 3) == 0)
 			data->config.ea_path = extract_path(lines[i]);
-		else if (ft_strncmp(lines[i], "SP ", 3) == 0)
-			data->config.sp_path = extract_path(lines[i]);
-		else if (ft_strncmp(lines[i], "DO ", 3) == 0)
-			data->config.door_path = extract_path(lines[i]);
+		else
+			parse_sprites(lines, data, i);
 		i++;
 	}
 }

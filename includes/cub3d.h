@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:52:09 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 08:54:25 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:12:53 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			check_duplicate(int *flag, t_game *data);
 void			check_color_format(char *line, t_game *data, char id);
 void			check_texture_path(char *line, t_game *data, char *id);
 int				find_map_start_index(char **lines);
-void	check_map_is_closed(char **lines, int start, t_game *data);
+void			check_map_is_closed(char **lines, int start, t_game *data);
 
 // Store data
 void			store_data(t_game *data, char **lines);
@@ -108,9 +108,9 @@ int				add_shadow(int color, float corrected_dist);
 int				get_tex_x(t_ray *ray, t_img *tex, float wall_hit);
 
 // Sprites
-void	draw_sprite_loop(t_game *game);
-void	init_draw_sprite_struct(t_draw_sprite *sprite);
-void	init_sprite_column_vars(t_sprite_column	*vars);
+void			draw_sprite_loop(t_game *game);
+void			init_draw_sprite_struct(t_draw_sprite *sprite);
+void			init_sprite_column_vars(t_sprite_column	*vars);
 
 // Events
 int				close_window(t_game *data);

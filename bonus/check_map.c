@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:10:27 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 08:50:52 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:23:26 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_map_characters(char **lines, int start, t_game *data)
 		j = 0;
 		while (lines[i][j])
 		{
-			if (!ft_strchr("01NSEW \n", lines[i][j]))
+			if (!ft_strchr("0123NSEW \n", lines[i][j]))
 				error_exit(data, "Invalid character in map");
 			if (ft_strchr("NSEW", lines[i][j]))
 				player_count++;

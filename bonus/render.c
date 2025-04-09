@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 11:55:46 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 09:43:38 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:17:55 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, int color)
 	char	*dst;
 
 	if (x < 0 || x >= 1920 || y < 0 || y >= 1080)
-        return ;
+		return ;
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
 }

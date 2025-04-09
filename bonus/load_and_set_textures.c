@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_and_set_textures.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblancha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 09:32:44 by eblancha          #+#    #+#             */
+/*   Updated: 2025/04/09 09:35:04 by eblancha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	load_texture(t_game *game, t_img *tex, char *path)
@@ -10,24 +22,29 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 			&tex->line_length, &tex->endian);
 }
 
-static void load_sprites(t_game *game)
+static void	load_sprites(t_game *game)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < game->sprites_count)
-    {
-        if (game->sprites[i].path)
-        {
-            game->sprites[i].image.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, 
-                game->sprites[i].path, &game->sprites[i].image.width, &game->sprites[i].image.height);
-            if (!game->sprites[i].image.img)
-                error_exit(game, "Failed to load sprite texture");
-            game->sprites[i].image.addr = mlx_get_data_addr(game->sprites[i].image.img, 
-                &game->sprites[i].image.bpp, &game->sprites[i].image.line_length, &game->sprites[i].image.endian);
-        }
-        i++;
-    }
+	i = 0;
+	while (i < game->sprites_count)
+	{
+		if (game->sprites[i].path)
+		{
+			game->sprites[i].image.img
+				= mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+					game->sprites[i].path, &game->sprites[i].image.width,
+					&game->sprites[i].image.height);
+			if (!game->sprites[i].image.img)
+				error_exit(game, "Failed to load sprite texture");
+			game->sprites[i].image.addr
+				= mlx_get_data_addr(game->sprites[i].image.img,
+					&game->sprites[i].image.bpp,
+					&game->sprites[i].image.line_length,
+					&game->sprites[i].image.endian);
+		}
+		i++;
+	}
 }
 
 void	load_textures(t_game *game)
@@ -36,8 +53,8 @@ void	load_textures(t_game *game)
 	load_texture(game, &game->tex.so, game->config.so_path);
 	load_texture(game, &game->tex.ea, game->config.ea_path);
 	load_texture(game, &game->tex.we, game->config.we_path);
-    load_texture(game, &game->tex.door, game->config.door_path);
-    load_sprites(game);
+	load_texture(game, &game->tex.door, game->config.door_path);
+	load_sprites(game);
 }
 
 void	load_hud(t_game *game)

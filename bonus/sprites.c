@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblancha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 09:19:20 by eblancha          #+#    #+#             */
+/*   Updated: 2025/04/09 09:20:01 by eblancha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static void calculate_sprites_dist(t_game *game)
+static void	calculate_sprites_dist(t_game *game)
 {
 	int		i;
 	float	x;
@@ -18,7 +30,7 @@ static void calculate_sprites_dist(t_game *game)
 	}
 }
 
-static void sort_sprites_dist(t_game *game)
+static void	sort_sprites_dist(t_game *game)
 {
 	int			i;
 	int			j;

@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:25:36 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/06 16:39:39 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:19:02 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ void	move_player(t_player *player, t_game *game)
 	new_y = player->y;
 	rotation(player);
 	perpendicular_moves(player, &new_x, &new_y);
-	if (!is_wall(new_x, player->y, game->config.map) && !is_sprite(new_x, player->y, game->config.map))
+	if (!is_wall(new_x, player->y, game->config.map)
+		&& !is_sprite(new_x, player->y, game->config.map))
 		player->x = new_x;
-	if (!is_wall(player->x, new_y, game->config.map) && !is_sprite(new_x, player->y, game->config.map))
+	if (!is_wall(player->x, new_y, game->config.map)
+		&& !is_sprite(new_x, player->y, game->config.map))
 		player->y = new_y;
 }

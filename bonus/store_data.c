@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:43 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:45:20 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,62 +70,61 @@ void	store_map(t_game *data, char **lines)
 	data->config.map[j] = NULL;
 }
 
-static t_sprite    *init_sprites(t_game *data)
+static t_sprite	*init_sprites(t_game *data)
 {
-    int    x;
-    int y;
-    int    sprites_count;
-    t_sprite *sprites;
+	int			x;
+	int			y;
+	int			sprites_count;
+	t_sprite	*sprites;
 
-    y = 0;
-    sprites_count = 0;
-    while (data->config.map[y])
-    {
-        x = 0;
-        while (x < (int)ft_strlen(data->config.map[y]))
-        {
-            if (!ft_strncmp("2", data->config.map[y] + x, 1))
-                sprites_count++;
-            x++;
-        }
-        y++;
-    }
-    sprites = malloc(sizeof(t_sprite) * sprites_count);
-    if (!sprites)
+	y = 0;
+	sprites_count = 0;
+	while (data->config.map[y])
 	{
-        error_exit(data, "Failed to allocate memory for sprites");
+		x = 0;
+		while (x < (int)ft_strlen(data->config.map[y]))
+		{
+			if (!ft_strncmp("2", data->config.map[y] + x, 1))
+				sprites_count++;
+			x++;
+		}
+		y++;
 	}
-	
-    return (sprites);
+	sprites = malloc(sizeof(t_sprite) * sprites_count);
+	if (!sprites)
+	{
+		error_exit(data, "Failed to allocate memory for sprites");
+	}
+	return (sprites);
 }
 
-void    store_sprites(t_game *data)
+void	store_sprites(t_game *data)
 {
-    int    y;
-    int    x;
-    int    sprite_nb;
+	int	y;
+	int	x;
+	int	sprite_nb;
 
-    y = 0;
-    sprite_nb = 0;
-    data->sprites = init_sprites(data);
-    while (data->config.map[y])
-    {
-        x = 0;
-        while (x < (int)ft_strlen(data->config.map[y]))
-        {
-            if (data->config.map[y][x] == '2')
-            {
-                data->sprites[sprite_nb].x = (x + 0.5) * TILE_SIZE;
-                data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE;
-                data->sprites[sprite_nb].dist = 0;
-                data->sprites[sprite_nb].path = ft_strdup(data->config.sp_path);
-                sprite_nb++;
-            }
-            x++;
-        }
-        y++;
-    }
-    data->sprites_count = sprite_nb;
+	y = 0;
+	sprite_nb = 0;
+	data->sprites = init_sprites(data);
+	while (data->config.map[y])
+	{
+		x = 0;
+		while (x < (int)ft_strlen(data->config.map[y]))
+		{
+			if (data->config.map[y][x] == '2')
+			{
+				data->sprites[sprite_nb].x = (x + 0.5) * TILE_SIZE;
+				data->sprites[sprite_nb].y = (y + 0.5) * TILE_SIZE;
+				data->sprites[sprite_nb].dist = 0;
+				data->sprites[sprite_nb].path = ft_strdup(data->config.sp_path);
+				sprite_nb++;
+			}
+			x++;
+		}
+		y++;
+	}
+	data->sprites_count = sprite_nb;
 }
 
 void	store_data(t_game *data, char **lines)

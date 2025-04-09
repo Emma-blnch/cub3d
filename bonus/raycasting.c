@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:48 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 16:58:32 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:41:27 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,22 @@ void	draw_ray(t_game *game, float angle, int col, float *perp_ray_dist)
 	draw_wall_column(game, perp_ray_dist, col, &ray);
 }
 
-void    ray_casting(t_game *game)
+void	ray_casting(t_game *game)
 {
-    float    start_angle;
-    float    fraction;
-    float    perp_ray_dist;
+	float	start_angle;
+	float	fraction;
+	float	perp_ray_dist;
+	int		i;
 
-
-    start_angle = game->player.angle - PI / 6;
-    fraction = PI / 3 / game->win_width;
-    perp_ray_dist = 0;
-    int i = 0;
-    while (i < game->win_width)
-    {
-        draw_ray(game, start_angle, i, &perp_ray_dist);
-        game->z_buffer[i] = perp_ray_dist;
-        start_angle += fraction;
-        i++;
-    }
+	start_angle = game->player.angle - PI / 6;
+	fraction = PI / 3 / game->win_width;
+	perp_ray_dist = 0;
+	i = 0;
+	while (i < game->win_width)
+	{
+		draw_ray(game, start_angle, i, &perp_ray_dist);
+		game->z_buffer[i] = perp_ray_dist;
+		start_angle += fraction;
+		i++;
+	}
 }

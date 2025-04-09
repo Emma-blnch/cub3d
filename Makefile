@@ -6,7 +6,7 @@
 #    By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/11 12:41:12 by ema_blnch         #+#    #+#              #
-#    Updated: 2025/04/08 17:26:24 by eblancha         ###   ########.fr        #
+#    Updated: 2025/04/09 09:32:06 by eblancha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ BONUS_FILES =	error.c \
 				map_utils.c \
 				init_window.c \
 				minimap.c \
+				minimap_utils.c \
 				player.c \
 				render.c \
 				handle_events.c \

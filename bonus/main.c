@@ -6,7 +6,7 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:51:51 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:49 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:18:19 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_game	*init_data(int argc)
 	data->win_width = 1920;
 	data->win_height = 1080;
 	data->z_buffer = malloc(sizeof(float) * data->win_width);
-    if (!data->z_buffer)
+	if (!data->z_buffer)
 	{
-    	error_exit(data, "Could not allocate z_buffer");
+		error_exit(data, "Could not allocate z_buffer");
 	}
 	return (data);
 }

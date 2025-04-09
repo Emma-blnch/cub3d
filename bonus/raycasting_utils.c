@@ -6,12 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:50:43 by eblancha          #+#    #+#             */
-/*   Updated: 2025/04/08 16:54:28 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:40:12 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	init_ray_struct(t_ray *ray, t_player *player, float angle)
 {

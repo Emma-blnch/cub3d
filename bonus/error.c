@@ -6,22 +6,11 @@
 /*   By: eblancha <eblancha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:56:12 by ema_blnch         #+#    #+#             */
-/*   Updated: 2025/04/09 08:45:13 by eblancha         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:30:43 by eblancha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	error_exit(t_game *data, char *message)
-{
-	printf(R"Error\n"RESET);
-	if (message)
-		ft_printf(R"%s\n"RESET, message);
-	if (data->lines != NULL)
-		free(data->lines);
-	free_resources(data);
-	exit(1);
-}
 
 void	free_lines(char **lines)
 {
@@ -74,7 +63,7 @@ void	free_textures(t_game *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->hud.ammo.img);
 }
 
-void free_sprites(t_game *data)
+void	free_sprites(t_game *data)
 {
 	int	i;
 
@@ -98,8 +87,9 @@ void	free_resources(t_game *data)
 	free(data->config.we_path);
 	free(data->config.ea_path);
 	free(data->config.sp_path);
-    free(data->config.door_path);
+	free(data->config.door_path);
 	free_map(data->config.map);
+	free_lines(data->lines);
 	free_textures(data);
 	if (data->sprites)
 		free_sprites(data);
