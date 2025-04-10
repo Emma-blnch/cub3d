@@ -83,9 +83,8 @@ void move_player(t_player *player, t_game *game)
 	new_y = player->y;
 	rotation(player);
 	perpendicular_moves(player, &new_x, &new_y);
-	if (!is_wall(new_x, new_y, game->config.map) && !is_sprite(new_x, new_y, game->config.map))
-    {
-        player->x = new_x;
-        player->y = new_y;
-    }
+	if (!is_wall(new_x, player->y, game->config.map) && !is_sprite(new_x, player->y, game->config.map))
+    	player->x = new_x;
+	if (!is_wall(player->x, new_y, game->config.map) && !is_sprite(player->x, new_y, game->config.map))
+    	player->y = new_y;
 }
