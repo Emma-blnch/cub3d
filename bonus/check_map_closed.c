@@ -23,17 +23,22 @@ static int	is_in_bounds(char **map, int i, int j)
 	return (i >= 0 && map[i] && j >= 0 && j < (int)ft_strlen(map[i]));
 }
 
+static bool	is_space(char c)
+{
+	return (c >= 9 && c <= 13);
+}
+
 static int	is_closed_around(char **map, int i, int j)
 {
 	if (!is_in_bounds(map, i, j) || !is_valid_tile(map[i][j]))
 		return (1);
-	if (!is_in_bounds(map, i - 1, j) || map[i - 1][j] == ' ')
+	if (!is_in_bounds(map, i - 1, j) || is_space(map[i - 1][j]))
 		return (0);
-	if (!is_in_bounds(map, i + 1, j) || map[i + 1][j] == ' ')
+	if (!is_in_bounds(map, i + 1, j) || is_space(map[i + 1][j]))
 		return (0);
-	if (!is_in_bounds(map, i, j - 1) || map[i][j - 1] == ' ')
+	if (!is_in_bounds(map, i, j - 1) || is_space(map[i][j - 1]))
 		return (0);
-	if (!is_in_bounds(map, i, j + 1) || map[i][j + 1] == ' ')
+	if (!is_in_bounds(map, i, j + 1) || is_space(map[i][j + 1]))
 		return (0);
 	return (1);
 }

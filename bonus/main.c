@@ -25,8 +25,8 @@ t_game	*init_data(int argc)
 	data->menu_selection = 0;
 	data->is_firing = false;
 	data->ammo = 5;
-	data->win_width = 1920;
-	data->win_height = 1080;
+	data->win_width = 1280;
+	data->win_height = 720;
 	data->z_buffer = malloc(sizeof(float) * data->win_width);
 	if (!data->z_buffer)
 	{
